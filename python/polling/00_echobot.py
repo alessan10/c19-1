@@ -16,6 +16,7 @@ bot.
 """
 
 import logging
+import json
 
 from data import token
 from telegram import Update
@@ -34,7 +35,24 @@ logger = logging.getLogger(__name__)
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     user = update.message.from_user
-    print('You talk with user {}, his user ID: {}, name: {}, surname:  {} '.format(user['username'], user['id'], user['first_name'], user['last_name'] ))  
+    print('You talk with user {}, his user ID: {}, name: {}, surname:  {} '
+    .format(user['username'], user['id'], user['first_name'], user['last_name'] )  )
+    # x =  '{ "username":{}, "chatid":{}, "name":{} {}}' .format(user['username'], user['id'], user['first_name'], user['last_name'] )
+    first_name = str(user['first_name'])
+    last_name = str(user['last_name'])
+
+    if(str(user['first_name']) == 'None'):
+      first_name = ''
+    if(str(user['last_name']) == 'None'):
+      last_name = ''
+    full_name = first_name + ' ' + last_name
+    payload = {
+      "username": user['username'],
+      "chatid": user['id'],
+      "name" : full_name
+    }
+    
+    print(payload["name"] )
     update.message.reply_text('Hi!, ')
 
 
