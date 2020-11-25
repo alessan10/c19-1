@@ -37,7 +37,6 @@ def start(update: Update, context: CallbackContext) -> None:
     user = update.message.from_user
     print('You talk with user {}, his user ID: {}, name: {}, surname:  {} '
     .format(user['username'], user['id'], user['first_name'], user['last_name'] )  )
-    # x =  '{ "username":{}, "chatid":{}, "name":{} {}}' .format(user['username'], user['id'], user['first_name'], user['last_name'] )
     first_name = str(user['first_name'])
     last_name = str(user['last_name'])
 
