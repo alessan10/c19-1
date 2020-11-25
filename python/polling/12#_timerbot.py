@@ -37,6 +37,10 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Hi! Use /set <seconds> to set a timer')
+    # chat_id = update.message.chat.id  NON FUNZIONA
+    # chat = update.message.chat_id
+    update.message.reply_text('chatid: ', str(chat))
+    
 
 
 def alarm(context):
@@ -85,12 +89,13 @@ def unset(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(text)
 
 
+
 def main():
     """Run bot."""
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("1344981020:AAGaXJ-z6R1myEmlx1W2VYdujWHsUlfq2ko", use_context=True)
+    updater = Updater("1349052173:AAEgIwaGT45t-PbOnmx_7o_1XvWuD1wsqPQ", use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
@@ -99,7 +104,7 @@ def main():
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", start))
     dispatcher.add_handler(CommandHandler("set", set_timer))
-    dispatcher.add_handler(CommandHandler("unset", unset))
+    
 
     # Start the Bot
     updater.start_polling()
