@@ -18,6 +18,7 @@ bot.
 
 import logging
 
+from data import token
 from telegram import ReplyKeyboardMarkup, Update
 from telegram.ext import (
     Updater,
@@ -134,7 +135,7 @@ def done(update: Update, context: CallbackContext) -> None:
 def main():
     # Create the Updater and pass it your bot's token.
     pp = PicklePersistence(filename='conversationbot')
-    updater = Updater("1344981020:AAGaXJ-z6R1myEmlx1W2VYdujWHsUlfq2ko", persistence=pp, use_context=True)
+    updater = Updater(token, persistence=pp, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher

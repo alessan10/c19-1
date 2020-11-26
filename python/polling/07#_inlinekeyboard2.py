@@ -17,6 +17,8 @@ Send /start to initiate the conversation.
 Press Ctrl-C on the command line to stop the bot.
 """
 import logging
+
+from data import token
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
     Updater,
@@ -162,7 +164,7 @@ def end(update: Update, context: CallbackContext) -> None:
 
 def main():
     # Create the Updater and pass it your bot's token.
-    updater = Updater("1344981020:AAGaXJ-z6R1myEmlx1W2VYdujWHsUlfq2ko", use_context=True)
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

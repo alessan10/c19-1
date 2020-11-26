@@ -8,6 +8,8 @@ on the telegram.ext bot framework.
 This program is dedicated to the public domain under the CC0 license.
 """
 import logging
+
+from data import token
 from typing import NoReturn
 from time import sleep
 
@@ -22,7 +24,7 @@ def main() -> NoReturn:
     """Run the bot."""
     global UPDATE_ID
     # Telegram Bot Authorization Token
-    bot = telegram.Bot('1344981020:AAGaXJ-z6R1myEmlx1W2VYdujWHsUlfq2ko')
+    bot = telegram.Bot(token)
 
     # get the first pending update_id, this is so we can skip over it in case
     # we get an "Unauthorized" exception.

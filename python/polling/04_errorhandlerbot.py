@@ -12,6 +12,7 @@ import json
 import logging
 import traceback
 
+from data import token
 from telegram import Update, ParseMode
 from telegram.ext import Updater, CallbackContext, CommandHandler
 
@@ -21,8 +22,6 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# The token you got from @botfather when you created the bot
-BOT_TOKEN = "1344981020:AAGaXJ-z6R1myEmlx1W2VYdujWHsUlfq2ko"
 
 # This can be your own ID, or one for a developer group/channel.
 # You can use the /start command of this bot to see your chat id.
@@ -74,7 +73,7 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater(BOT_TOKEN, use_context=True)
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

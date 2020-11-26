@@ -43,6 +43,7 @@ def start(update: Update, context: CallbackContext) -> None:
     if(str(user['first_name']) == 'None'):
       first_name = ''
     if(str(user['last_name']) == 'None'):
+      update.message.reply_text('Inserisci il cognome: ')
       last_name = ''
     full_name = first_name + ' ' + last_name
     payload = {
