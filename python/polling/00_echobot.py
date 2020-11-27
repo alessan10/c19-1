@@ -41,6 +41,7 @@ def start(update: Update, context: CallbackContext) -> None:
     last_name = str(user['last_name'])
 
     if(str(user['first_name']) == 'None'):
+      update.message.reply_text('Inserisci il nome: ')
       first_name = ''
     if(str(user['last_name']) == 'None'):
       update.message.reply_text('Inserisci il cognome: ')
@@ -64,7 +65,6 @@ def help_command(update: Update, context: CallbackContext) -> None:
 def echo(update: Update, context: CallbackContext) -> None:
     """Echo the user message."""
     update.message.reply_text(update.message.text)
-
 
 def main():
     """Start the bot."""
