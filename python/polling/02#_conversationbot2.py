@@ -18,6 +18,7 @@ bot.
 
 import logging
 from typing import Dict
+from data import token
 
 from telegram import ReplyKeyboardMarkup, Update
 from telegram.ext import (
@@ -117,7 +118,7 @@ def main() -> None:
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("1344981020:AAGaXJ-z6R1myEmlx1W2VYdujWHsUlfq2ko", use_context=True)
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
