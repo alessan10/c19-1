@@ -17,6 +17,15 @@ bot.
 """
 
 import logging
+
+# RITORNARE DA 22 A 26 DOPO CHE HAI SISTEMATO IL SERVER.GO
+#import requests
+# data = {'chat_id': '72600457', 'voice': 'AwADBAADPAYAAvFWCVFZFfPyZdGLfhYE'}
+#url = f'https://api.telegram.org/bot{token}/sendVoice'
+#response = requests.post(url, data=data)
+#response = requests.get(url, params=data)
+#print(response.json())
+
 from typing import Dict
 from data import token
 
@@ -37,26 +46,10 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-TYPING_SURNAME, DONE  = range(2)
-
-# reply_keyboard = [
-#     ['Age', 'Favourite colour'],
-#     ['Number of siblings', 'Something else...'],
-#     ['Done'],
-# ]
-# markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
-
-
-# def facts_to_str(user_data: Dict[str, str]) -> str:
-#     facts = list()
-
-#     for key, value in user_data.items():
-#         facts.append('{} - {}'.format(key, value))
-
-#     return "\n".join(facts).join(['\n', '\n'])
-
+TYPING_SURNAME, FINE  = range(2)
 
 def start(update: Update, context: CallbackContext) -> int:
+    print("[ START ]")
     user = update.message.from_user
     first_name = str(user['first_name'])
     last_name = str(user['last_name'])
@@ -86,9 +79,10 @@ def start(update: Update, context: CallbackContext) -> int:
     }
     
     print(payload["name"] )
-    return DONE
+    return FINE
     
 def typing_surname(update: Update, context: CallbackContext) -> int:
+    print("[ TYPING SURNAME]")
     user = update.message.from_user
     first_name = str(user['first_name'])
     last_name = update.message.text
@@ -101,20 +95,21 @@ def typing_surname(update: Update, context: CallbackContext) -> int:
       "name" : full_name
     }
     print(payload["name"])
-    return DONE
+    update.message.reply_text( "Nome: " "{}" "\nCognome: " "{}".format(first_name, last_name))
+
+    update.message.reply_text( "Registrazione effettuata con successo, buona giornata.")
+    
+    return ConversationHandler.END
 
 
 def fine(update: Update, context: CallbackContext) -> int:
-    # user_data = context.user_data
-    user = update.message.from_user
-    first_name = str(user['first_name'])
-    last_name = str(user['last_name'])
+    print("[ FINE ]")
+    #user_data = context.user_data
+    
+    # context.user_data ci serve per memorizzare delle variabili relative all'utente in questione
+    # la utilizzeremo quando faremo il codice più pulito
 
-    update.message.reply_text(
-        "Nome: " "{}" "\nCognome: " "{}".format(first_name, last_name)
-    )
-
-    user_data.clear()
+    #user_data.clear()
     return ConversationHandler.END
 
 
@@ -132,17 +127,16 @@ def main() -> None:
         entry_points=[CommandHandler('start', start)],
         states={
             TYPING_SURNAME: [
-                MessageHandler(
-                    Filters.text & ~(Filters.command | Filters.regex('^Done$')), typing_surname
-                )
+                MessageHandler(Filters.text, typing_surname) #il bot ignora tutto ciò che non sia testo
             ],
-            DONE: [
-                MessageHandler(
-                    Filters.text & ~(Filters.command | Filters.regex('^Done$')), fine
-                )
-            ]
+            # FINE: [
+            #     MessageHandler(
+            #         MessageHandler(Filters.text, fine)
+            #     )
+            # ]
         },
-        fallbacks=[MessageHandler(Filters.regex('^Done$'), fine)],
+        fallbacks=[MessageHandler(Filters.text, fine)], 
+        # fallbacks ci serve se lo stato dell'utente non è nessuno dei precedenti definiti      
     )
 
     dispatcher.add_handler(conv_handler)

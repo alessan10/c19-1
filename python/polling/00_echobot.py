@@ -34,6 +34,7 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
+    print("[START]")
     user = update.message.from_user
     print('You talk with user {}, his user ID: {}, name: {}, surname:  {} '
     .format(user['username'], user['id'], user['first_name'], user['last_name'] )  )
