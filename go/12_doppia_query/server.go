@@ -283,21 +283,54 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			}})
 		}
 
-		// MATCH (u:`User`) WHERE ID(u) IN [1, 2, 3] RETURN u
+		// query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
+		// CREATE (u)-[:HAS_ROLE]->(r)`
 
-		// 	query3 := `CREATE (p:CPerson { name: $name, chatid: $chatid, covid: $covid })
-		// 					RETURN p.name as name`
-		// 	result3, err3 := session.Run(query3, map[string]interface{}{
-		// 		"name":   person.Name,
-		// 		"chatid": person.Chatid,
-		// 		"covid":  person.Covid,
-		// 	})
+		query3 := `CREATE (p:CPerson { name: $name, chatid: $chatid, covid: $covid })
+							RETURN p.name as name`
+		result3, err3 := session.Run(query3, map[string]interface{}{
+			"name":   person.Name,
+			"chatid": person.Chatid,
+			"covid":  person.Covid,
+		})
 
-		// 	if err3 != nil {
-		// 		log.Fatal(err3)
-		// 	}
+		if err3 != nil {
+			log.Fatal(err3)
+		}
 
-		// 	fmt.Println("result3 :", result3)
+		fmt.Println("result3 :", result3)
+		//FUNZIONAAAAA -->
+		// query4 := `MATCH (a:CPerson),(b:CPerson)
+		// WHERE a.name = $name0 AND b.name = $name_new
+		// CREATE (a)-[r:CONTACT]->(b)
+		// RETURN type(r)`
+
+		query4 := `MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		UNION
+		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name1 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		UNION
+		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name2 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		UNION
+		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name3 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		UNION
+		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
+
+		fmt.Println("cpersonResults[0].Name:", cpersonResults[0].Name)
+		fmt.Println("name_new:", person.Name)
+		result4, err4 := session.Run(query4, map[string]interface{}{
+			"name0":    cpersonResults[0].Name,
+			"name1":    cpersonResults[1].Name,
+			"name2":    cpersonResults[2].Name,
+			"name3":    cpersonResults[3].Name,
+			"name4":    cpersonResults[4].Name,
+			"name_new": person.Name,
+		})
+
+		if err4 != nil {
+			log.Fatal(err4)
+		}
+
+		fmt.Println("result4 :", result4)
 
 	}
 }
