@@ -53,15 +53,15 @@ END = ConversationHandler.END
     PARENTS,
     CHILDREN,
     SELF,
-    GENDER,
-    MALE,
-    FEMALE,
-    AGE,
-    NAME,
+    GENDER,     #\r
+    MALE,       #\x0e
+    FEMALE,     #\x0f
+    AGE,        #\x10
+    NAME,       #\x11 
     START_OVER,
     FEATURES,
     CURRENT_FEATURE,
-    CURRENT_LEVEL,
+    CURRENT_LEVEL,   #\x0c
 ) = map(chr, range(10, 22))
 
 
@@ -108,6 +108,7 @@ def start(update: Update, context: CallbackContext) -> None:
 def adding_self(update: Update, context: CallbackContext) -> None:
     """Add information about youself."""
     context.user_data[CURRENT_LEVEL] = SELF
+    print(list(context.user_data[CURRENT_LEVEL]))
     text = 'Okay, please tell me about yourself.'
     button = InlineKeyboardButton(text='Add info', callback_data=str(MALE))
     keyboard = InlineKeyboardMarkup.from_button(button)
@@ -123,6 +124,7 @@ def show_data(update: Update, context: CallbackContext) -> None:
 
     def prettyprint(user_data, level):
         people = user_data.get(level)
+        print(user_data.get(level))
         if not people:
             return '\nNo information yet.'
 

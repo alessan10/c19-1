@@ -104,9 +104,9 @@ def typing_surname(update: Update, context: CallbackContext) -> int:
 
 
 # RIPRENDERE DA QUI --> implementare la POST per inviare i dati al server GO
-# def post(update: Update, context: CallbackContext) -> int:
+def post(update: Update, context: CallbackContext) -> int:
 
-#     return ConversationHandler.END
+    return ConversationHandler.END
 
 
 def fine(update: Update, context: CallbackContext) -> int:
