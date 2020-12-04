@@ -65,7 +65,7 @@ END = ConversationHandler.END
     START_OVER,       # \x12
     FEATURES,         # \x13
     CURRENT_FEATURE,  # \x14
-    CURRENT_LEVEL,    # \x0c
+    CURRENT_LEVEL,    # \x15
 ) = map(chr, range(10, 22))
 
 
@@ -111,7 +111,7 @@ def start(update: Update, context: CallbackContext) -> None:
 
 def adding_self(update: Update, context: CallbackContext) -> None:
     """Add information about youself."""
-    context.user_data[CURRENT_LEVEL] = SELF
+    context.user_data[CURRENT_LEVEL] = SELF #  \x15  <-  \x0c 
     print(list(context.user_data[CURRENT_LEVEL]))
     text = 'Okay, please tell me about yourself.'
     button = InlineKeyboardButton(text='Add info', callback_data=str(MALE))
