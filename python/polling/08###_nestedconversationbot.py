@@ -38,36 +38,40 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # State definitions for top level conversation
+#     \x00      ,      \x01    ,    \x02     ,     \x03
 SELECTING_ACTION, ADDING_MEMBER, ADDING_SELF, DESCRIBING_SELF = map(chr, range(4))
 # State definitions for second level conversation
+#     \x04     ,       \x05
 SELECTING_LEVEL, SELECTING_GENDER = map(chr, range(4, 6))
 # State definitions for descriptions conversation
+#     \x06       ,   \x07
 SELECTING_FEATURE, TYPING = map(chr, range(6, 8))
 # Meta states
+#  \x08 ,    \t
 STOPPING, SHOWING = map(chr, range(8, 10))
 # Shortcut for ConversationHandler.END
 END = ConversationHandler.END
 
 # Different constants for this example
 (
-    PARENTS,
-    CHILDREN,
-    SELF,
-    GENDER,     #\r
-    MALE,       #\x0e
-    FEMALE,     #\x0f
-    AGE,        #\x10
-    NAME,       #\x11 
-    START_OVER,
-    FEATURES,
-    CURRENT_FEATURE,
-    CURRENT_LEVEL,   #\x0c
+    PARENTS,          # \n
+    CHILDREN,         # \x0b
+    SELF,             # \x0c
+    GENDER,           # \r
+    MALE,             # \x0e
+    FEMALE,           # \x0f
+    AGE,              # \x10
+    NAME,             # \x11 
+    START_OVER,       # \x12
+    FEATURES,         # \x13
+    CURRENT_FEATURE,  # \x14
+    CURRENT_LEVEL,    # \x0c
 ) = map(chr, range(10, 22))
 
 
 # Helper
 def _name_switcher(level):
-    if level == PARENTS:
+    if level == PARENTS:  # \n
         return 'Father', 'Mother'
     return 'Brother', 'Sister'
 
@@ -92,7 +96,7 @@ def start(update: Update, context: CallbackContext) -> None:
     keyboard = InlineKeyboardMarkup(buttons)
 
     # If we're starting over we don't need do send a new message
-    if context.user_data.get(START_OVER):
+    if context.user_data.get(START_OVER):  # \x12
         update.callback_query.answer()
         update.callback_query.edit_message_text(text=text, reply_markup=keyboard)
     else:
@@ -101,7 +105,7 @@ def start(update: Update, context: CallbackContext) -> None:
         )
         update.message.reply_text(text=text, reply_markup=keyboard)
 
-    context.user_data[START_OVER] = False
+    context.user_data[START_OVER] = False  # \x12
     return SELECTING_ACTION
 
 
@@ -116,7 +120,7 @@ def adding_self(update: Update, context: CallbackContext) -> None:
     update.callback_query.answer()
     update.callback_query.edit_message_text(text=text, reply_markup=keyboard)
 
-    return DESCRIBING_SELF
+    return DESCRIBING_SELF  # \x03
 
 
 def show_data(update: Update, context: CallbackContext) -> None:
@@ -154,7 +158,7 @@ def show_data(update: Update, context: CallbackContext) -> None:
     update.callback_query.edit_message_text(text=text, reply_markup=keyboard)
     user_data[START_OVER] = True
 
-    return SHOWING
+    return SHOWING   # \t
 
 
 def stop(update: Update, context: CallbackContext) -> None:
@@ -193,7 +197,7 @@ def select_level(update: Update, context: CallbackContext) -> None:
     update.callback_query.answer()
     update.callback_query.edit_message_text(text=text, reply_markup=keyboard)
 
-    return SELECTING_LEVEL
+    return SELECTING_LEVEL  # \x04 
 
 
 def select_gender(update: Update, context: CallbackContext) -> None:
@@ -220,7 +224,7 @@ def select_gender(update: Update, context: CallbackContext) -> None:
     update.callback_query.answer()
     update.callback_query.edit_message_text(text=text, reply_markup=keyboard)
 
-    return SELECTING_GENDER
+    return SELECTING_GENDER  # \x05
 
 
 def end_second_level(update: Update, context: CallbackContext) -> None:
@@ -256,7 +260,7 @@ def select_feature(update: Update, context: CallbackContext) -> None:
         update.message.reply_text(text=text, reply_markup=keyboard)
 
     context.user_data[START_OVER] = False
-    return SELECTING_FEATURE
+    return SELECTING_FEATURE  # \x06
 
 
 def ask_for_input(update: Update, context: CallbackContext) -> None:
