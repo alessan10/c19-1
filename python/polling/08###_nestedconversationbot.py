@@ -276,6 +276,7 @@ def ask_for_input(update: Update, context: CallbackContext) -> None:
 
 def save_input(update: Update, context: CallbackContext) -> None:
     """Save input for feature and return to feature selection."""
+    # RIPRENDERE DA QUI FONDAMENTALE 280 E 281
     user_data = context.user_data
     user_data[FEATURES][user_data[CURRENT_FEATURE]] = update.message.text
 
