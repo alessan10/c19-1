@@ -17,7 +17,7 @@ bot.
 """
 
 import logging
-#import requests
+import requests
 
 # RITORNARE DA 22 A 26 DOPO CHE HAI SISTEMATO IL SERVER.GO
 #import requests
@@ -85,7 +85,6 @@ def ask_for_input(update: Update, context: CallbackContext) -> None:
 
 def save_input(update: Update, context: CallbackContext) -> None:
     """Save input for feature and return to feature selection."""
-    # RIPRENDERE DA QUI FONDAMENTALE 280 E 281
     print("[ SAVE_INPUT ]")
     user_data = context.user_data
     user_data[NAME] = update.message.text
@@ -99,15 +98,22 @@ def post(update: Update, context: CallbackContext) -> None:
   print("[ POST ]")
   user_data = context.user_data
   user = update.message.from_user
-  payload = {
-    "username": user['username'],
-    "chatid": user['id'],
-    "name" : user_data[NAME]
-  }
-  print("Payload[username]: ", payload["username"] )
+  # payload = {
+  #   'username': user['username'],
+  #   'chatid': user['id'],
+  #   'name' : user_data[NAME]
+  # }
+  payload = {"name":"bau5","chatid": "00000","covid": "negativo"}
+
+  #print("Payload[username]: ", payload["username"] )
   print("Payload[chatid]: ", payload["chatid"] )
   print("Payload[name]: ", payload["name"] )
   print("ConversationHandler.END: ", ConversationHandler.END )
+  # la SEARCH FUNZIONA
+  response = requests.post(url='http://localhost:8081/search',data=payload)
+  # la ADD non funziona
+  response = requests.post(url='http://localhost:8081/add',data=payload)
+  print("respose: ", response)
   return ConversationHandler.END
 
 
