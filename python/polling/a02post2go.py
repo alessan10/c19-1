@@ -37,6 +37,7 @@ from telegram.ext import (
     Filters,
     ConversationHandler,
     CallbackContext,
+    
 )
 
 # Enable logging
@@ -46,7 +47,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-TYPING_SURNAME, POST, FINE  = range(3)
+TYPING_SURNAME, POST, FINE, NAME  = range(4)
 
 def start(update: Update, context: CallbackContext) -> int:
     print("[ START ]")
@@ -82,7 +83,11 @@ def start(update: Update, context: CallbackContext) -> int:
     return POST
     
 def typing_surname(update: Update, context: CallbackContext) -> int:
+
     user_data = context.user_data
+    user_data[NAME] = update.message.text
+
+    #user_data = context.user_data
     print("[ TYPING SURNAME]")
     user = update.message.from_user
     first_name = str(user['first_name'])
@@ -106,8 +111,10 @@ def typing_surname(update: Update, context: CallbackContext) -> int:
 
 # RIPRENDERE DA QUI --> implementare la POST per inviare i dati al server GO
 def post(update: Update, context: CallbackContext) -> int:
+    user_data = context.user_data
+    print("user_data[NAME]: " , user_data[NAME])
+    return FINE
 
-    return ConversationHandler.END
 
 
 def fine(update: Update, context: CallbackContext) -> int:
@@ -119,6 +126,15 @@ def fine(update: Update, context: CallbackContext) -> int:
 
     #user_data.clear()
     return ConversationHandler.END
+
+def end(update: Update, context: CallbackContext) -> None:
+    """End conversation from InlineKeyboardButton."""
+    update.callback_query.answer()
+
+    text = 'See you around!'
+    update.callback_query.edit_message_text(text=text)
+
+    return END
 
 
 def main() -> None:
