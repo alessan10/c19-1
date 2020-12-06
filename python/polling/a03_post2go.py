@@ -103,17 +103,19 @@ def post(update: Update, context: CallbackContext) -> None:
   #   'chatid': user['id'],
   #   'name' : user_data[NAME]
   # }
-  payload = {"name":"bau5","chatid": "00000","covid": "negativo"}
+  payload = {"name":"cippino","chatid": "00000","covid": "negativo"}
 
   #print("Payload[username]: ", payload["username"] )
   print("Payload[chatid]: ", payload["chatid"] )
   print("Payload[name]: ", payload["name"] )
+  print("Payload[covid]: ", payload["covid"] )
+
   print("ConversationHandler.END: ", ConversationHandler.END )
   # la SEARCH FUNZIONA
-  response = requests.post(url='http://localhost:8081/search',data=payload)
-  # la ADD non funziona
-  response = requests.post(url='http://localhost:8081/add',data=payload)
-  print("respose: ", response)
+  #response = requests.post(url='http://localhost:8081/search',data=payload)
+  # la ADD funziona!
+  response = requests.post(url='http://localhost:8081/add',json=payload)
+  print("response: ", response.status_code)
   return ConversationHandler.END
 
 
