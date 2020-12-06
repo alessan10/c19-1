@@ -4,6 +4,13 @@
 # type: ignore[union-attr]
 # This program is dedicated to the public domain under the CC0 license.
 
+# COSE DA FARE:
+# 1) ELIMINARE IL BOTTONE CONFERMA riga 68
+# 2) impostare il msg di conferma a riga 129
+# 3) aggiungere l'inserimento dello stato positivo/negativo?
+# 4) varie ed eventuali in base al buonsenso
+
+
 """
 First, a few callback functions are defined. Then, those functions are passed to
 the Dispatcher and registered at their respective places.
@@ -120,6 +127,8 @@ def post(update: Update, context: CallbackContext) -> None:
   # la ADD funziona!
   response = requests.post(url='http://localhost:8081/add',json=payload)
   print("response: ", response.status_code)
+
+  #AGGIUNGERE LA CONFERMA CHE L'INSERIMENTO è ANDATO A BUON FINE (se status_code = 200)
   return ConversationHandler.END
 
 
