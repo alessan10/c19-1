@@ -332,6 +332,10 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 
 		fmt.Println("result4 :", result4)
 
+		err5 := json.NewEncoder(w).Encode(cpersonResults)
+		if err5 != nil {
+			log.Println("error writing search response:", err5)
+		}
 	}
 }
 
