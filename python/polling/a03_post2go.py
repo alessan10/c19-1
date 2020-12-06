@@ -103,7 +103,11 @@ def post(update: Update, context: CallbackContext) -> None:
   #   'chatid': user['id'],
   #   'name' : user_data[NAME]
   # }
-  payload = {"name":"cippino","chatid": "00000","covid": "negativo"}
+  print("name",user_data[NAME])
+  print("chatid", user['id'])
+  
+  # b'{"Machine Name":"'+hostname+'"}', None, True)
+  payload = {"name":""+user_data[NAME]+"","chatid": ""+str(user['id'])+"","covid": "negativo"}
 
   #print("Payload[username]: ", payload["username"] )
   print("Payload[chatid]: ", payload["chatid"] )
