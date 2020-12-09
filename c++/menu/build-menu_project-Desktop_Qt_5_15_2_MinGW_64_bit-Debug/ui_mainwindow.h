@@ -12,11 +12,11 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -32,7 +32,9 @@ public:
     QAction *actionExit;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
-    QTextEdit *textEdit;
+    QLabel *label_2;
+    QLabel *label_3;
+    QLabel *label;
     QMenuBar *menubar;
     QMenu *menuOperazioni;
     QMenu *menuHelp;
@@ -42,7 +44,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(903, 646);
         actioninserisci = new QAction(MainWindow);
         actioninserisci->setObjectName(QString::fromUtf8("actioninserisci"));
         actionRicerca = new QAction(MainWindow);
@@ -57,15 +59,31 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        textEdit = new QTextEdit(centralwidget);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setPixmap(QPixmap(QString::fromUtf8("C:/Users/alexm/Desktop/page-GraphDatabase1.png")));
+        label_2->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        label_2->setMargin(-100);
 
-        verticalLayout->addWidget(textEdit);
+        verticalLayout->addWidget(label_2);
+
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        QFont font;
+        font.setPointSize(20);
+        label_3->setFont(font);
+
+        verticalLayout->addWidget(label_3);
+
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        verticalLayout->addWidget(label);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 903, 21));
         menuOperazioni = new QMenu(menubar);
         menuOperazioni->setObjectName(QString::fromUtf8("menuOperazioni"));
         menuHelp = new QMenu(menubar);
@@ -97,6 +115,9 @@ public:
         actionElimina->setText(QCoreApplication::translate("MainWindow", "Elimina", nullptr));
         actionAbout_Our_Project->setText(QCoreApplication::translate("MainWindow", "About Our Project", nullptr));
         actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
+        label_2->setText(QString());
+        label_3->setText(QCoreApplication::translate("MainWindow", "Benvenuto nel programma di gestione.......", nullptr));
+        label->setText(QString());
         menuOperazioni->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi

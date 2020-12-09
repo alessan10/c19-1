@@ -9,14 +9,23 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    elimina.cpp \
+    inserisci.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    ricerca.cpp
 
 HEADERS += \
-    mainwindow.h
+    elimina.h \
+    inserisci.h \
+    mainwindow.h \
+    ricerca.h
 
 FORMS += \
-    mainwindow.ui
+    elimina.ui \
+    inserisci.ui \
+    mainwindow.ui \
+    ricerca.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -20,6 +20,12 @@ private slots:
 
     void on_actionExit_triggered();
 
+    void on_actioninserisci_triggered();
+
+    void on_actionRicerca_triggered();
+
+    void on_actionElimina_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

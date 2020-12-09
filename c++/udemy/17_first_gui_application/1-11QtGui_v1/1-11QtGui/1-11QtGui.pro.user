@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.3, 2020-12-08T18:37:59. -->
+<!-- Written by QtCreator 4.13.3, 2020-12-09T18:21:40. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -325,8 +325,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/udemy/17/1-11QtGui_v1/1-11QtGui/1-11QtGui.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/udemy/17/1-11QtGui_v1/1-11QtGui/1-11QtGui.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">1-11QtGui2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/udemy/17_first_gui_application/1-11QtGui_v1/1-11QtGui/1-11QtGui.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/udemy/17_first_gui_application/1-11QtGui_v1/1-11QtGui/1-11QtGui.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
