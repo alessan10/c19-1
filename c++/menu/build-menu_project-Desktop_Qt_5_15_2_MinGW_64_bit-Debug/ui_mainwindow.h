@@ -32,9 +32,8 @@ public:
     QAction *actionExit;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
-    QLabel *label_2;
-    QLabel *label_3;
     QLabel *label;
+    QLabel *label_2;
     QMenuBar *menubar;
     QMenu *menuOperazioni;
     QMenu *menuHelp;
@@ -59,26 +58,21 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setPixmap(QPixmap(QString::fromUtf8("C:/Users/alexm/Desktop/page-GraphDatabase1.png")));
-        label_2->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-        label_2->setMargin(-100);
-
-        verticalLayout->addWidget(label_2);
-
-        label_3 = new QLabel(centralwidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        QFont font;
-        font.setPointSize(20);
-        label_3->setFont(font);
-
-        verticalLayout->addWidget(label_3);
-
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
+        label->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
 
         verticalLayout->addWidget(label);
+
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        QFont font;
+        font.setPointSize(14);
+        label_2->setFont(font);
+        label_2->setAlignment(Qt::AlignCenter);
+        label_2->setMargin(0);
+
+        verticalLayout->addWidget(label_2);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -115,9 +109,8 @@ public:
         actionElimina->setText(QCoreApplication::translate("MainWindow", "Elimina", nullptr));
         actionAbout_Our_Project->setText(QCoreApplication::translate("MainWindow", "About Our Project", nullptr));
         actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
-        label_2->setText(QString());
-        label_3->setText(QCoreApplication::translate("MainWindow", "Benvenuto nel programma di gestione.......", nullptr));
-        label->setText(QString());
+        label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Clicca su File e seleziona un'operazione per iniziare", nullptr));
         menuOperazioni->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi

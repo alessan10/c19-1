@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QPixmap pix(":/images/page-GraphDatabase1.png");
+    ui->label->setPixmap(pix.scaled(500,500));
 }
 
 MainWindow::~MainWindow()
