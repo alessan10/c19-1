@@ -14,6 +14,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +25,7 @@ public:
     QDialogButtonBox *buttonBox;
     QLabel *label;
     QPushButton *pushButton;
-    QLabel *label_2;
+    QListWidget *listWidget;
 
     void setupUi(QDialog *Visualizza)
     {
@@ -58,9 +59,9 @@ public:
         pushButton = new QPushButton(Visualizza);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(830, 50, 93, 28));
-        label_2 = new QLabel(Visualizza);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(240, 190, 431, 201));
+        listWidget = new QListWidget(Visualizza);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        listWidget->setGeometry(QRect(140, 130, 621, 421));
 
         retranslateUi(Visualizza);
         QObject::connect(buttonBox, SIGNAL(accepted()), Visualizza, SLOT(accept()));
@@ -74,7 +75,6 @@ public:
         Visualizza->setWindowTitle(QCoreApplication::translate("Visualizza", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("Visualizza", "Per visualizzare tutto il grafico, clicca su Visualizza", nullptr));
         pushButton->setText(QCoreApplication::translate("Visualizza", "Visualizza", nullptr));
-        label_2->setText(QCoreApplication::translate("Visualizza", "TextLabel", nullptr));
     } // retranslateUi
 
 };

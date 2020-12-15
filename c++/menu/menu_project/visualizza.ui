@@ -86,17 +86,14 @@
     <string>Visualizza</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>190</y>
-     <width>431</width>
-     <height>201</height>
+     <x>140</x>
+     <y>130</y>
+     <width>621</width>
+     <height>421</height>
     </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
    </property>
   </widget>
  </widget>
