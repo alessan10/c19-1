@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,19 +13,22 @@ SOURCES += \
     inserisci.cpp \
     main.cpp \
     mainwindow.cpp \
-    ricerca.cpp
+    ricerca.cpp \
+    visualizza.cpp
 
 HEADERS += \
     elimina.h \
     inserisci.h \
     mainwindow.h \
-    ricerca.h
+    ricerca.h \
+    visualizza.h
 
 FORMS += \
     elimina.ui \
     inserisci.ui \
     mainwindow.ui \
-    ricerca.ui
+    ricerca.ui \
+    visualizza.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

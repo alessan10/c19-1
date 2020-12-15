@@ -3,8 +3,10 @@ release/inserisci.o
 release/main.o
 release/mainwindow.o
 release/ricerca.o
+release/visualizza.o
 release/qrc_resource.o
 release/moc_elimina.o
 release/moc_inserisci.o
 release/moc_mainwindow.o
 release/moc_ricerca.o
+release/moc_visualizza.o

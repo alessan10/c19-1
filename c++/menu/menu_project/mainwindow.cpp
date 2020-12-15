@@ -1,9 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
 #include "inserisci.h"
 #include "ricerca.h"
 #include "elimina.h"
+#include "visualizza.h"
+
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -53,4 +55,12 @@ void MainWindow::on_actionElimina_triggered()
     eliminadialog.setWindowTitle("Elimina");
     eliminadialog.setModal(true);
     eliminadialog.exec();
+}
+
+void MainWindow::on_actionVisualizza_Database_triggered()
+{
+    Visualizza visualizzadialog;
+    visualizzadialog.setWindowTitle("Visualizza Grafico");
+    visualizzadialog.setModal(true);
+    visualizzadialog.exec();
 }

@@ -26,6 +26,8 @@ private slots:
 
     void on_actionElimina_triggered();
 
+    void on_actionVisualizza_Database_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

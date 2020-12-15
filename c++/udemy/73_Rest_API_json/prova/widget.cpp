@@ -78,13 +78,15 @@ void Widget::dataReadFinished()
        for ( int i = 0; i < array.size(); i++)
        {
 
-           QJsonObject object = array.at(i).toObject();
+           //QJsonObject object = array.at(i).toObject();
+           //QJsonObject object1 = object["cperson"].toObject();
 
-           //QVariantMap map = object.toVariantMap();
+           QJsonObject object = array.at(i).toObject().value("cperson").toObject();
+           QString name = object["name"].toString();
+           QString chatid = object["chatid"].toString();
+           QString covid = object["covid"].toString();
 
-           QString name = object["cperson.name"].toString();
-
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + name);
+           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + name + chatid + covid );
 
            QString c0 = mDoc.object().value("cperson").toArray().at(i).toObject().value("name").toString();
            qDebug() << c0;
