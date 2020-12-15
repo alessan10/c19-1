@@ -70,6 +70,7 @@ void Widget::dataReadFinished()
        {
 
            QJsonObject object = array.at(i).toObject();
+           object.
 
            QVariantMap map = object.toVariantMap();
 
