@@ -4,6 +4,7 @@
 #include "ricerca.h"
 #include "elimina.h"
 #include "visualizza.h"
+#include "table.h"
 
 #include <QMessageBox>
 
@@ -63,4 +64,15 @@ void MainWindow::on_actionVisualizza_Database_triggered()
     visualizzadialog.setWindowTitle("Visualizza Grafico");
     visualizzadialog.setModal(true);
     visualizzadialog.exec();
+}
+
+
+
+void MainWindow::on_actionTable_triggered()
+{
+    Table tabledialog;
+    tabledialog.setWindowTitle("Tabella");
+    tabledialog.setModal(true);
+    tabledialog.exec();
+
 }

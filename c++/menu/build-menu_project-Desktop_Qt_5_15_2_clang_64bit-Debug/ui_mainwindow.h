@@ -30,6 +30,8 @@ public:
     QAction *actionElimina;
     QAction *actionAbout_Our_Project;
     QAction *actionExit;
+    QAction *actionVisualizza_Database;
+    QAction *actionTable;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QLabel *label;
@@ -37,6 +39,7 @@ public:
     QMenuBar *menubar;
     QMenu *menuOperazioni;
     QMenu *menuHelp;
+    QMenu *menuModifica;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -54,6 +57,10 @@ public:
         actionAbout_Our_Project->setObjectName(QString::fromUtf8("actionAbout_Our_Project"));
         actionExit = new QAction(MainWindow);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
+        actionVisualizza_Database = new QAction(MainWindow);
+        actionVisualizza_Database->setObjectName(QString::fromUtf8("actionVisualizza_Database"));
+        actionTable = new QAction(MainWindow);
+        actionTable->setObjectName(QString::fromUtf8("actionTable"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -82,12 +89,15 @@ public:
         menuOperazioni->setObjectName(QString::fromUtf8("menuOperazioni"));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
+        menuModifica = new QMenu(menubar);
+        menuModifica->setObjectName(QString::fromUtf8("menuModifica"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
         menubar->addAction(menuOperazioni->menuAction());
+        menubar->addAction(menuModifica->menuAction());
         menubar->addAction(menuHelp->menuAction());
         menuOperazioni->addAction(actioninserisci);
         menuOperazioni->addAction(actionRicerca);
@@ -95,6 +105,8 @@ public:
         menuOperazioni->addSeparator();
         menuOperazioni->addAction(actionExit);
         menuHelp->addAction(actionAbout_Our_Project);
+        menuModifica->addAction(actionVisualizza_Database);
+        menuModifica->addAction(actionTable);
 
         retranslateUi(MainWindow);
 
@@ -109,10 +121,13 @@ public:
         actionElimina->setText(QCoreApplication::translate("MainWindow", "Elimina", nullptr));
         actionAbout_Our_Project->setText(QCoreApplication::translate("MainWindow", "About Our Project", nullptr));
         actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
+        actionVisualizza_Database->setText(QCoreApplication::translate("MainWindow", "Visualizza Database", nullptr));
+        actionTable->setText(QCoreApplication::translate("MainWindow", "Table", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Clicca in alto a sinistra su File e seleziona un'operazione per iniziare!", nullptr));
         menuOperazioni->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
+        menuModifica->setTitle(QCoreApplication::translate("MainWindow", "Modifica", nullptr));
     } // retranslateUi
 
 };

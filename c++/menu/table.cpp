@@ -1,6 +1,5 @@
-#include "visualizza.h"
-#include "ui_visualizza.h"
-
+#include "table.h"
+#include "ui_table.h"
 #include <QNetworkRequest>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -8,40 +7,50 @@
 #include <QVariantMap>
 #include <QDebug>
 
-Visualizza::Visualizza(QWidget *parent) :
+Table::Table(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Visualizza),
+    ui(new Ui::Table),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
     mDataBuffer(new QByteArray)
 {
     ui->setupUi(this);
+    ui->tableWidget = new QTableWidget(12, 12, this);
+
 }
 
-Visualizza::~Visualizza()
+Table::~Table()
 {
     delete ui;
 }
 
-void Visualizza::on_pushButton_clicked()
+void Table::on_tableWidget_clicked(const QModelIndex &index)
+{
+
+}
+
+void Table::on_pushButton_clicked()
 {
     //Initialize our API data
+
+
     const QUrl API_ENDPOINT("http://localhost:8081/graph");
     QNetworkRequest request;
     request.setUrl(API_ENDPOINT);
 
     mNetReply = mNetManager->get(request);
-    connect(mNetReply,&QIODevice::readyRead,this,&Visualizza::dataReadyRead);
-    connect(mNetReply,&QNetworkReply::finished,this,&Visualizza::dataReadFinished);
+    connect(mNetReply,&QIODevice::readyRead,this,&Table::dataReadyRead);
+    connect(mNetReply,&QNetworkReply::finished,this,&Table::dataReadFinished);
 }
 
-void Visualizza::dataReadyRead()
+void Table::dataReadyRead()
 {
     mDataBuffer->append(mNetReply->readAll());
 }
 
-void Visualizza::dataReadFinished()
+void Table::dataReadFinished()
 {
+
     if( mNetReply->error())
     {
         qDebug() << "Error : " << mNetReply->errorString();
@@ -67,6 +76,10 @@ void Visualizza::dataReadFinished()
        //Turn document into json array
 
        QJsonArray array = mDoc.array();
+       ui->tableWidget->setRowCount(array.size());
+       ui->tableWidget->setColumnCount(5);
+
+
 
        for ( int i = 0; i < array.size(); i++)
        {
@@ -78,8 +91,20 @@ void Visualizza::dataReadFinished()
            QString name = object["name"].toString();
            QString chatid = object["chatid"].toString();
            QString covid = object["covid"].toString();
+           for (int j=0; j< 5 ;j++ )
+           {
 
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + name + chatid + covid );
+
+               ui->tableWidget->setItem(i,j, new QTableWidgetItem('name + chatid + covid') );
+
+
+           }
+
+
+
+
+
+           //ui->listWidget->addItem("["+ QString::number(i+1) + "] " + name + chatid + covid );
 
            //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
            //ui->label_2->setText("Dati ricevuti");
@@ -91,3 +116,5 @@ void Visualizza::dataReadFinished()
 
     }
 }
+
+
