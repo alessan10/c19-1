@@ -79,7 +79,7 @@ void Visualizza::dataReadFinished()
            QString chatid = object["chatid"].toString();
            QString covid = object["covid"].toString();
 
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + name + chatid + covid );
+           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + "Nome: " + name + " - ChatID: "  + chatid + " - Covid: " + covid );
 
            //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
            //ui->label_2->setText("Dati ricevuti");

@@ -14,7 +14,7 @@ var covid = [
 
 var array = []
 
-var totale = 100;
+var totale = process.argv[2];
 var flag = 1;
 
 for (var i=0;i<totale; i++){  
@@ -32,49 +32,12 @@ for (var i=0;i<totale; i++){
   }  
 }
 
-// fs.writeFile('test.txt', str, function(err){
-//   if(err) { return console.log(err); } console.log('The file was saved');
-// });
-
-// for(var i = 0; i < array.length ; i++){     
-//   console.log(array[i]) 
-// }
-
-// for(var i=0; i<20; i++){
-//   var n = Math.floor(Math.random()*5 )+5;
-//   console.log(n)
-// }
-
-// var group = Math.floor(Math.random()*5 )+5;
-// for(var i = 0; i < array.length ; i++){
-//   str += '(' + array[i] + ')-[:CONTACT]->(' + array[i++] + '),';
-// }
-
-//SEMIFUNZIONANTE
-// var somma_rndn = 0;
-
-// for (group = 0; somma_rndn < totale; ){
-//   var indice = Math.floor(Math.random()*5 )+5;
-//   console.log(indice);
-//   for (var i= group; i<indice; i++)
-//   str2 += '(' + array[group] + ')-[:CONTACT]->(' + array[i++] + '),'+ '\n';
-//   group = indice;
-//   console.log(str2);
-//   somma_rndn += indice;
-// }
-
-
-// fs.writeFile('test.txt', str, function(err){
-//   if(err) { return console.log(err); } console.log('The file was saved');
-// });
-
 var array2=[];
 var array3=[];
 
 for (var i of array){
   array3.push(i);
 }
-
 
 
 console.log("1Array1: \n")
@@ -167,6 +130,6 @@ while (array3.length >1)
 
 str = str.substring(0, str.length - 2);
 
-fs.writeFile('test.txt', str, function(err){
+fs.writeFile('queries_neo4j.txt', str, function(err){
   if(err) { return console.log(err); } console.log('The file was saved');
 });
