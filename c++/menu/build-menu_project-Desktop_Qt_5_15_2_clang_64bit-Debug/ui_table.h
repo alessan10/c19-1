@@ -12,29 +12,36 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_Table
 {
 public:
-    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
     QTableView *tableView;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *Table)
     {
         if (Table->objectName().isEmpty())
             Table->setObjectName(QString::fromUtf8("Table"));
         Table->resize(400, 300);
-        horizontalLayout = new QHBoxLayout(Table);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        verticalLayout = new QVBoxLayout(Table);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         tableView = new QTableView(Table);
         tableView->setObjectName(QString::fromUtf8("tableView"));
 
-        horizontalLayout->addWidget(tableView);
+        verticalLayout->addWidget(tableView);
+
+        pushButton = new QPushButton(Table);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        verticalLayout->addWidget(pushButton);
 
 
         retranslateUi(Table);
@@ -45,6 +52,7 @@ public:
     void retranslateUi(QDialog *Table)
     {
         Table->setWindowTitle(QCoreApplication::translate("Table", "Dialog", nullptr));
+        pushButton->setText(QCoreApplication::translate("Table", "Visualizza/Aggiorna", nullptr));
     } // retranslateUi
 
 };

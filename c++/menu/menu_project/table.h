@@ -22,6 +22,10 @@ public:
 
 private slots:
     void on_tableView_clicked(const QModelIndex &index);
+    void dataReadyRead();
+    void dataReadFinished();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::Table *ui;
