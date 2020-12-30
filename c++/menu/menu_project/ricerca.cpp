@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QDebug>
+#include <QUrlQuery>
 
 Ricerca::Ricerca(QWidget *parent) :
     QDialog(parent),
@@ -25,17 +26,32 @@ Ricerca::~Ricerca()
 
 void Ricerca::on_pushButton_clicked()
 {
-    QString nome_cognome=ui->lineEdit->text();
-    qDebug() << "Hai scritto: " << nome_cognome;
+    QString nome=ui->name->text();
+    QString cognome=ui->surname->text();
 
+    //QString url_string = "http://localhost:8081/search/?name="+ nome + cognome;
+    //QString url_string = "http://localhost:8081/search?name=Odie%20Von";
 
-    const QUrl API_ENDPOINT("http://localhost:8081/search/");
+    QUrlQuery postData;
+    postData.addQueryItem(nome, "string");
+    postData.addQueryItem(cognome, "string");
+
+    QUrl serviceUrl = QUrl("http://localhost:8081/search");
+    QNetworkRequest request(serviceUrl);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+
+    QNetworkAccessManager *networkManager = new QNetworkAccessManager(this);
+    connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(serviceRequestFinished(QNetworkReply*)));
+    mNetReply = networkManager->post(request, postData.toString(QUrl::FullyEncoded).toUtf8());
+
+    /*const QUrl API_ENDPOINT(url_string);
     QNetworkRequest request;
     request.setUrl(API_ENDPOINT);
 
-    mNetReply = mNetManager->get(request);
+    mNetReply = mNetManager->get(request);*/
     connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
     connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
+
 }
 
 void Ricerca::dataReadyRead()
@@ -45,7 +61,7 @@ void Ricerca::dataReadyRead()
 
 void Ricerca::dataReadFinished()
 {
-    /*if( mNetReply->error())
+    if( mNetReply->error())
     {
         qDebug() << "Error : " << mNetReply->errorString();
     }else
@@ -77,5 +93,5 @@ void Ricerca::dataReadFinished()
 
        }
 
-    }*/
+    }
 }
