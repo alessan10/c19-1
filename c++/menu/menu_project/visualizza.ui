@@ -24,11 +24,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QListWidget" name="listWidget">
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-    </widget>
+    <widget class="QTableView" name="tableView"/>
    </item>
    <item>
     <widget class="QLabel" name="label">
