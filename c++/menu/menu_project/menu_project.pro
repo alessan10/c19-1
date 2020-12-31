@@ -15,7 +15,8 @@ SOURCES += \
     mainwindow.cpp \
     ricerca.cpp \
     table.cpp \
-    visualizza.cpp
+    visualizza.cpp \
+    worker.cpp
 
 HEADERS += \
     elimina.h \
@@ -23,7 +24,8 @@ HEADERS += \
     mainwindow.h \
     ricerca.h \
     table.h \
-    visualizza.h
+    visualizza.h \
+    worker.h
 
 FORMS += \
     elimina.ui \

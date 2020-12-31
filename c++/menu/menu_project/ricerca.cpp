@@ -1,5 +1,6 @@
 #include "ricerca.h"
 #include "ui_ricerca.h"
+#include "worker.h"
 
 #include <QNetworkRequest>
 #include <QJsonDocument>
@@ -26,38 +27,29 @@ Ricerca::~Ricerca()
 
 void Ricerca::on_pushButton_clicked()
 {
-    QString nome=ui->name->text();
-    QString cognome=ui->surname->text();
+    //QCoreApplication a(argc, argv);
 
-    //QString url_string = "http://localhost:8081/search/?name="+ nome + cognome;
-    //QString url_string = "http://localhost:8081/search?name=Odie%20Von";
+    Worker worker;
 
-    QUrlQuery postData;
-    postData.addQueryItem(nome, "string");
-    postData.addQueryItem(cognome, "string");
+    worker.get("http://localhost:8081/search?name=Odie%20Von");
 
-    QUrl serviceUrl = QUrl("http://localhost:8081/search");
-    QNetworkRequest request(serviceUrl);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+    //QByteArray data;
+    //data.append("name=Odie%20Von");
+    //data.append("&");
+    //data.append("param2=Von");
 
-    QNetworkAccessManager *networkManager = new QNetworkAccessManager(this);
-    connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(serviceRequestFinished(QNetworkReply*)));
-    mNetReply = networkManager->post(request, postData.toString(QUrl::FullyEncoded).toUtf8());
+   // worker.post("http://localhost:8081/search",data);
 
-    /*const QUrl API_ENDPOINT(url_string);
-    QNetworkRequest request;
-    request.setUrl(API_ENDPOINT);
 
-    mNetReply = mNetManager->get(request);*/
-    connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
-    connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
+    //return a.exec();
 
 }
 
 void Ricerca::dataReadyRead()
 {
-    /*mDataBuffer->append(mNetReply->readAll());*/
+    mDataBuffer->append(mNetReply->readAll());
 }
+
 
 void Ricerca::dataReadFinished()
 {
