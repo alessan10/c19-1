@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.0, 2020-12-31T18:32:32. -->
+<!-- Written by QtCreator 4.14.0, 2020-12-31T18:41:08. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{36e951b1-2941-4a7b-977e-d76bd4fc79a6}</value>
+  <value type="QByteArray">{c46a7d0a-3272-43c2-9f4c-bd969d1484b4}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -67,16 +67,14 @@
    <valuemap type="QVariantMap" key="AutoTest.CheckStates"/>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>
-   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey">
-    <value type="QString">-fno-delayed-template-parsing</value>
-   </valuelist>
+   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey"/>
    <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
    <value type="QString" key="ClangCodeModel.WarningConfigId">Builtin.Questionable</value>
    <valuemap type="QVariantMap" key="ClangTools">
-    <value type="bool" key="ClangTools.AnalyzeOpenFiles">false</value>
+    <value type="bool" key="ClangTools.AnalyzeOpenFiles">true</value>
     <value type="bool" key="ClangTools.BuildBeforeAnalysis">true</value>
     <value type="QString" key="ClangTools.DiagnosticConfig">Builtin.DefaultTidyAndClazy</value>
-    <value type="int" key="ClangTools.ParallelJobs">4</value>
+    <value type="int" key="ClangTools.ParallelJobs">8</value>
     <valuelist type="QVariantList" key="ClangTools.SelectedDirs"/>
     <valuelist type="QVariantList" key="ClangTools.SelectedFiles"/>
     <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
@@ -88,16 +86,16 @@
   <variable>ProjectExplorer.Project.Target.0</variable>
   <valuemap type="QVariantMap">
    <value type="QString" key="DeviceType">Desktop</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop Qt 5.15.2 MinGW 64-bit</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop Qt 5.15.2 MinGW 64-bit</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">qt.qt5.5152.win64_mingw81_kit</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop Qt 5.15.2 clang 64bit</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop Qt 5.15.2 clang 64bit</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">qt.qt5.5152.clang_64_kit</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">D:\Alessandro\uniCT\Magistrale\Secondo Anno\1 - Advanced Programming Languages\Progetto_Esame\git_c19\c19\c++\menu\build-menu_project-Desktop_Qt_5_15_2_MinGW_64_bit-Debug</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_MinGW_64_bit-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -133,10 +131,11 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Debug</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
+    <value type="int" key="RunSystemFunction">0</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">D:\Alessandro\uniCT\Magistrale\Secondo Anno\1 - Advanced Programming Languages\Progetto_Esame\git_c19\c19\c++\menu\build-menu_project-Desktop_Qt_5_15_2_MinGW_64_bit-Release</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_MinGW_64_bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Release</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -173,11 +172,12 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">0</value>
     <value type="int" key="QtQuickCompiler">0</value>
+    <value type="int" key="RunSystemFunction">0</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">D:\Alessandro\uniCT\Magistrale\Secondo Anno\1 - Advanced Programming Languages\Progetto_Esame\git_c19\c19\c++\menu\build-menu_project-Desktop_Qt_5_15_2_MinGW_64_bit-Profile</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_MinGW_64_bit-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Profile</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -214,6 +214,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">0</value>
     <value type="int" key="QtQuickCompiler">0</value>
+    <value type="int" key="RunSystemFunction">0</value>
     <value type="int" key="SeparateDebugInfo">0</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.BuildConfigurationCount">3</value>
@@ -291,15 +292,14 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">menu_project2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/menu/menu_project/menu_project.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/menu/menu_project/menu_project.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/menu_project/menu_project.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/menu_project/menu_project.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/Alessandro/uniCT/Magistrale/Secondo Anno/1 - Advanced Programming Languages/Progetto_Esame/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_MinGW_64_bit-Debug</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/menu_project.app/Contents/MacOS</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

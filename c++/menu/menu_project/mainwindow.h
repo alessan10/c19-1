@@ -30,7 +30,6 @@ private slots:
 
     void on_actionTable_triggered();
 
-    void on_actionProva_triggered();
 
 private:
     Ui::MainWindow *ui;
