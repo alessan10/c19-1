@@ -7,6 +7,8 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
+#include "worker.h"
+
 namespace Ui {
 class Ricerca;
 }
@@ -20,9 +22,9 @@ public:
     ~Ricerca();
 
 private slots:
-    void on_pushButton_clicked();
-    void dataReadyRead();
-    void dataReadFinished();
+    void on_pushButton_clicked(Worker worker);
+    //void dataReadyRead();
+    //void dataReadFinished();
 
 private:
     Ui::Ricerca *ui;

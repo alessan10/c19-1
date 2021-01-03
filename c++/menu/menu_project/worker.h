@@ -25,16 +25,19 @@ public slots:
 
 private slots:
     void readyRead();
+    void dataReadFinished();
+
     void authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);
     void encrypted(QNetworkReply *reply);
     void finished(QNetworkReply *reply);
-    void networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility accessible);
     void preSharedKeyAuthenticationRequired(QNetworkReply *reply, QSslPreSharedKeyAuthenticator *authenticator);
     void proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator);
     void sslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
 private:
-    QNetworkAccessManager manager;
+    QNetworkAccessManager * mNetManager;
+    QNetworkReply * mNetReply;
+    QByteArray *mDataBuffer;
 
 };
 

@@ -25,26 +25,15 @@ Ricerca::~Ricerca()
     delete ui;
 }
 
-void Ricerca::on_pushButton_clicked()
+void Ricerca::on_pushButton_clicked(Worker worker)
 {
-    //QCoreApplication a(argc, argv);
-
-    Worker worker;
-
-    worker.get("http://localhost:8081/search?name=Odie%20Von");
-
-    //QByteArray data;
-    //data.append("name=Odie%20Von");
-    //data.append("&");
-    //data.append("param2=Von");
-
-   // worker.post("http://localhost:8081/search",data);
-
-
-    //return a.exec();
-
+    QString name = "Odie";
+    QString surname = "Von";
+  //worker.get("http://localhost:8081/search?name=Rosemary%20Stiedemann");
+    worker.get("http://localhost:8081/search?name="+name+"%20"+surname);
 }
 
+/*
 void Ricerca::dataReadyRead()
 {
     mDataBuffer->append(mNetReply->readAll());
@@ -86,4 +75,4 @@ void Ricerca::dataReadFinished()
        }
 
     }
-}
+}*/

@@ -8,8 +8,8 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     Worker worker;
-    QString name = "Alec";
-    QString surname = "Hahn";
+    QString name = "Odie";
+    QString surname = "Von";
     //worker.get("http://localhost:8081/search?name=Rosemary%20Stiedemann");
     worker.get("http://localhost:8081/search?name="+name+"%20"+surname);
 
