@@ -22,7 +22,7 @@ public:
     ~Ricerca();
 
 private slots:
-    void on_pushButton_clicked(Worker worker);
+    void on_pushButton_clicked();
     //void dataReadyRead();
     //void dataReadFinished();
 

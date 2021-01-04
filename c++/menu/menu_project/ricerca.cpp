@@ -25,12 +25,12 @@ Ricerca::~Ricerca()
     delete ui;
 }
 
-void Ricerca::on_pushButton_clicked(Worker worker)
+void Ricerca::on_pushButton_clicked()
 {
-    QString name = "Odie";
-    QString surname = "Von";
+    //QString name = "Odie";
+    //QString surname = "Von";
   //worker.get("http://localhost:8081/search?name=Rosemary%20Stiedemann");
-    worker.get("http://localhost:8081/search?name="+name+"%20"+surname);
+    //worker.get("http://localhost:8081/search?name="+name+"%20"+surname);
 }
 
 /*
