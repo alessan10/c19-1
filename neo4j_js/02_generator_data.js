@@ -12,7 +12,7 @@ var str= "";
 //genero date
 for (var i=0; i<100; i++){
     var aux = faker.date.past().toString();
-    aux = aux.substring(0, 25); //da 0 a 25 significa che non stampa la parte di stringa successiva GMT+01 eccetera
+    aux = aux.substring(0, 15); //da 0 a 15 significa che non stampa la parte di stringa successiva GMT+01 eccetera
     str += aux +'\n';
 }
 
