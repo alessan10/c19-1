@@ -52,7 +52,7 @@ for (var i=0;i<totale; i++){
     str = 'CREATE ';
   } 
   if (flag == 1){
-    str += '(' + firstname.toLowerCase() + "_" + lastName.toLowerCase() + ':CPerson {name: "'  + firstname + ' ' + lastName + '", chatid: "-", covid: "' + covid[random] + '"}),' +'\n';
+    str += '(' + firstname.toLowerCase() + "_" + lastName.toLowerCase() + ':CPerson {name: "'  + firstname + ' ' + lastName + '", chatid: "-", covid: "' + covid[random] +'", year: "' + year + '", month: "' + month + '", day: "' + day + '", weekday: "' + weekday + '"}),' +'\n';
     array.push(firstname.toLowerCase() + '_' + lastName.toLowerCase())
   }  
 }

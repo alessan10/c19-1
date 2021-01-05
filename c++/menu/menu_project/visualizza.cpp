@@ -78,8 +78,12 @@ void Visualizza::dataReadFinished()
            QString name = object["name"].toString();
            QString chatid = object["chatid"].toString();
            QString covid = object["covid"].toString();
+           QString weekday = object["weekday"].toString();
+           QString day = object["day"].toString();
+           QString month = object["month"].toString();
+           QString year = object["year"].toString();
 
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + "Nome: " + name + " - ChatID: "  + chatid + " - Covid: " + covid );
+           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + "Nome: " + name + " - ChatID: "  + chatid + " - Covid: " + covid + " - Data: " + weekday + " " + day + " " + month + " " + year);
            //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
            //ui->label_2->setText("Dati ricevuti");
            //ui->tableView->(name +  chatid + covid);
