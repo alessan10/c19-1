@@ -5,10 +5,11 @@
 #include "elimina.h"
 #include "visualizza.h"
 #include "table.h"
+#include "worker.h"
 
 #include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(Worker &worker, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -44,7 +45,7 @@ void MainWindow::on_actioninserisci_triggered()
 
 void MainWindow::on_actionRicerca_triggered()
 {
-    Ricerca ricercadialog;
+    Ricerca ricercadialog(worker);//(worker)
     ricercadialog.setWindowTitle("Ricerca");
     ricercadialog.setModal(true);
     ricercadialog.exec();
