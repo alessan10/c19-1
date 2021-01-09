@@ -39,8 +39,11 @@ void Ricerca::on_pushButton_clicked()
 
 void Ricerca::on_pushButton_clicked()
 {
+    QString name = ui->name->text();
+    QString surname = ui->surname->text();
+
     //Initialize our API data
-    const QUrl API_ENDPOINT("http://localhost:8081/search?name=Kian%20Kemmer");
+    const QUrl API_ENDPOINT("http://localhost:8081/search?name="+name+"%20"+surname);
     QNetworkRequest request;
     request.setUrl(API_ENDPOINT);
 
