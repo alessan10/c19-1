@@ -20,10 +20,11 @@ signals:
 
 public slots:
 
-    void get(QString location);
-    void post(QString location, QByteArray data);
+     void get(QString location);
+     void post(QString location, QByteArray data);
 
 private slots:
+
     void readyRead();
     void dataReadFinished();
 

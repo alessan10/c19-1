@@ -19,7 +19,7 @@ Worker::Worker(QObject *parent) :
     connect(mNetManager,&QNetworkAccessManager::sslErrors,this,&Worker::sslErrors);
 }
 
-void Worker::get(QString location)
+void  Worker::get(QString location)
 {
     qInfo() << "Getting from server...";
     QNetworkReply* reply = mNetManager->get(QNetworkRequest(QUrl(location)));
