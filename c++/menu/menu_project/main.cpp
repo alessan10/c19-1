@@ -7,16 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Worker worker;
-    Worker & pippo = worker;
-    MainWindow w(pippo); //(worker)
+    Worker & ref = worker;
+    MainWindow w(ref);
     w.show();
-
-    //QString name = "Odie";
-    //QString surname = "Von";
-    //worker.get("http://localhost:8081/search?name=Rosemary%20Stiedemann");
-    //worker.get("http://localhost:8081/search?name="+name+"%20"+surname);
-
     return a.exec();
-
-
 }
