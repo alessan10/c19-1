@@ -25,9 +25,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <property name="locale">
-   <locale language="English" country="UnitedStates"/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
@@ -51,7 +48,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="string_name">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -71,9 +68,6 @@
       <font>
        <pointsize>14</pointsize>
       </font>
-     </property>
-     <property name="locale">
-      <locale language="English" country="UnitedStates"/>
      </property>
      <property name="text">
       <string>Seleziona l'esito del tampone al COVID-19 e la data in cui è stato effettuato:</string>
@@ -129,7 +123,7 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QCalendarWidget" name="calendarWidget">
+      <widget class="QCalendarWidget" name="calendar">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -143,7 +137,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="locale">
-        <locale language="English" country="UnitedStates"/>
+        <locale language="Italian" country="Italy"/>
        </property>
        <property name="minimumDate">
         <date>
@@ -153,7 +147,7 @@
         </date>
        </property>
        <property name="firstDayOfWeek">
-        <enum>Qt::Sunday</enum>
+        <enum>Qt::Monday</enum>
        </property>
        <property name="gridVisible">
         <bool>true</bool>
@@ -166,7 +160,14 @@
     </layout>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="save_button">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -180,6 +181,9 @@
       <font>
        <pointsize>8</pointsize>
       </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
      </property>
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>

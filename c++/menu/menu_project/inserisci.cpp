@@ -11,7 +11,6 @@
 #include <QUrlQuery>
 
 
-
 Inserisci::Inserisci(Worker &worker ,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Inserisci),
@@ -22,7 +21,6 @@ Inserisci::Inserisci(Worker &worker ,QWidget *parent) :
 {
     this->worker = &worker;
     ui->setupUi(this);
-    ui->calendarWidget->setLocale(QLocale(QLocale::English));
 }
 
 Inserisci::~Inserisci()
@@ -30,81 +28,53 @@ Inserisci::~Inserisci()
     delete ui;
 }
 
-void Inserisci::on_buttonBox_clicked(QAbstractButton *button)
+void Inserisci::on_buttonBox_clicked()
 {
+
     QString esito;
-    QString name = ui->lineEdit->text();
+    QString name = ui->string_name->text();
+
+    //controllo che string name sia pieno
+    connect(ui->string_name, SIGNAL(textEdited(const QString&)), SLOT(on_text_changed()));
+
     if (ui->radio_positivo->isChecked() == true && ui->radio_negativo->isChecked() == false){
         esito = "positivo";
     }else esito = "negativo";
+    //controllo che positivo o negativo siano selezionati - da sistemare
+    //connect(ui->radio_negativo, SIGNAL(()), SLOT(check_button()));
+    //connect(ui->radio_positivo, SIGNAL(()), SLOT(check_button()));
 
-    QString calendar = ui->calendarWidget->selectedDate().toString();
-    QString month;
-    QString dayOfWeek;
-    switch (ui->calendarWidget->selectedDate().month())
-    {
-        case 1:
-            month = "Jan";
-        break;
-        case 2:
-            month = "Feb";
-        break;
-        case 3:
-            month = "Mar";
-        break;
-        case 4:
-            month = "Apr";
-        break;
-        case 5:
-            month = "May";
-        break;
-        case 6:
-            month = "Jun";
-        break;
-        case 7:
-            month = "Jul";
-        break;
-        case 8:
-            month = "Aug";
-        break;
-        case 9:
-            month = "Sep";
-        break;
-        case 10:
-            month = "Oct";
-        break;
-        case 11:
-            month = "Nov";
-        break;
-        case 12:
-        month = "Dec";
-        break;
+    QString calendar = ui->calendar->selectedDate().toString();
 
-    }
-    switch (ui->calendarWidget->selectedDate().dayOfWeek()) {
-    case 1:
-        dayOfWeek = "Mon";
-    break;
-    case 2:
-        dayOfWeek = "Tue";
-    break;
-    case 3:
-        dayOfWeek = "Wed";
-    break;
-    case 4:
-        dayOfWeek = "Thu";
-    break;
-    case 5:
-        dayOfWeek = "Fri";
-    break;
-    case 6:
-        dayOfWeek = "Sat";
-    break;
-    case 7:
-        dayOfWeek = "Sun";
-    break;
+    //controllo che la data sia stata selezionata - da sistemare
+    //connect(ui->calendar, SIGNAL());
+    qDebug() << "calendar: " << calendar;
 
-    }
-    qInfo() << ui->calendarWidget->selectedDate().year() << month  << ui->calendarWidget->selectedDate().day() << dayOfWeek;
-    qInfo() << name << " esito: " <<esito;
+
+
 }
+
+/*
+void Inserisci::on_pushButton_toggled(bool checked)
+{
+    //ui->string_name->text();
+
+    //controllo che string name sia pieno
+    connect(ui->string_name, SIGNAL(textEdited(const QString&)), SLOT(on_text_changed()));
+}
+*/
+
+/*
+void Inserisci::check_button(){
+
+    ui->save_button->setEnabled(!ui->string_name->text().isEmpty()); //&& !ui->calendar->selectedDate().isNull()
+
+}*/
+void Inserisci::onTextChanged(const QString &arg1){
+    if (ui->string_name->text().isEmpty()){
+        ui->pushButton->setEnabled(false);
+    }else{
+        ui->pushButton->setEnabled(true);
+    }
+}
+
