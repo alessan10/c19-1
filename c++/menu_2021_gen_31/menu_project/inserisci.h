@@ -18,6 +18,7 @@ class Inserisci : public QDialog
 public:
     explicit Inserisci(Worker &worker ,QWidget *parent = nullptr);
     ~Inserisci();
+    void cleanUp();
 
 private slots:
     //void on_buttonBox_clicked(QAbstractButton *button);

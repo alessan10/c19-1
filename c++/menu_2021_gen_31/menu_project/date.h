@@ -16,7 +16,7 @@ public:
 public:
     Date();
     ~Date();
-    Date* conversion(QDate &q);
+    void conversion(QDate &q);
 };
 
 #endif // DATE_H

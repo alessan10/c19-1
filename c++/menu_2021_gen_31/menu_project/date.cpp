@@ -1,8 +1,8 @@
 #include "date.h"
 
 Date::Date(){
-  day=0;
-  month ="";
+  day = 0;
+  month = "";
   year = 0;
   dayOfWeek ="";
 
@@ -13,7 +13,7 @@ Date::~Date()
 
 }
 
-Date* Date::conversion(QDate & q){
+void Date::conversion(QDate & q){
 
 
     switch (q.dayOfWeek()) {
@@ -82,11 +82,10 @@ Date* Date::conversion(QDate & q){
     this->year = q.year();
     this->day = q.day();
 
-    qDebug() << "ANNO: "<< this->year;
-    qDebug() << "Mese: " << this->month;
-    qDebug() << "Giorno: " << this->day;
-    qDebug() << "Day of The week: " << this->dayOfWeek;
+    qDebug() << "Date::conversion --> ANNO: "<< this->year;
+    qDebug() << "Date::conversion --> Mese: " << this->month;
+    qDebug() << "Date::conversion --> Giorno: " << this->day;
+    qDebug() << "Date::conversion --> Day of The week: " << this->dayOfWeek;
 
-    return this;
 
 }
