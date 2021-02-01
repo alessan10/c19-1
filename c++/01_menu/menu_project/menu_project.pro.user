@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.0, 2021-02-01T00:35:10. -->
+<!-- Written by QtCreator 4.14.0, 2021-02-01T19:50:41. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -292,9 +292,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">menu_project2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu_2021_gen_31/menu_project/menu_project.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu_2021_gen_31/menu_project/menu_project.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/01_menu/menu_project/menu_project.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/01_menu/menu_project/menu_project.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

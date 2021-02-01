@@ -69,6 +69,21 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         qDebug() << "Inserisci::save --> Anno = " << date.year;
         cleanUp();
 
+        QJsonObject json;
+        json.insert("name",QJsonValue::fromVariant(name));
+        json.insert("chatid", QJsonValue::fromVariant(""));
+        json.insert("covid", QJsonValue::fromVariant(covid));
+        json.insert("weekday", QJsonValue::fromVariant(date.dayOfWeek));
+        json.insert("day", QJsonValue::fromVariant(date.day));
+        json.insert("month", QJsonValue::fromVariant(date.month));
+        json.insert("year", QJsonValue::fromVariant(date.year));
+
+        QJsonObject finalObj;
+        finalObj.insert(QString("cperson"), QJsonValue(json));
+        qDebug() << finalObj;
+
+
+
     }
 
 }
