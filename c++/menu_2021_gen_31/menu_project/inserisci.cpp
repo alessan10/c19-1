@@ -51,16 +51,14 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
 
     }else {
-        qDebug() << "OK";
-        QString name = ui->nome_e_cognome->text();
-        qDebug() << "string: " << name;
 
+        QString name = ui->nome_e_cognome->text();
         QString covid;
+
         ui->radio_positivo->isChecked()? covid = "positivo" : covid = "negativo";
 
         QDate calend = ui->calendar->selectedDate() ;
         QDate &cld = calend;
-
 
         date.conversion(cld);
 
