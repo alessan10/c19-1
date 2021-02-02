@@ -105,6 +105,8 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 		defer session.Close()
 
+		log.Println("ecco il body SEARCH:", req.Body)
+
 		query := `MATCH (p1:CPerson)-[r:CONTACT]-(p2:CPerson) 
 					where p1.name = $name 
 					return p2.name as name, p2.chatid as chatid, p2.covid as covid, p2.weekday as weekday, p2.day as day, p2.month as month, p2.year as year`
@@ -297,12 +299,14 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		fmt.Println("sono nell'ADD")
 		defer session.Close()
 
+		log.Println("ecco il body ADD:", req.Body)
 		decoder := json.NewDecoder(req.Body)
 		var person CPerson
 		jsonerr := decoder.Decode(&person)
 		if jsonerr != nil {
 			panic(err)
 		}
+
 		log.Println("Nome :", person.Name)
 		log.Println("Chatid :", person.Chatid)
 		log.Println("Covid :", person.Covid)
@@ -459,6 +463,8 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 		}
 
 		defer session.Close()
+
+		log.Println("ecco il body GRAPH:", req.Body)
 
 		query := `MATCH (p1:CPerson) 
 		RETURN p1.name as name, p1.chatid as chatid, p1.covid as covid, p1.weekday as weekday, p1.day as day, p1.month as month, p1.year as year`

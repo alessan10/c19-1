@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QDate>
+#include <QStringBuilder>
 
 Inserisci::Inserisci(Worker &worker ,QWidget *parent) :
     QDialog(parent),
@@ -70,17 +71,50 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         cleanUp();
 
         QJsonObject json;
-        json.insert("name",QJsonValue::fromVariant(name));
-        json.insert("chatid", QJsonValue::fromVariant(""));
-        json.insert("covid", QJsonValue::fromVariant(covid));
-        json.insert("weekday", QJsonValue::fromVariant(date.dayOfWeek));
-        json.insert("day", QJsonValue::fromVariant(date.day));
-        json.insert("month", QJsonValue::fromVariant(date.month));
-        json.insert("year", QJsonValue::fromVariant(date.year));
+        json["name"] = QString(name);
+        json["chatid"] = QString("-");
+        json["covid"] =QString(covid);
+        json["weekday"] =QString(date.dayOfWeek);
+        json["day"] = QString(date.day);
+        json["month"] = QString(date.month);
+        json["year"] =QString(date.year);
+//        json.insert("name",QJsonValue::fromVariant(name));
+//        json.insert("chatid", QJsonValue::fromVariant(""));
+//        json.insert("covid", QJsonValue::fromVariant(covid));
+//        json.insert("weekday", QJsonValue::fromVariant(date.dayOfWeek));
+//        json.insert("day", QJsonValue::fromVariant(date.day));
+//        json.insert("month", QJsonValue::fromVariant(date.month));
+//        json.insert("year", QJsonValue::fromVariant(date.year));
 
-        QJsonObject finalObj;
-        finalObj.insert(QString("cperson"), QJsonValue(json));
-        qDebug() << finalObj;
+
+        qDebug() << json;
+        QJsonDocument doc(json);
+        QByteArray data = doc.toJson();
+
+
+        QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
+        const QUrl url(QStringLiteral("http://localhost:8081/add"));
+        QNetworkRequest request(url);
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+        // or
+//        QString m = "{/";
+
+
+//        QByteArray data("{\"name\":\"value1\",\"covid\":\"value2\"}");
+        QNetworkReply *reply = mgr->post(request, data);
+
+        QObject::connect(reply, &QNetworkReply::finished, [=](){
+            if(reply->error() == QNetworkReply::NoError){
+                QString contents = QString::fromUtf8(reply->readAll());
+                qDebug() << contents;
+            }
+            else{
+                QString err = reply->errorString();
+                qDebug() << err;
+            }
+            reply->deleteLater();
+        });
 
 
 

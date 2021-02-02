@@ -8,9 +8,9 @@
 class Date
 {
 public:
-    int day;
+    QString day;
     QString month;
-    int year;
+    QString year;
     QString dayOfWeek;
 
 public:

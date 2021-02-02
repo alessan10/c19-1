@@ -39,6 +39,8 @@ void Worker::post(QString location, QByteArray data)
     connect(reply,&QNetworkReply::readyRead,this,&Worker::readyRead);
 }
 
+
+
 void Worker::readyRead()
 {
     qInfo() << "Entro in readyRead";

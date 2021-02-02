@@ -23,6 +23,7 @@ public slots:
      void get(QString location);
      void post(QString location, QByteArray data);
 
+
 private slots:
 
     void readyRead();

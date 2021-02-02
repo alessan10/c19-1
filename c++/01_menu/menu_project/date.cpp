@@ -1,9 +1,9 @@
 #include "date.h"
 
 Date::Date(){
-  day = 0;
+  day = "";
   month = "";
-  year = 0;
+  year = "";
   dayOfWeek ="";
 
 }
@@ -80,8 +80,8 @@ void Date::conversion(QDate & q){
     break;
     }
 
-    this->year = q.year();
-    this->day = q.day();
+    this->year = QString::number(q.year());
+    this->day = QString::number(q.day());
 
     qDebug() << "Date::conversion --> ANNO: "<< this->year;
     qDebug() << "Date::conversion --> Mese: " << this->month;
