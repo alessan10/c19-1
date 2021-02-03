@@ -60,7 +60,6 @@
     </property>
     <addaction name="actioninserisci"/>
     <addaction name="actionRicerca"/>
-    <addaction name="actionElimina"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -90,11 +89,6 @@
   <action name="actionRicerca">
    <property name="text">
     <string>Ricerca</string>
-   </property>
-  </action>
-  <action name="actionElimina">
-   <property name="text">
-    <string>Elimina</string>
    </property>
   </action>
   <action name="actionAbout_Our_Project">

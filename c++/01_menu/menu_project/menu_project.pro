@@ -10,7 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     date.cpp \
-    elimina.cpp \
     inserisci.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -21,7 +20,6 @@ SOURCES += \
 
 HEADERS += \
     date.h \
-    elimina.h \
     inserisci.h \
     mainwindow.h \
     ricerca.h \
@@ -30,7 +28,6 @@ HEADERS += \
     worker.h
 
 FORMS += \
-    elimina.ui \
     inserisci.ui \
     mainwindow.ui \
     ricerca.ui \

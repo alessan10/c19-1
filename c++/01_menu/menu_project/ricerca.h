@@ -27,6 +27,8 @@ private slots:
     void dataReadyRead();
     void dataReadFinished();
 
+    void on_button_elimina_clicked();
+
 private:
     Ui::Ricerca *ui;
     QNetworkAccessManager * mNetManager;

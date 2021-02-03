@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "inserisci.h"
 #include "ricerca.h"
-#include "elimina.h"
 #include "visualizza.h"
 #include "table.h"
 #include "worker.h"
@@ -51,13 +50,6 @@ void MainWindow::on_actionRicerca_triggered()
     ricercadialog.exec();
 }
 
-void MainWindow::on_actionElimina_triggered()
-{
-    Elimina eliminadialog;
-    eliminadialog.setWindowTitle("Elimina");
-    eliminadialog.setModal(true);
-    eliminadialog.exec();
-}
 
 void MainWindow::on_actionVisualizza_Database_triggered()
 {

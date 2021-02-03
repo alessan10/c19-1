@@ -42,7 +42,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
             ui->calendar->selectedDate().isNull() ){
 
-        int ret = QMessageBox::warning(this,"Message Title","hai dimenticato di impostare uno dei campi. Controlla!",
+        int ret = QMessageBox::warning(this,"Info","hai dimenticato di impostare uno dei campi. Controlla!",
                                         QMessageBox::Ok);
 
         if ( ret == QMessageBox::Ok)
@@ -54,7 +54,10 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
     }else {
 
         QString name = ui->nome->text();
+        name.replace(" ",""); //rimuoviamo eventuali spazi
         QString surname = ui->cognome->text();
+        surname.replace(" ",""); //rimuoviamo eventuali spazi
+
         QString fullname = name+" "+surname;
         qDebug() << "Fullname" <<fullname;
         QString covid;
@@ -103,6 +106,8 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
             if(reply->error() == QNetworkReply::NoError){
                 QString contents = QString::fromUtf8(reply->readAll());
                 qDebug() << contents;
+                //se non ci sono errori mostra un dialog
+                QMessageBox::information(this,"Info","Utente inserito con successo.", QMessageBox::Ok);
             }
             else{
                 QString err = reply->errorString();

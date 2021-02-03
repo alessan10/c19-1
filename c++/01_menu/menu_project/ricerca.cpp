@@ -39,6 +39,7 @@ void Ricerca::on_pushButton_clicked()
 
 void Ricerca::on_pushButton_clicked()
 {
+    ui->listWidget->clear();
     QString name = ui->name->text();
     QString surname = ui->surname->text();
 
@@ -113,4 +114,19 @@ void Ricerca::dataReadFinished()
        }
 
     }
+}
+
+void Ricerca::on_button_elimina_clicked()
+{
+    QString name = ui->name->text();
+    QString surname = ui->surname->text();
+
+    //Initialize our API data
+    const QUrl API_ENDPOINT("http://localhost:8081/delete?name="+name+"%20"+surname);
+    QNetworkRequest request;
+    request.setUrl(API_ENDPOINT);
+
+    mNetReply = mNetManager->get(request);
+    connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
+    connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
 }

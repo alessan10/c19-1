@@ -102,7 +102,7 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		if err != nil {
 			log.Fatal(err)
 		}
-
+		fmt.Println("[ ENTRYPOINT ] : SEARCH ")
 		defer session.Close()
 
 		log.Println("ecco il body SEARCH:", req.Body)
@@ -165,7 +165,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println("sono nell'UPDATE")
+		fmt.Println("[ ENTRYPOINT ] : UPDATE ")
 		defer session.Close()
 
 		query := `MATCH (p:CPerson {name: $name})
@@ -232,7 +232,7 @@ func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println("sono nell'HEALED")
+		fmt.Println("[ ENTRYPOINT ] : HEALED ")
 		defer session.Close()
 
 		query := `MATCH (p:CPerson {name: $name})-[r:CONTACT]-()
@@ -296,7 +296,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println("sono nell'ADD")
+		fmt.Println("[ ENTRYPOINT ] : ADD ")
 		defer session.Close()
 
 		log.Println("ecco il body ADD:", req.Body)
@@ -461,7 +461,7 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 		if err != nil {
 			log.Fatal(err)
 		}
-
+		fmt.Println("[ ENTRYPOINT ] : GRAPH ")
 		defer session.Close()
 
 		log.Println("ecco il body GRAPH:", req.Body)
@@ -513,6 +513,34 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 	}
 }
 
+func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, req *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		sessionConfig := neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite}
+		session, err := driver.NewSession(sessionConfig)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("[ ENTRYPOINT ] : DELETE ")
+		defer session.Close()
+
+		query := `MATCH (p:CPerson {name: $name}) 
+					DETACH DELETE p`
+
+		fmt.Println("URL name: ", req.URL.Query()["name"][0])
+		result, err := session.Run(query, map[string]interface{}{
+			"name": req.URL.Query()["name"][0],
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("result :", result)
+
+	}
+}
+
 func main() {
 
 	configuration := parseConfiguration()
@@ -520,7 +548,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("[ SERVER UP ]")
+	fmt.Println("[ SERVER ] : UP ")
 	defer unsafeClose(driver)
 
 	serveMux := http.NewServeMux()
@@ -531,6 +559,7 @@ func main() {
 	serveMux.HandleFunc("/add", addHandlerFunc(driver, configuration.Database))       // ADD
 	serveMux.HandleFunc("/graph", graphHandlerFunc(driver, configuration.Database))   // RETURN ALL GRAPH
 	serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database)) // SEARCH A CPerson and all of its DATA
+	serveMux.HandleFunc("/delete", deleteHandlerFunc(driver, configuration.Database)) // DELETE PERSON
 
 	var port string
 	var found bool
