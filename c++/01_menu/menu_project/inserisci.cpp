@@ -78,13 +78,6 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         json["day"] = QString(date.day);
         json["month"] = QString(date.month);
         json["year"] =QString(date.year);
-//        json.insert("name",QJsonValue::fromVariant(name));
-//        json.insert("chatid", QJsonValue::fromVariant(""));
-//        json.insert("covid", QJsonValue::fromVariant(covid));
-//        json.insert("weekday", QJsonValue::fromVariant(date.dayOfWeek));
-//        json.insert("day", QJsonValue::fromVariant(date.day));
-//        json.insert("month", QJsonValue::fromVariant(date.month));
-//        json.insert("year", QJsonValue::fromVariant(date.year));
 
 
         qDebug() << json;
@@ -97,8 +90,6 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         QNetworkRequest request(url);
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-        // or
-//        QString m = "{/";
 
 
 //        QByteArray data("{\"name\":\"value1\",\"covid\":\"value2\"}");
