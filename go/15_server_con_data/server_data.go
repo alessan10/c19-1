@@ -520,7 +520,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("sono dentro")
+	fmt.Println("[ SERVER UP ]")
 	defer unsafeClose(driver)
 
 	serveMux := http.NewServeMux()

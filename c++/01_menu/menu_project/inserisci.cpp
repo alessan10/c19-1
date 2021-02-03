@@ -38,7 +38,7 @@ Inserisci::~Inserisci()
 void Inserisci::on_save_button_clicked(QAbstractButton *button)
 {
 
-    if (ui->nome_e_cognome->text().isEmpty() ||
+    if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty() ||
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
             ui->calendar->selectedDate().isNull() ){
 
@@ -53,7 +53,10 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
     }else {
 
-        QString name = ui->nome_e_cognome->text();
+        QString name = ui->nome->text();
+        QString surname = ui->cognome->text();
+        QString fullname = name+" "+surname;
+        qDebug() << "Fullname" <<fullname;
         QString covid;
 
         ui->radio_positivo->isChecked()? covid = "positivo" : covid = "negativo";
@@ -64,6 +67,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         date.conversion(cld);
 
         qDebug() << "Inserisci::save -->  NOME = " <<  name;
+        qDebug() << "Inserisci::save -->  COGNOME = " <<  surname;
         qDebug() << "Inserisci::save --> COVID = " << covid;
         qDebug() << "Inserisci::save --> Giorno = " << date.day;
         qDebug() << "Inserisci::save --> Mese = " << date.month;
@@ -71,7 +75,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         cleanUp();
 
         QJsonObject json;
-        json["name"] = QString(name);
+        json["name"] = QString(fullname);
         json["chatid"] = QString("-");
         json["covid"] =QString(covid);
         json["weekday"] =QString(date.dayOfWeek);
@@ -114,5 +118,6 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 }
 
 void Inserisci::cleanUp(){
-    this->ui->nome_e_cognome->setText("");
+    this->ui->nome->setText("");
+    this->ui->cognome->setText("");
 }
