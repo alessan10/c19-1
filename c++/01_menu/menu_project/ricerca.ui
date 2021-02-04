@@ -47,7 +47,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLineEdit" name="name">
+      <widget class="QLineEdit" name="nome">
        <property name="font">
         <font>
          <pointsize>14</pointsize>
@@ -62,7 +62,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="surname">
+      <widget class="QLineEdit" name="cognome">
        <property name="font">
         <font>
          <pointsize>14</pointsize>

@@ -42,7 +42,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
             ui->calendar->selectedDate().isNull() ){
 
-        int ret = QMessageBox::warning(this,"Info","hai dimenticato di impostare uno dei campi. Controlla!",
+        int ret = QMessageBox::warning(this,"Attenzione","Inserisci tutti i campi.",
                                         QMessageBox::Ok);
 
         if ( ret == QMessageBox::Ok)

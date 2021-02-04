@@ -9,6 +9,7 @@
 #include <QVariantMap>
 #include <QDebug>
 #include <QUrlQuery>
+#include <QMessageBox>
 
 Ricerca::Ricerca(Worker &worker , QWidget *parent) :
     QDialog(parent),
@@ -40,17 +41,24 @@ void Ricerca::on_pushButton_clicked()
 void Ricerca::on_pushButton_clicked()
 {
     ui->listWidget->clear();
-    QString name = ui->name->text();
-    QString surname = ui->surname->text();
+    QString name = ui->nome->text();
+    QString surname = ui->cognome->text();
 
-    //Initialize our API data
-    const QUrl API_ENDPOINT("http://localhost:8081/search?name="+name+"%20"+surname);
-    QNetworkRequest request;
-    request.setUrl(API_ENDPOINT);
+    if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty()){
 
-    mNetReply = mNetManager->get(request);
-    connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
-    connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
+        QMessageBox::warning(this,"Attenzione","Inserisci nome e cognome.", QMessageBox::Ok);
+
+    }else{
+
+        //Initialize our API data
+        const QUrl API_ENDPOINT("http://localhost:8081/search?name="+name+"%20"+surname);
+        QNetworkRequest request;
+        request.setUrl(API_ENDPOINT);
+
+        mNetReply = mNetManager->get(request);
+        connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
+        connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
+    }
 }
 
 
@@ -95,7 +103,7 @@ void Ricerca::dataReadFinished()
            //QJsonObject object1 = object["cperson"].toObject();
 
            QJsonObject object = array.at(i).toObject().value("cperson").toObject();
-           QString name = object["name"].toString();
+           QString fullname = object["name"].toString();
            QString chatid = object["chatid"].toString();
            QString covid = object["covid"].toString();
            QString weekday = object["weekday"].toString();
@@ -103,7 +111,7 @@ void Ricerca::dataReadFinished()
            QString month = object["month"].toString();
            QString year = object["year"].toString();
 
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + "Nome: " + name + " - ChatID: "  + chatid + " - Covid: " + covid + " - Data: " + weekday + " " + day + " " + month + " " + year);
+           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + "Nome: " + fullname + " - ChatID: "  + chatid + " - Covid: " + covid + " - Data: " + weekday + " " + day + " " + month + " " + year);
            //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
            //ui->label_2->setText("Dati ricevuti");
            //ui->tableView->(name +  chatid + covid);
@@ -118,8 +126,8 @@ void Ricerca::dataReadFinished()
 
 void Ricerca::on_button_elimina_clicked()
 {
-    QString name = ui->name->text();
-    QString surname = ui->surname->text();
+    QString name = ui->nome->text();
+    QString surname = ui->cognome->text();
 
     //Initialize our API data
     const QUrl API_ENDPOINT("http://localhost:8081/delete?name="+name+"%20"+surname);

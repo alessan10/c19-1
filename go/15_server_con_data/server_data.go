@@ -8,6 +8,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"strings" //per controllo errori
 
 	"github.com/neo4j/neo4j-go-driver/neo4j"
 
@@ -410,6 +411,13 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		if err3 != nil {
 			log.Fatal(err3)
 		}
+
+		//----CONTROLLO ERRRORI----
+
+		chk := strings.Compare(person.Name, "")
+		fmt.Println("[MISSING]: NAME", chk)
+
+		//-----FINE----
 
 		fmt.Println("result3 :", result3)
 		//FUNZIONAAAAA -->
