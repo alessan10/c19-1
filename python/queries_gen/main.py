@@ -1,0 +1,4 @@
+import cperson
+
+p = Person()
+
