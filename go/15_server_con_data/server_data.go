@@ -316,6 +316,13 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		log.Println("Month :", person.Month)
 		log.Println("Year :", person.Year)
 
+		//----CONTROLLO ERRRORI----
+
+		chk := strings.Compare(person.Name, "")
+		fmt.Println("[MISSING]: NAME", chk)
+
+		//-----FINE----
+
 		query1 := `MATCH (n) RETURN count(n) as count`
 		result1, err1 := session.Run(query1, map[string]interface{}{})
 
@@ -411,13 +418,6 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		if err3 != nil {
 			log.Fatal(err3)
 		}
-
-		//----CONTROLLO ERRRORI----
-
-		chk := strings.Compare(person.Name, "")
-		fmt.Println("[MISSING]: NAME", chk)
-
-		//-----FINE----
 
 		fmt.Println("result3 :", result3)
 		//FUNZIONAAAAA -->
