@@ -1,8 +1,13 @@
+import random
+
 class Person:
-  def __init__(self, name, chatid, covid, weekday, day, month, year):
+
+  status = ('positivo', 'negativo') 
+
+  def __init__(self, name, chatid, weekday, day, month, year):
     self.name = name
     self.chatid = chatid
-    self.covid = covid
+    self.covid = self.status[random.choice([0, 1])]
     self.day = day
     self.weekday = weekday
     self.month = month
@@ -10,6 +15,7 @@ class Person:
     
 
   def toString(self):
+    print("\n")
     print("Name : " + self.name)
     print("Chatid : " + self.chatid)
     print("Covid : " + self.covid)
@@ -19,12 +25,6 @@ class Person:
     print("Year : " + self.year)
 
 
-
-
-d = Person("Deb", "-", "positivo", "Mon", "12","Jen", "2021")
-
-
-d.toString()
 
 
 
