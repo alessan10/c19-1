@@ -1,14 +1,11 @@
-#include <iostream>
+#include "date.hh"
 
-using namespace std;
-class Date
-{
-	private:
-		string day, month, year, dayOfWeek;
-	public:
-		Date(string d, string m, string y, string dow): day(d), month(m), year(y), dayOfWeek(dow){};
-		void toString();
-};
+Date::Date(string d, string m, string y, string dow){
+	this->day = d;
+	this->month = m;
+	this->year = y;
+	this->dayOfWeek = dow;
+}
 
 void Date::toString(){
 	cout << "Data: " << day <<" "<< month <<" "<< year << " - " << dayOfWeek << endl;
