@@ -31,6 +31,6 @@ class CPerson: public Person {
 		string chatId;
 		Date date;
 	public:
-//  costruttore
+		CPerson(string n, string s, string cvd, string chid, string d, string m, string y, string dow);
 }
 #endif
