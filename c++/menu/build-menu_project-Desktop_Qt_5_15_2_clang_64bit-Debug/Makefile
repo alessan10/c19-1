@@ -53,7 +53,6 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../01_menu/menu_project/date.cpp \
-		../../01_menu/menu_project/elimina.cpp \
 		../../01_menu/menu_project/inserisci.cpp \
 		../../01_menu/menu_project/main.cpp \
 		../../01_menu/menu_project/mainwindow.cpp \
@@ -61,7 +60,6 @@ SOURCES       = ../../01_menu/menu_project/date.cpp \
 		../../01_menu/menu_project/table.cpp \
 		../../01_menu/menu_project/visualizza.cpp \
 		../../01_menu/menu_project/worker.cpp qrc_resource.cpp \
-		moc_elimina.cpp \
 		moc_inserisci.cpp \
 		moc_mainwindow.cpp \
 		moc_ricerca.cpp \
@@ -69,7 +67,6 @@ SOURCES       = ../../01_menu/menu_project/date.cpp \
 		moc_visualizza.cpp \
 		moc_worker.cpp
 OBJECTS       = date.o \
-		elimina.o \
 		inserisci.o \
 		main.o \
 		mainwindow.o \
@@ -78,7 +75,6 @@ OBJECTS       = date.o \
 		visualizza.o \
 		worker.o \
 		qrc_resource.o \
-		moc_elimina.o \
 		moc_inserisci.o \
 		moc_mainwindow.o \
 		moc_ricerca.o \
@@ -263,14 +259,12 @@ DIST          = /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/sp
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/yacc.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/lex.prf \
 		../../01_menu/menu_project/menu_project.pro ../../01_menu/menu_project/date.h \
-		../../01_menu/menu_project/elimina.h \
 		../../01_menu/menu_project/inserisci.h \
 		../../01_menu/menu_project/mainwindow.h \
 		../../01_menu/menu_project/ricerca.h \
 		../../01_menu/menu_project/table.h \
 		../../01_menu/menu_project/visualizza.h \
 		../../01_menu/menu_project/worker.h ../../01_menu/menu_project/date.cpp \
-		../../01_menu/menu_project/elimina.cpp \
 		../../01_menu/menu_project/inserisci.cpp \
 		../../01_menu/menu_project/main.cpp \
 		../../01_menu/menu_project/mainwindow.cpp \
@@ -296,7 +290,7 @@ include /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-menu_project.app/Contents/MacOS/menu_project: ui_elimina.h ui_inserisci.h ui_mainwindow.h ui_ricerca.h ui_table.h ui_visualizza.h $(OBJECTS)  
+menu_project.app/Contents/MacOS/menu_project: ui_inserisci.h ui_mainwindow.h ui_ricerca.h ui_table.h ui_visualizza.h $(OBJECTS)  
 	@test -d menu_project.app/Contents/MacOS/ || mkdir -p menu_project.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -698,9 +692,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../01_menu/menu_project/resource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../01_menu/menu_project/date.h ../../01_menu/menu_project/elimina.h ../../01_menu/menu_project/inserisci.h ../../01_menu/menu_project/mainwindow.h ../../01_menu/menu_project/ricerca.h ../../01_menu/menu_project/table.h ../../01_menu/menu_project/visualizza.h ../../01_menu/menu_project/worker.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../01_menu/menu_project/date.cpp ../../01_menu/menu_project/elimina.cpp ../../01_menu/menu_project/inserisci.cpp ../../01_menu/menu_project/main.cpp ../../01_menu/menu_project/mainwindow.cpp ../../01_menu/menu_project/ricerca.cpp ../../01_menu/menu_project/table.cpp ../../01_menu/menu_project/visualizza.cpp ../../01_menu/menu_project/worker.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../01_menu/menu_project/elimina.ui ../../01_menu/menu_project/inserisci.ui ../../01_menu/menu_project/mainwindow.ui ../../01_menu/menu_project/ricerca.ui ../../01_menu/menu_project/table.ui ../../01_menu/menu_project/visualizza.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../01_menu/menu_project/date.h ../../01_menu/menu_project/inserisci.h ../../01_menu/menu_project/mainwindow.h ../../01_menu/menu_project/ricerca.h ../../01_menu/menu_project/table.h ../../01_menu/menu_project/visualizza.h ../../01_menu/menu_project/worker.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../01_menu/menu_project/date.cpp ../../01_menu/menu_project/inserisci.cpp ../../01_menu/menu_project/main.cpp ../../01_menu/menu_project/mainwindow.cpp ../../01_menu/menu_project/ricerca.cpp ../../01_menu/menu_project/table.cpp ../../01_menu/menu_project/visualizza.cpp ../../01_menu/menu_project/worker.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../01_menu/menu_project/inserisci.ui ../../01_menu/menu_project/mainwindow.ui ../../01_menu/menu_project/ricerca.ui ../../01_menu/menu_project/table.ui ../../01_menu/menu_project/visualizza.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -741,16 +735,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.13 -Wall -Wextra -dM -E -o moc_predefs.h /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_elimina.cpp moc_inserisci.cpp moc_mainwindow.cpp moc_ricerca.cpp moc_table.cpp moc_visualizza.cpp moc_worker.cpp
+compiler_moc_header_make_all: moc_inserisci.cpp moc_mainwindow.cpp moc_ricerca.cpp moc_table.cpp moc_visualizza.cpp moc_worker.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_elimina.cpp moc_inserisci.cpp moc_mainwindow.cpp moc_ricerca.cpp moc_table.cpp moc_visualizza.cpp moc_worker.cpp
-moc_elimina.cpp: ../../01_menu/menu_project/elimina.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		moc_predefs.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc
-	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/menu/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/moc_predefs.h -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang -I/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/APL_20-21/apl_calabretta_mauro/git_c19/c19/c++/01_menu/menu_project -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib ../../01_menu/menu_project/elimina.h -o moc_elimina.cpp
-
+	-$(DEL_FILE) moc_inserisci.cpp moc_mainwindow.cpp moc_ricerca.cpp moc_table.cpp moc_visualizza.cpp moc_worker.cpp
 moc_inserisci.cpp: ../../01_menu/menu_project/inserisci.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
@@ -879,13 +866,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_elimina.h ui_inserisci.h ui_mainwindow.h ui_ricerca.h ui_table.h ui_visualizza.h
+compiler_uic_make_all: ui_inserisci.h ui_mainwindow.h ui_ricerca.h ui_table.h ui_visualizza.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_elimina.h ui_inserisci.h ui_mainwindow.h ui_ricerca.h ui_table.h ui_visualizza.h
-ui_elimina.h: ../../01_menu/menu_project/elimina.ui \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/uic
-	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/uic ../../01_menu/menu_project/elimina.ui -o ui_elimina.h
-
+	-$(DEL_FILE) ui_inserisci.h ui_mainwindow.h ui_ricerca.h ui_table.h ui_visualizza.h
 ui_inserisci.h: ../../01_menu/menu_project/inserisci.ui \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/uic
 	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/uic ../../01_menu/menu_project/inserisci.ui -o ui_inserisci.h
@@ -927,12 +910,6 @@ date.o: ../../01_menu/menu_project/date.cpp ../../01_menu/menu_project/date.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o date.o ../../01_menu/menu_project/date.cpp
 
-elimina.o: ../../01_menu/menu_project/elimina.cpp ../../01_menu/menu_project/elimina.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_elimina.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o elimina.o ../../01_menu/menu_project/elimina.cpp
-
 inserisci.o: ../../01_menu/menu_project/inserisci.cpp ../../01_menu/menu_project/inserisci.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
@@ -972,7 +949,9 @@ inserisci.o: ../../01_menu/menu_project/inserisci.cpp ../../01_menu/menu_project
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QStringBuilder \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inserisci.o ../../01_menu/menu_project/inserisci.cpp
 
 main.o: ../../01_menu/menu_project/main.cpp ../../01_menu/menu_project/mainwindow.h \
@@ -1029,7 +1008,6 @@ mainwindow.o: ../../01_menu/menu_project/mainwindow.cpp ../../01_menu/menu_proje
 		../../01_menu/menu_project/ricerca.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../01_menu/menu_project/elimina.h \
 		../../01_menu/menu_project/visualizza.h \
 		../../01_menu/menu_project/table.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers/QStandardItemModel \
@@ -1068,7 +1046,9 @@ ricerca.o: ../../01_menu/menu_project/ricerca.cpp ../../01_menu/menu_project/ric
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QVariantMap \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qvariant.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QUrlQuery \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qurlquery.h
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ricerca.o ../../01_menu/menu_project/ricerca.cpp
 
 table.o: ../../01_menu/menu_project/table.cpp ../../01_menu/menu_project/table.h \
@@ -1144,9 +1124,6 @@ worker.o: ../../01_menu/menu_project/worker.cpp ../../01_menu/menu_project/worke
 
 qrc_resource.o: qrc_resource.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp
-
-moc_elimina.o: moc_elimina.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_elimina.o moc_elimina.cpp
 
 moc_inserisci.o: moc_inserisci.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_inserisci.o moc_inserisci.cpp

@@ -17,6 +17,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QRadioButton>
@@ -29,7 +30,9 @@ class Ui_Inserisci
 public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
-    QLineEdit *nome_e_cognome;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *nome;
+    QLineEdit *cognome;
     QLabel *label_2;
     QGridLayout *gridLayout_2;
     QRadioButton *radio_negativo;
@@ -65,16 +68,29 @@ public:
 
         verticalLayout->addWidget(label);
 
-        nome_e_cognome = new QLineEdit(Inserisci);
-        nome_e_cognome->setObjectName(QString::fromUtf8("nome_e_cognome"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        nome = new QLineEdit(Inserisci);
+        nome->setObjectName(QString::fromUtf8("nome"));
+        nome->setFont(font);
+        nome->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout->addWidget(nome);
+
+        cognome = new QLineEdit(Inserisci);
+        cognome->setObjectName(QString::fromUtf8("cognome"));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(nome_e_cognome->sizePolicy().hasHeightForWidth());
-        nome_e_cognome->setSizePolicy(sizePolicy2);
-        nome_e_cognome->setFont(font);
+        sizePolicy2.setHeightForWidth(cognome->sizePolicy().hasHeightForWidth());
+        cognome->setSizePolicy(sizePolicy2);
+        cognome->setFont(font);
+        cognome->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(nome_e_cognome);
+        horizontalLayout->addWidget(cognome);
+
+
+        verticalLayout->addLayout(horizontalLayout);
 
         label_2 = new QLabel(Inserisci);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -151,6 +167,8 @@ public:
     {
         Inserisci->setWindowTitle(QCoreApplication::translate("Inserisci", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("Inserisci", "Inserisci Nome e Cognome:", nullptr));
+        nome->setPlaceholderText(QCoreApplication::translate("Inserisci", "Nome", nullptr));
+        cognome->setPlaceholderText(QCoreApplication::translate("Inserisci", "Cognome", nullptr));
         label_2->setText(QCoreApplication::translate("Inserisci", "Seleziona l'esito del tampone al COVID-19 e la data in cui \303\250 stato effettuato:", nullptr));
         radio_negativo->setText(QCoreApplication::translate("Inserisci", "Negativo", nullptr));
         radio_positivo->setText(QCoreApplication::translate("Inserisci", "Positivo", nullptr));

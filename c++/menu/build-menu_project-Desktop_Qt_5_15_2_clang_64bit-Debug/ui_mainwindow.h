@@ -27,7 +27,6 @@ class Ui_MainWindow
 public:
     QAction *actioninserisci;
     QAction *actionRicerca;
-    QAction *actionElimina;
     QAction *actionAbout_Our_Project;
     QAction *actionExit;
     QAction *actionVisualizza_Database;
@@ -51,8 +50,6 @@ public:
         actioninserisci->setObjectName(QString::fromUtf8("actioninserisci"));
         actionRicerca = new QAction(MainWindow);
         actionRicerca->setObjectName(QString::fromUtf8("actionRicerca"));
-        actionElimina = new QAction(MainWindow);
-        actionElimina->setObjectName(QString::fromUtf8("actionElimina"));
         actionAbout_Our_Project = new QAction(MainWindow);
         actionAbout_Our_Project->setObjectName(QString::fromUtf8("actionAbout_Our_Project"));
         actionExit = new QAction(MainWindow);
@@ -101,7 +98,6 @@ public:
         menubar->addAction(menuHelp->menuAction());
         menuOperazioni->addAction(actioninserisci);
         menuOperazioni->addAction(actionRicerca);
-        menuOperazioni->addAction(actionElimina);
         menuOperazioni->addSeparator();
         menuOperazioni->addAction(actionExit);
         menuHelp->addAction(actionAbout_Our_Project);
@@ -118,7 +114,6 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actioninserisci->setText(QCoreApplication::translate("MainWindow", "Inserisci", nullptr));
         actionRicerca->setText(QCoreApplication::translate("MainWindow", "Ricerca", nullptr));
-        actionElimina->setText(QCoreApplication::translate("MainWindow", "Elimina", nullptr));
         actionAbout_Our_Project->setText(QCoreApplication::translate("MainWindow", "About Our Project", nullptr));
         actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
         actionVisualizza_Database->setText(QCoreApplication::translate("MainWindow", "Visualizza Database", nullptr));

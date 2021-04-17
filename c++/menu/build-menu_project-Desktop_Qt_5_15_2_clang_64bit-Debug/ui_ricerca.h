@@ -27,10 +27,13 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label;
     QHBoxLayout *horizontalLayout_2;
-    QLineEdit *name;
-    QLineEdit *surname;
+    QLineEdit *nome;
+    QLineEdit *cognome;
     QPushButton *pushButton;
+    QLabel *label_3;
     QListWidget *listWidget;
+    QLabel *label_2;
+    QPushButton *button_elimina;
 
     void setupUi(QDialog *Ricerca)
     {
@@ -58,19 +61,19 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        name = new QLineEdit(Ricerca);
-        name->setObjectName(QString::fromUtf8("name"));
-        name->setFont(font);
-        name->setAlignment(Qt::AlignCenter);
+        nome = new QLineEdit(Ricerca);
+        nome->setObjectName(QString::fromUtf8("nome"));
+        nome->setFont(font);
+        nome->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout_2->addWidget(name);
+        horizontalLayout_2->addWidget(nome);
 
-        surname = new QLineEdit(Ricerca);
-        surname->setObjectName(QString::fromUtf8("surname"));
-        surname->setFont(font);
-        surname->setAlignment(Qt::AlignCenter);
+        cognome = new QLineEdit(Ricerca);
+        cognome->setObjectName(QString::fromUtf8("cognome"));
+        cognome->setFont(font);
+        cognome->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout_2->addWidget(surname);
+        horizontalLayout_2->addWidget(cognome);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
@@ -80,6 +83,13 @@ public:
         pushButton->setFont(font);
 
         verticalLayout_2->addWidget(pushButton);
+
+        label_3 = new QLabel(Ricerca);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setFont(font);
+        label_3->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_2->addWidget(label_3);
 
         listWidget = new QListWidget(Ricerca);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
@@ -91,6 +101,19 @@ public:
 
         verticalLayout_2->addWidget(listWidget);
 
+        label_2 = new QLabel(Ricerca);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setFont(font);
+        label_2->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_2->addWidget(label_2);
+
+        button_elimina = new QPushButton(Ricerca);
+        button_elimina->setObjectName(QString::fromUtf8("button_elimina"));
+        button_elimina->setFont(font);
+
+        verticalLayout_2->addWidget(button_elimina);
+
 
         retranslateUi(Ricerca);
 
@@ -101,9 +124,12 @@ public:
     {
         Ricerca->setWindowTitle(QCoreApplication::translate("Ricerca", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("Ricerca", "Per cercare i contatti di un soggetto, digita il suo nome e il suo cognome nel box sottostante!", nullptr));
-        name->setPlaceholderText(QCoreApplication::translate("Ricerca", "Nome", nullptr));
-        surname->setPlaceholderText(QCoreApplication::translate("Ricerca", "Cognome", nullptr));
+        nome->setPlaceholderText(QCoreApplication::translate("Ricerca", "Nome", nullptr));
+        cognome->setPlaceholderText(QCoreApplication::translate("Ricerca", "Cognome", nullptr));
         pushButton->setText(QCoreApplication::translate("Ricerca", "Cerca", nullptr));
+        label_3->setText(QCoreApplication::translate("Ricerca", "Il soggetto cercato risulta essere entrato in contatto con i seguenti nominativi:", nullptr));
+        label_2->setText(QCoreApplication::translate("Ricerca", "Per eliminare il soggetto cercato, clicca su Elimina", nullptr));
+        button_elimina->setText(QCoreApplication::translate("Ricerca", "Elimina", nullptr));
     } // retranslateUi
 
 };
