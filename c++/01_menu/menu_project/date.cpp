@@ -8,11 +8,6 @@ Date::Date(){
 
 }
 
-Date::~Date()
-{
-
-}
-
 
 void Date::conversion(QDate & q){
 
