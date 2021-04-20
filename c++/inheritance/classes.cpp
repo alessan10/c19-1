@@ -26,13 +26,13 @@ void Person::printSurname(){
 }
 
 /*
-CPerson::CPerson(string n, string s, string cvd, string chId, string d, string m, string y, string dow ): Person(n,s), date(d,m,y,dow) {
+Patient::Patient(string n, string s, string cvd, string chId, string d, string m, string y, string dow ): Person(n,s), date(d,m,y,dow) {
 	this->covid = cvd;
 	this->chatId = chId;
 }
 */
 
-void CPerson::toString(){
+void Patient::toString(){
 	cout << name <<" "<< surname <<" "<< covid <<" "<< chatId <<" "<< date.getDay() <<" "<< date.getMonth() <<" "<< date.getYear() <<" "<< date.getDayOfWeek() << endl;
 
 //	cout << this->name <<" "<< surname <<" "<< covid <<" "<< chatId << endl;
@@ -46,7 +46,7 @@ int main(){
 	p->printName();
 	delete p;
 
-	CPerson *cp = new CPerson("Caio", "Mario","negativo", "-", "23", "Aprile", "2021", "Wed");
+	Patient *cp = new Patient("Caio", "Mario","negativo", "-", "23", "Aprile", "2021", "Wed");
 	cp->toString();
 	delete cp;
 }
