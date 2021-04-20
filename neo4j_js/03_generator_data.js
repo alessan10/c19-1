@@ -26,6 +26,8 @@ for (var i=0;i<totale; i++){
   flag = 1;
   var firstname = faker.name.firstName();
   var lastName = faker.name.lastName();
+  //var country = faker.address.country(); //AGGIUNGILO ALLA STRINGA
+  //var age = Math.floor(Math.random()*15)+75; //AGGIUNGILO ALLA STRINGA
   
   //genero la stringa e tolgo la parte in eccesso
   var date = faker.date.past().toString();
