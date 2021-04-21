@@ -7,8 +7,9 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
-namespace Ui {
-class Visualizza;
+namespace Ui
+{
+    class Visualizza;
 }
 
 class Visualizza : public QDialog

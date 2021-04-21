@@ -4,6 +4,7 @@
 #include "ricerca.h"
 #include "visualizza.h"
 #include "table.h"
+#include "stats.h"
 #include "worker.h"
 
 #include <QMessageBox>
@@ -68,4 +69,12 @@ void MainWindow::on_actionTable_triggered()
     tabledialog.setModal(true);
     tabledialog.exec();
 
+}
+
+void MainWindow::on_actionVisualizza_Statistiche_triggered()
+{
+    Stats statsdialog;
+    statsdialog.setWindowTitle("Visualizza Statistiche");
+    statsdialog.setModal(true);
+    statsdialog.exec();
 }

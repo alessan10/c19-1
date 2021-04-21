@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     ricerca.cpp \
+    stats.cpp \
     table.cpp \
     visualizza.cpp \
     worker.cpp
@@ -25,6 +26,7 @@ HEADERS += \
     inserisci.h \
     mainwindow.h \
     ricerca.h \
+    stats.h \
     table.h \
     visualizza.h \
     worker.h
@@ -33,6 +35,7 @@ FORMS += \
     inserisci.ui \
     mainwindow.ui \
     ricerca.ui \
+    stats.ui \
     table.ui \
     visualizza.ui
 

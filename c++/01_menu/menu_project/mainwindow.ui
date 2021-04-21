@@ -51,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>903</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOperazioni">
@@ -74,6 +74,7 @@
      <string>Modifica</string>
     </property>
     <addaction name="actionVisualizza_Database"/>
+    <addaction name="actionVisualizza_Statistiche"/>
     <addaction name="actionTable"/>
    </widget>
    <addaction name="menuOperazioni"/>
@@ -109,6 +110,11 @@
   <action name="actionTable">
    <property name="text">
     <string>Table</string>
+   </property>
+  </action>
+  <action name="actionVisualizza_Statistiche">
+   <property name="text">
+    <string>Visualizza Statistiche</string>
    </property>
   </action>
  </widget>

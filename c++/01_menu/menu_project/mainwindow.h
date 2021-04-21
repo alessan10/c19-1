@@ -30,6 +30,7 @@ private slots:
 
     void on_actionTable_triggered();
 
+    void on_actionVisualizza_Statistiche_triggered();
 
 private:
     Ui::MainWindow *ui;
