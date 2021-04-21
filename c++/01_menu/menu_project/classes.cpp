@@ -18,9 +18,16 @@ void Person::printSurname(){
     qDebug() << "Surname : " << surname ;
 }
 
+void Person::printAge(){
+    qDebug() << "Age : " << age ;
+}
+
+void Person::printCountry(){
+    qDebug() << "Country : " << country ;
+}
 
 void Patient::toString(){
-    qDebug() << name <<" "<< surname <<" "<< covid <<" "<< chatId <<" "<< date.getDay() <<" "<< date.getMonth() <<" "<< date.getYear() <<" "<< date.getDayOfWeek() ;
+    qDebug() << name <<" "<< surname <<" "<< covid <<" "<< chatId <<" "<< date.getDay() <<" "<< date.getMonth() <<" "<< date.getYear() <<" "<< date.getDayOfWeek() <<" "<< age <<" "<< country ;
 
 }
 /*int main(){

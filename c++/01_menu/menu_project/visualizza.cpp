@@ -55,7 +55,7 @@ void Visualizza::dataReadFinished()
        QJsonDocument mDoc;
        mDoc = QJsonDocument::fromJson(*mDataBuffer);
 
-       qDebug() << mDoc.object().value("cperson").toArray().size();
+       qDebug() << mDoc.object().value("patient").toArray().size();
 
        /*
        //What if you get an object from the server
@@ -74,7 +74,7 @@ void Visualizza::dataReadFinished()
            //QJsonObject object = array.at(i).toObject();
            //QJsonObject object1 = object["cperson"].toObject();
 
-           QJsonObject object = array.at(i).toObject().value("cperson").toObject();
+           QJsonObject object = array.at(i).toObject().value("patient").toObject();
            QString name = object["name"].toString();
            QString chatid = object["chatid"].toString();
            QString covid = object["covid"].toString();
@@ -82,13 +82,23 @@ void Visualizza::dataReadFinished()
            QString day = object["day"].toString();
            QString month = object["month"].toString();
            QString year = object["year"].toString();
+           QString country = object["country"].toString();
+           QString age = object["age"].toString();
 
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + "Nome: " + name + " - ChatID: "  + chatid + " - Covid: " + covid + " - Data: " + weekday + " " + day + " " + month + " " + year);
+
+           ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
+                                   "Nome: " + name +
+                                   " - ChatID: "  + chatid +
+                                   " - Covid: " + covid +
+                                   " - Data: " + weekday + " " + day + " " + month + " " + year +
+                                   " - Country: " + country +
+                                   " - Age: " + age);
+
            //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
            //ui->label_2->setText("Dati ricevuti");
            //ui->tableView->(name +  chatid + covid);
             //rimetti qtableview
-           QString c0 = mDoc.object().value("cperson").toArray().at(i).toObject().value("name").toString();
+           QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
            qDebug() << c0;
 
        }

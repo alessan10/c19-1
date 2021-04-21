@@ -21,11 +21,11 @@ import (
 // CREATE? --> ADD
 // ADD al grafo di neo4j di una persona che avvia il bot telegram
 
-type CPersonResult struct {
-	CPerson `json:"cperson"`
+type PatientResult struct {
+	Patient `json:"patient"`
 }
 
-type CPerson struct {
+type Patient struct {
 	Chatid  string `json:"chatid"`
 	Name    string `json:"name,omitempty"`
 	Covid   string `json:"covid"`
@@ -61,7 +61,7 @@ func (nc *Neo4jConfiguration) newDriver() (neo4j.Driver, error) {
 
 // 		defer session.Close()
 
-// 		query := `MATCH (p1:CPerson)
+// 		query := `MATCH (p1:Patient)
 // 		where p1.name = "Adrian Weissnat"
 // 		return p1.name as name, p1.chatid as chatid, p1.covid as covid`
 // 		result, err := session.Run(query, map[string]interface{}{})
@@ -71,7 +71,7 @@ func (nc *Neo4jConfiguration) newDriver() (neo4j.Driver, error) {
 
 // 		fmt.Println("result :", result)
 
-// 		var cpersonResults []CPersonResult
+// 		var patientResults []PatientResult
 
 // 		for result.Next() {
 // 			record := result.Record()
@@ -82,14 +82,14 @@ func (nc *Neo4jConfiguration) newDriver() (neo4j.Driver, error) {
 // 			fmt.Println("chatid: ", chatid)
 // 			covid, _ := record.Get("covid")
 // 			fmt.Println("covid: ", covid)
-// 			cpersonResults = append(cpersonResults, CPersonResult{CPerson{
+// 			patientResults = append(patientResults, PatientResult{Patient{
 // 				Name:   name.(string),
 // 				Chatid: chatid.(string),
 // 				Covid:  covid.(string),
 // 			}})
 // 		}
 
-// 		err = json.NewEncoder(w).Encode(cpersonResults)
+// 		err = json.NewEncoder(w).Encode(patientResults)
 // 		if err != nil {
 // 			log.Println("error writing search response:", err)
 // 		}
@@ -110,7 +110,7 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 		log.Println("ecco il body SEARCH:", req.Body)
 
-		query := `MATCH (p1:CPerson)-[r:CONTACT]-(p2:CPerson) 
+		query := `MATCH (p1:Patient)-[r:CONTACT]-(p2:Patient) 
 					where p1.name = $name 
 					return p2.name as name, p2.chatid as chatid, p2.covid as covid, p2.weekday as weekday, p2.day as day, p2.month as month, p2.year as year, p2.country as country, p2.age as age`
 		result, err := session.Run(query, map[string]interface{}{
@@ -122,7 +122,7 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 		fmt.Println("result :", result)
 
-		var cpersonResults []CPersonResult
+		var patientResults []PatientResult
 
 		for result.Next() {
 			record := result.Record()
@@ -145,7 +145,7 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			fmt.Println("country: ", country)
 			age, _ := record.Get("age")
 			fmt.Println("age: ", age)
-			cpersonResults = append(cpersonResults, CPersonResult{CPerson{
+			patientResults = append(patientResults, PatientResult{Patient{
 				Name:    name.(string),
 				Chatid:  chatid.(string),
 				Covid:   covid.(string),
@@ -158,7 +158,7 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			}})
 		}
 
-		err = json.NewEncoder(w).Encode(cpersonResults)
+		err = json.NewEncoder(w).Encode(patientResults)
 		if err != nil {
 			log.Println("error writing search response:", err)
 		}
@@ -177,7 +177,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("[ ENTRYPOINT ] : UPDATE ")
 		defer session.Close()
 
-		query := `MATCH (p:CPerson {name: $name})
+		query := `MATCH (p:Patient {name: $name})
 							SET p.covid = $covid
 							RETURN p.name as name, p.chatid as chatid, p.covid as covid, p.weekday as weekday, p.day as day, p.month as month, p.year as year, p2.country as country, p2.age as age`
 
@@ -195,7 +195,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 		fmt.Println("result :", result)
 
-		var cpersonResults []CPersonResult
+		var patientResults []PatientResult
 
 		for result.Next() {
 			record := result.Record()
@@ -218,7 +218,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			fmt.Println("country: ", country)
 			age, _ := record.Get("age")
 			fmt.Println("age: ", age)
-			cpersonResults = append(cpersonResults, CPersonResult{CPerson{
+			patientResults = append(patientResults, PatientResult{Patient{
 				Name:    name.(string),
 				Chatid:  chatid.(string),
 				Covid:   covid.(string),
@@ -231,7 +231,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			}})
 		}
 
-		err = json.NewEncoder(w).Encode(cpersonResults)
+		err = json.NewEncoder(w).Encode(patientResults)
 		if err != nil {
 			log.Println("error writing search response:", err)
 		}
@@ -250,7 +250,7 @@ func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("[ ENTRYPOINT ] : HEALED ")
 		defer session.Close()
 
-		query := `MATCH (p:CPerson {name: $name})-[r:CONTACT]-()
+		query := `MATCH (p:Patient {name: $name})-[r:CONTACT]-()
 									DELETE r
 									SET p.covid = "healed"
 									RETURN p.name as name, p.chatid as chatid, p.covid as covid, p.weekday as weekday, p.day as day, p.month as month, p.year as year, p.country as country, p.age as age`
@@ -265,7 +265,7 @@ func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 		fmt.Println("result :", result)
 
-		var cpersonResults []CPersonResult
+		var patientResults []PatientResult
 
 		for result.Next() {
 			record := result.Record()
@@ -288,7 +288,7 @@ func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			fmt.Println("country: ", country)
 			age, _ := record.Get("age")
 			fmt.Println("age: ", age)
-			cpersonResults = append(cpersonResults, CPersonResult{CPerson{
+			patientResults = append(patientResults, PatientResult{Patient{
 				Name:    name.(string),
 				Chatid:  chatid.(string),
 				Covid:   covid.(string),
@@ -301,7 +301,7 @@ func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			}})
 		}
 
-		err = json.NewEncoder(w).Encode(cpersonResults)
+		err = json.NewEncoder(w).Encode(patientResults)
 		if err != nil {
 			log.Println("error writing search response:", err)
 		}
@@ -322,7 +322,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 
 		log.Println("ecco il body ADD:", req.Body)
 		decoder := json.NewDecoder(req.Body)
-		var person CPerson
+		var person Patient
 		jsonerr := decoder.Decode(&person)
 		if jsonerr != nil {
 			panic(err)
@@ -392,7 +392,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 
 		fmt.Println("result2 :", result2)
 
-		var cpersonResults []CPersonResult
+		var patientResults []PatientResult
 
 		for result2.Next() {
 			record := result2.Record()
@@ -415,7 +415,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			fmt.Println("country: ", country)
 			age, _ := record.Get("age")
 			fmt.Println("age: ", age)
-			cpersonResults = append(cpersonResults, CPersonResult{CPerson{
+			patientResults = append(patientResults, PatientResult{Patient{
 				Name:    name.(string),
 				Chatid:  chatid.(string),
 				Covid:   covid.(string),
@@ -431,7 +431,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		// query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
 		// CREATE (u)-[:HAS_ROLE]->(r)`
 
-		query3 := `CREATE (p:CPerson { name: $name, chatid: $chatid, covid: $covid, weekday: $weekday, day: $day, month: $month, year: $year, country: $country, age: $age })
+		query3 := `CREATE (p:Patient { name: $name, chatid: $chatid, covid: $covid, weekday: $weekday, day: $day, month: $month, year: $year, country: $country, age: $age })
 							RETURN p.name as name`
 		result3, err3 := session.Run(query3, map[string]interface{}{
 			"name":    person.Name,
@@ -451,29 +451,29 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 
 		fmt.Println("result3 :", result3)
 		//FUNZIONAAAAA -->
-		// query4 := `MATCH (a:CPerson),(b:CPerson)
+		// query4 := `MATCH (a:Patient),(b:Patient)
 		// WHERE a.name = $name0 AND b.name = $name_new
 		// CREATE (a)-[r:CONTACT]->(b)
 		// RETURN type(r)`
 
-		query4 := `MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		query4 := `MATCH (a:Patient),(b:Patient) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name1 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name1 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name2 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name2 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name3 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name3 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:CPerson),(b:CPerson) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
 
-		fmt.Println("cpersonResults[0].Name:", cpersonResults[0].Name)
+		fmt.Println("patientResults[0].Name:", patientResults[0].Name)
 		fmt.Println("name_new:", person.Name)
 		result4, err4 := session.Run(query4, map[string]interface{}{
-			"name0":    cpersonResults[0].Name,
-			"name1":    cpersonResults[1].Name,
-			"name2":    cpersonResults[2].Name,
-			"name3":    cpersonResults[3].Name,
-			"name4":    cpersonResults[4].Name,
+			"name0":    patientResults[0].Name,
+			"name1":    patientResults[1].Name,
+			"name2":    patientResults[2].Name,
+			"name3":    patientResults[3].Name,
+			"name4":    patientResults[4].Name,
 			"name_new": person.Name,
 		})
 
@@ -483,7 +483,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 
 		fmt.Println("result4 :", result4)
 
-		err5 := json.NewEncoder(w).Encode(cpersonResults)
+		err5 := json.NewEncoder(w).Encode(patientResults)
 		if err5 != nil {
 			log.Println("error writing search response:", err5)
 		}
@@ -504,7 +504,7 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 
 		log.Println("ecco il body GRAPH:", req.Body)
 
-		query := `MATCH (p1:CPerson) 
+		query := `MATCH (p1:Patient) 
 		RETURN p1.name as name, p1.chatid as chatid, p1.covid as covid, p1.weekday as weekday, p1.day as day, p1.month as month, p1.year as year, p1.country as country, p1.age as age`
 
 		result, err := session.Run(query, map[string]interface{}{})
@@ -514,7 +514,7 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 
 		fmt.Println("result :", result)
 
-		var cpersonResults []CPersonResult
+		var patientResults []PatientResult
 
 		for result.Next() {
 			record := result.Record()
@@ -537,7 +537,7 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 			fmt.Println("country: ", country)
 			age, _ := record.Get("age")
 			fmt.Println("age: ", age)
-			cpersonResults = append(cpersonResults, CPersonResult{CPerson{
+			patientResults = append(patientResults, PatientResult{Patient{
 				Name:    name.(string),
 				Chatid:  chatid.(string),
 				Covid:   covid.(string),
@@ -550,7 +550,7 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 			}})
 		}
 
-		err = json.NewEncoder(w).Encode(cpersonResults)
+		err = json.NewEncoder(w).Encode(patientResults)
 		if err != nil {
 			log.Println("error writing search response:", err)
 		}
@@ -569,7 +569,7 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("[ ENTRYPOINT ] : DELETE ")
 		defer session.Close()
 
-		query := `MATCH (p:CPerson {name: $name}) 
+		query := `MATCH (p:Patient {name: $name}) 
 					DETACH DELETE p`
 
 		fmt.Println("URL name: ", req.URL.Query()["name"][0])
@@ -602,7 +602,7 @@ func main() {
 	serveMux.HandleFunc("/healed", healedHandlerFunc(driver, configuration.Database)) // DELETE --c19healed
 	serveMux.HandleFunc("/add", addHandlerFunc(driver, configuration.Database))       // ADD
 	serveMux.HandleFunc("/graph", graphHandlerFunc(driver, configuration.Database))   // RETURN ALL GRAPH
-	serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database)) // SEARCH A CPerson and all of its DATA
+	serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database)) // SEARCH A Patient and all of its DATA
 	serveMux.HandleFunc("/delete", deleteHandlerFunc(driver, configuration.Database)) // DELETE PERSON
 
 	var port string

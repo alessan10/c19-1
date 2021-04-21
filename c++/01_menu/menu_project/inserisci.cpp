@@ -69,12 +69,19 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
         date.conversion(cld);
 
+        QString country = ui->paese->text();
+        QString age = ui->eta->text();
+
         qDebug() << "Inserisci::save -->  NOME = " <<  name;
         qDebug() << "Inserisci::save -->  COGNOME = " <<  surname;
         qDebug() << "Inserisci::save --> COVID = " << covid;
         qDebug() << "Inserisci::save --> Giorno = " << date.day;
         qDebug() << "Inserisci::save --> Mese = " << date.month;
         qDebug() << "Inserisci::save --> Anno = " << date.year;
+        qDebug() << "Inserisci::save --> Paese = " << country;
+        qDebug() << "Inserisci::save --> Eta = " << age;
+
+
         cleanUp();
 
         QJsonObject json;
@@ -85,6 +92,10 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         json["day"] = QString(date.day);
         json["month"] = QString(date.month);
         json["year"] =QString(date.year);
+        json["country"] =QString(country);
+        json["age"] =QString(age);
+
+
 
 
         qDebug() << json;
@@ -125,4 +136,6 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 void Inserisci::cleanUp(){
     this->ui->nome->setText("");
     this->ui->cognome->setText("");
+    this->ui->paese->setText("");
+    this->ui->eta->setText("");
 }

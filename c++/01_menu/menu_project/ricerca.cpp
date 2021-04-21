@@ -110,8 +110,17 @@ void Ricerca::dataReadFinished()
            QString day = object["day"].toString();
            QString month = object["month"].toString();
            QString year = object["year"].toString();
+           QString country = object["country"].toString();
+           QString age = object["age"].toString();
 
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " + "Nome: " + fullname + " - ChatID: "  + chatid + " - Covid: " + covid + " - Data: " + weekday + " " + day + " " + month + " " + year);
+           ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
+                                   "Nome: " + fullname +
+                                   " - ChatID: "  + chatid +
+                                   " - Covid: " + covid +
+                                   " - Data: " + weekday + " " + day + " " + month + " " + year +
+                                   " - Country:  "+ country +
+                                   " - Age: " + age);
+
            //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
            //ui->label_2->setText("Dati ricevuti");
            //ui->tableView->(name +  chatid + covid);

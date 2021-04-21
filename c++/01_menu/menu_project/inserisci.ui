@@ -40,7 +40,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Inserisci Nome e Cognome:</string>
+      <string>Inserisci i dati del soggetto:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -82,6 +82,43 @@
        </property>
        <property name="placeholderText">
         <string>Cognome</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="eta">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>Età</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="paese">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>Paese</string>
        </property>
       </widget>
      </item>

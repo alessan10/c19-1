@@ -16,8 +16,6 @@ public:
     ~Stats();
 
 private slots:
-    void on_pushButton_clicked();
-
     void on_positive_weekday_clicked();
 
 private:

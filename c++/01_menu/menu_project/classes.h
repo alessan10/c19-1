@@ -21,12 +21,14 @@ class Date{
 
 class Person{
     protected:
-        QString name, surname;
+        QString name, surname, age, country;
     public:
-        Person(QString n, QString s): name(n), surname(s){};
+        Person(QString n, QString s, QString a, QString c): name(n), surname(s), age(a), country(c){};
         ~Person();
         void printName();
         void printSurname();
+        void printAge();
+        void printCountry();
 };
 
 class Patient: public Person {
@@ -35,7 +37,8 @@ class Patient: public Person {
         QString chatId;
         Date date;
     public:
-        Patient(QString n, QString s, QString cvd, QString chId, QString d, QString m, QString y, QString dow): Person(n,s),covid(cvd), chatId(chId), date(d,m,y,dow){};
+        Patient(QString n, QString s, QString cvd, QString chId, QString d, QString m, QString y, QString dow, QString a, QString c):
+            Person(n,s,a,c),covid(cvd), chatId(chId), date(d,m,y,dow){};
         void toString();
 };
 
