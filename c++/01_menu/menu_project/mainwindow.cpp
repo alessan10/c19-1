@@ -6,10 +6,11 @@
 #include "table.h"
 #include "stats.h"
 #include "worker.h"
+#include "classes.h"
 
 #include <QMessageBox>
 
-MainWindow::MainWindow(Worker &worker, QWidget *parent)
+MainWindow::MainWindow(Worker &worker, Patient &patient, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {

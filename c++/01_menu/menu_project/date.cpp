@@ -1,4 +1,4 @@
-#include "date.h"
+/*#include "date.h"
 
 Date::Date(){
   day = "";
@@ -86,4 +86,4 @@ void Date::conversion(QDate & q){
     qDebug() << "Date::conversion --> Day of The week: " << this->dayOfWeek;
 
 
-}
+}*/

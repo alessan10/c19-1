@@ -1,4 +1,4 @@
-#ifndef DATE_H
+/*#ifndef DATE_H
 #define DATE_H
 #include <QString>
 #include <QDate>
@@ -20,4 +20,4 @@ public:
 
 };
 
-#endif // DATE_H
+#endif // DATE_H*/

@@ -1,7 +1,7 @@
 #include "inserisci.h"
 #include "ui_inserisci.h"
 #include "worker.h"
-#include "date.h"
+#include "classes.h"
 
 #include <QNetworkRequest>
 #include <QJsonDocument>
@@ -15,14 +15,13 @@
 #include <QDate>
 #include <QStringBuilder>
 
-Inserisci::Inserisci(Worker &worker ,QWidget *parent) :
+Inserisci::Inserisci(Worker &worker, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Inserisci),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
     mDataBuffer(new QByteArray),
     worker(nullptr)
-
 {
     this->worker = &worker;
     ui->setupUi(this);
@@ -35,7 +34,6 @@ Inserisci::~Inserisci()
 
 void Inserisci::on_save_button_clicked(QAbstractButton *button)
 {
-
     if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty() ||
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
             ui->calendar->selectedDate().isNull() ||
@@ -49,51 +47,54 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         {
             qDebug() << "User clicked on OK";
         }
-
-
     }
     else
     {
         QString name = ui->nome->text();
         name.replace(" ",""); //rimuoviamo eventuali spazi
+
         QString surname = ui->cognome->text();
         surname.replace(" ",""); //rimuoviamo eventuali spazi
 
-        QString fullname = name+" "+surname;
-        qDebug() << "Fullname" <<fullname;
-        QString covid;
+        Patient p;
+        p.setFullName(name+" "+ surname);
+        qDebug() << "Fullname" <<p.getFullName();
 
-        ui->radio_positivo->isChecked()? covid = "positivo" : covid = "negativo";
+        p.setChatId("-");
+        //QString covid;
+        ui->radio_positivo->isChecked()? p.setCovid("positivo") : p.setCovid("negativo");
 
         QDate calend = ui->calendar->selectedDate() ;
         QDate &cld = calend;
         date.conversion(cld);
+        p.setDay();
 
-        QString country = ui->paese->text();
+        //QString country = ui->paese->text();
+        p.setCountry(ui->paese->text());
 
-        QString age = ui->eta->text();
+        //QString age = ui->eta->text();
+        p.setAge(ui->eta->text());
 
-        qDebug() << "Inserisci::save -->  NOME = " <<  name;
-        qDebug() << "Inserisci::save -->  COGNOME = " <<  surname;
-        qDebug() << "Inserisci::save --> COVID = " << covid;
-        qDebug() << "Inserisci::save --> Giorno = " << date.day;
-        qDebug() << "Inserisci::save --> Mese = " << date.month;
-        qDebug() << "Inserisci::save --> Anno = " << date.year;
-        qDebug() << "Inserisci::save --> Paese = " << country;
-        qDebug() << "Inserisci::save --> Eta = " << age;
+        qDebug() << "Inserisci::save -->  NOME e COGNOME= " <<  p.getFullName();
+        qDebug() << "Inserisci::save --> COVID = " << p.getCovid();
+        qDebug() << "Inserisci::save --> Giorno = " << date.getDay();
+        qDebug() << "Inserisci::save --> Mese = " << date.getMonth();
+        qDebug() << "Inserisci::save --> Anno = " << date.getYear();
+        qDebug() << "Inserisci::save --> Paese = " << p.getCountry();
+        qDebug() << "Inserisci::save --> Eta = " << p.getAge();
 
         cleanUp();
 
         QJsonObject json;
-        json["name"] = QString(fullname);
-        json["chatid"] = QString("-");
-        json["covid"] =QString(covid);
+        json["name"] = QString(p.getFullName());
+        json["chatid"] = QString(p.getChatId());
+        json["covid"] =QString(p.getCovid());
         json["weekday"] =QString(date.dayOfWeek);
         json["day"] = QString(date.day);
         json["month"] = QString(date.month);
         json["year"] =QString(date.year);
-        json["country"] =QString(country);
-        json["age"] =QString(age);
+        json["country"] =QString(p.getCountry());
+        json["age"] =QString(p.getAge());
 
         qDebug() << json;
         QJsonDocument doc(json);

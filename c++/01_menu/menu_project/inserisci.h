@@ -6,6 +6,7 @@
 
 #include "worker.h"
 #include "date.h"
+#include "classes.h"
 
 namespace Ui
 {
@@ -17,7 +18,7 @@ class Inserisci : public QDialog
     Q_OBJECT
 
 public:
-    explicit Inserisci(Worker &worker ,QWidget *parent = nullptr);
+    explicit Inserisci(Worker &worker, QWidget *parent = nullptr);
     ~Inserisci();
     void cleanUp();
 

@@ -8,6 +8,7 @@
 #include <QNetworkRequest>
 
 #include "worker.h"
+#include "classes.h"
 
 namespace Ui
 {
@@ -19,7 +20,7 @@ class Ricerca : public QDialog
     Q_OBJECT
 
 public:
-    explicit Ricerca(Worker & worker , QWidget *parent = nullptr);
+    explicit Ricerca(Worker & worker, Patient & patient, QWidget *parent = nullptr);
     ~Ricerca();
 
 
@@ -36,6 +37,7 @@ private:
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
     Worker *worker;
+    Patient *patient;
 };
 
 #endif // RICERCA_H
