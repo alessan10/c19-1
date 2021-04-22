@@ -55,9 +55,6 @@ class Patient: public Person {
         QString getCovid(){ return covid; }
         QString getChatId(){ return chatId; }
 
-        void setDay(QString d){ date.setDay(d); }
-
-
         void toString();
 };
 
