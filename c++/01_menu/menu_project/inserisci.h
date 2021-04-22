@@ -33,7 +33,6 @@ private:
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
     Worker *worker;
-    Date date;
 };
 
 #endif // INSERISCI_H

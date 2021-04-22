@@ -66,8 +66,8 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
         QDate calend = ui->calendar->selectedDate() ;
         QDate &cld = calend;
-        date.conversion(cld);
-        p.setDay();
+        p.date.conversion(cld);
+
 
         //QString country = ui->paese->text();
         p.setCountry(ui->paese->text());
@@ -77,9 +77,9 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
         qDebug() << "Inserisci::save -->  NOME e COGNOME= " <<  p.getFullName();
         qDebug() << "Inserisci::save --> COVID = " << p.getCovid();
-        qDebug() << "Inserisci::save --> Giorno = " << date.getDay();
-        qDebug() << "Inserisci::save --> Mese = " << date.getMonth();
-        qDebug() << "Inserisci::save --> Anno = " << date.getYear();
+        qDebug() << "Inserisci::save --> Giorno = " << p.date.getDay();
+        qDebug() << "Inserisci::save --> Mese = " << p.date.getMonth();
+        qDebug() << "Inserisci::save --> Anno = " << p.date.getYear();
         qDebug() << "Inserisci::save --> Paese = " << p.getCountry();
         qDebug() << "Inserisci::save --> Eta = " << p.getAge();
 
@@ -89,10 +89,10 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         json["name"] = QString(p.getFullName());
         json["chatid"] = QString(p.getChatId());
         json["covid"] =QString(p.getCovid());
-        json["weekday"] =QString(date.dayOfWeek);
-        json["day"] = QString(date.day);
-        json["month"] = QString(date.month);
-        json["year"] =QString(date.year);
+        json["weekday"] =QString(p.date.getDayOfWeek());
+        json["day"] = QString(p.date.getDay());
+        json["month"] = QString(p.date.getMonth());
+        json["year"] =QString(p.date.getYear());
         json["country"] =QString(p.getCountry());
         json["age"] =QString(p.getAge());
 

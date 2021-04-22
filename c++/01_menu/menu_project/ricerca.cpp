@@ -11,7 +11,7 @@
 #include <QUrlQuery>
 #include <QMessageBox>
 
-Ricerca::Ricerca(Worker &worker , QWidget *parent) :
+Ricerca::Ricerca(Worker &worker, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Ricerca),
     mNetManager(new QNetworkAccessManager(this)),

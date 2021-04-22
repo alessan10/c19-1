@@ -20,7 +20,7 @@ class Ricerca : public QDialog
     Q_OBJECT
 
 public:
-    explicit Ricerca(Worker & worker, Patient & patient, QWidget *parent = nullptr);
+    explicit Ricerca(Worker & worker, QWidget *parent = nullptr);
     ~Ricerca();
 
 

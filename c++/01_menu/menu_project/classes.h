@@ -43,11 +43,12 @@ class Patient: public Person {
     private:
         QString covid;
         QString chatId;
-        Date date;
     public:
+        Date date;
         Patient(QString f, QString cvd, QString chId, QString d, QString m, QString y, QString dow, QString a, QString c):
             Person(f,a,c),covid(cvd), chatId(chId), date(d,m,y,dow){};
         Patient ():Person(),covid(""), chatId(""), date(){};
+        ~Patient(){}
 
         void setCovid(QString cvd){ covid = cvd; }
         void setChatId(QString chId){ chatId = chId; }
@@ -55,13 +56,7 @@ class Patient: public Person {
         QString getChatId(){ return chatId; }
 
         void setDay(QString d){ date.setDay(d); }
-        /*void setMonth(QString m){ month = m; }
-        void setYear(QString y){ year = y; }
-        void setDayOfWeek(QString dow){ dayOfWeek = dow; }
-        QString getDay(){ return day; }
-        QString getMonth(){ return month; }
-        QString getYear(){ return year; }
-        QString getDayOfWeek(){ return dayOfWeek; }*/
+
 
         void toString();
 };
