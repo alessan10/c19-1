@@ -7,7 +7,8 @@
 #include "worker.h"
 #include "date.h"
 
-namespace Ui {
+namespace Ui
+{
 class Inserisci;
 }
 

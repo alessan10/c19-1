@@ -23,7 +23,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_actionAbout_Our_Project_triggered()
 {
     QMessageBox::about(this, "Message", "This is ...");
@@ -59,8 +58,6 @@ void MainWindow::on_actionVisualizza_Database_triggered()
     visualizzadialog.setModal(true);
     visualizzadialog.exec();
 }
-
-
 
 void MainWindow::on_actionTable_triggered()
 {

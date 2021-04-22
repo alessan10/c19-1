@@ -23,11 +23,9 @@ Inserisci::Inserisci(Worker &worker ,QWidget *parent) :
     mDataBuffer(new QByteArray),
     worker(nullptr)
 
-
 {
     this->worker = &worker;
     ui->setupUi(this);
-
 }
 
 Inserisci::~Inserisci()
@@ -40,8 +38,10 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
     if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty() ||
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
-            ui->calendar->selectedDate().isNull() ){
-
+            ui->calendar->selectedDate().isNull() ||
+            ui->eta->text().isEmpty() ||
+            ui->paese->text().isEmpty())
+    {
         int ret = QMessageBox::warning(this,"Attenzione","Inserisci tutti i campi.",
                                         QMessageBox::Ok);
 
@@ -51,8 +51,9 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         }
 
 
-    }else {
-
+    }
+    else
+    {
         QString name = ui->nome->text();
         name.replace(" ",""); //rimuoviamo eventuali spazi
         QString surname = ui->cognome->text();
@@ -66,10 +67,10 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
         QDate calend = ui->calendar->selectedDate() ;
         QDate &cld = calend;
-
         date.conversion(cld);
 
         QString country = ui->paese->text();
+
         QString age = ui->eta->text();
 
         qDebug() << "Inserisci::save -->  NOME = " <<  name;
@@ -80,7 +81,6 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         qDebug() << "Inserisci::save --> Anno = " << date.year;
         qDebug() << "Inserisci::save --> Paese = " << country;
         qDebug() << "Inserisci::save --> Eta = " << age;
-
 
         cleanUp();
 
@@ -95,42 +95,35 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         json["country"] =QString(country);
         json["age"] =QString(age);
 
-
-
-
         qDebug() << json;
         QJsonDocument doc(json);
         QByteArray data = doc.toJson();
-
 
         QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
         const QUrl url(QStringLiteral("http://localhost:8081/add"));
         QNetworkRequest request(url);
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-
-
 //        QByteArray data("{\"name\":\"value1\",\"covid\":\"value2\"}");
         QNetworkReply *reply = mgr->post(request, data);
 
-        QObject::connect(reply, &QNetworkReply::finished, [=](){
-            if(reply->error() == QNetworkReply::NoError){
+        QObject::connect(reply, &QNetworkReply::finished, [=]()
+        {
+            if(reply->error() == QNetworkReply::NoError)
+            {
                 QString contents = QString::fromUtf8(reply->readAll());
                 qDebug() << contents;
                 //se non ci sono errori mostra un dialog
                 QMessageBox::information(this,"Info","Utente inserito con successo.", QMessageBox::Ok);
             }
-            else{
+            else
+            {
                 QString err = reply->errorString();
                 qDebug() << err;
             }
             reply->deleteLater();
         });
-
-
-
     }
-
 }
 
 void Inserisci::cleanUp(){

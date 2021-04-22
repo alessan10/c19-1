@@ -9,7 +9,8 @@
 
 #include "worker.h"
 
-namespace Ui {
+namespace Ui
+{
 class Ricerca;
 }
 

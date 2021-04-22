@@ -13,8 +13,6 @@ Stats::~Stats()
     delete ui;
 }
 
-
-
 void Stats::on_positive_weekday_clicked()
 {
     //call R graph

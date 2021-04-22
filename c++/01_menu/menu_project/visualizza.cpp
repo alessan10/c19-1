@@ -45,7 +45,8 @@ void Visualizza::dataReadFinished()
     if( mNetReply->error())
     {
         qDebug() << "Error : " << mNetReply->errorString();
-    }else
+    }
+    else
     {
        qDebug() << "Data fetch finished : " << QString(*mDataBuffer);
 
@@ -70,7 +71,6 @@ void Visualizza::dataReadFinished()
 
        for ( int i = 0; i < array.size(); i++)
        {
-
            //QJsonObject object = array.at(i).toObject();
            //QJsonObject object1 = object["cperson"].toObject();
 
@@ -84,7 +84,6 @@ void Visualizza::dataReadFinished()
            QString year = object["year"].toString();
            QString country = object["country"].toString();
            QString age = object["age"].toString();
-
 
            ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
                                    "Nome: " + name +
@@ -102,6 +101,5 @@ void Visualizza::dataReadFinished()
            qDebug() << c0;
 
        }
-
     }
 }

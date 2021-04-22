@@ -44,12 +44,13 @@ void Ricerca::on_pushButton_clicked()
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
 
-    if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty()){
-
+    if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty())
+    {
         QMessageBox::warning(this,"Attenzione","Inserisci nome e cognome.", QMessageBox::Ok);
 
-    }else{
-
+    }
+    else
+    {
         //Initialize our API data
         const QUrl API_ENDPOINT("http://localhost:8081/search?name="+name+"%20"+surname);
         QNetworkRequest request;
@@ -60,7 +61,6 @@ void Ricerca::on_pushButton_clicked()
         connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
     }
 }
-
 
 void Ricerca::dataReadyRead()
 {
@@ -73,7 +73,8 @@ void Ricerca::dataReadFinished()
     if( mNetReply->error())
     {
         qDebug() << "Error : " << mNetReply->errorString();
-    }else
+    }
+    else
     {
        qDebug() << "Data fetch finished : " << QString(*mDataBuffer);
 
@@ -91,14 +92,12 @@ void Ricerca::dataReadFinished()
        QJsonObject obObject = objectDoc.toVariant().toJsonObject();
        */
 
-
        //Turn document into json array
 
        QJsonArray array = mDoc.array();
 
        for ( int i = 0; i < array.size(); i++)
        {
-
            //QJsonObject object = array.at(i).toObject();
            //QJsonObject object1 = object["cperson"].toObject();
 
@@ -129,7 +128,6 @@ void Ricerca::dataReadFinished()
            qDebug() << c0;
 
        }
-
     }
 }
 
