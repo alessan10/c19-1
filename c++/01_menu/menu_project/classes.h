@@ -8,9 +8,9 @@ class Date{
     private:
         QString day, month, year, dayOfWeek;
     public:
-        Date(QString d, QString m, QString y, QString dow): day(d),month(m), year(y), dayOfWeek(dow){};
-        Date():day(""), month(""), year(""), dayOfWeek(""){};
-        ~Date();
+        Date(QString d, QString m, QString y, QString dow): day(d),month(m), year(y), dayOfWeek(dow){}
+        Date():day(""), month(""), year(""), dayOfWeek(""){}
+        ~Date(){}
         void setDay(QString d){ day = d; }
         void setMonth(QString m){ month = m; }
         void setYear(QString y){ year = y; }

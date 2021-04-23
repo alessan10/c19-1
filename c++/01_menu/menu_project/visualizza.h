@@ -7,6 +7,8 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
+#include "classes.h"
+
 namespace Ui
 {
     class Visualizza;

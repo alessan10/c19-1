@@ -1,5 +1,6 @@
 #include "visualizza.h"
 #include "ui_visualizza.h"
+#include "classes.h"
 
 #include <QNetworkRequest>
 #include <QJsonDocument>
@@ -7,6 +8,10 @@
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QDebug>
+#include <QList>
+#include <iostream>
+
+using namespace std;
 
 Visualizza::Visualizza(QWidget *parent) :
     QDialog(parent),
@@ -68,6 +73,8 @@ void Visualizza::dataReadFinished()
        //Turn document into json array
 
        QJsonArray array = mDoc.array();
+       QList<Patient *> patients_list;
+       Patient *p = new Patient();
 
        for ( int i = 0; i < array.size(); i++)
        {
@@ -75,31 +82,39 @@ void Visualizza::dataReadFinished()
            //QJsonObject object1 = object["cperson"].toObject();
 
            QJsonObject object = array.at(i).toObject().value("patient").toObject();
-           QString name = object["name"].toString();
-           QString chatid = object["chatid"].toString();
-           QString covid = object["covid"].toString();
-           QString weekday = object["weekday"].toString();
-           QString day = object["day"].toString();
-           QString month = object["month"].toString();
-           QString year = object["year"].toString();
-           QString country = object["country"].toString();
-           QString age = object["age"].toString();
+
+           p->setFullName(object["name"].toString());
+           p->setChatId(object["chatid"].toString());
+           p->setCovid(object["covid"].toString());
+           p->date.setDayOfWeek(object["weekday"].toString());
+           p->date.setDay(object["day"].toString());
+           p->date.setMonth(object["month"].toString());
+           p->date.setYear(object["year"].toString());
+           p->setCountry(object["country"].toString());
+           p->setAge(object["age"].toString());
+
+           patients_list.push_back(p);
 
            ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
-                                   "Nome: " + name +
-                                   " - ChatID: "  + chatid +
-                                   " - Covid: " + covid +
-                                   " - Data: " + weekday + " " + day + " " + month + " " + year +
-                                   " - Country: " + country +
-                                   " - Age: " + age);
+                                   "Nome: " + p->getFullName() +
+                                   " - ChatID: "  + p->getChatId() +
+                                   " - Covid: " + p->getCovid() +
+                                   " - Data: " + p->date.getDayOfWeek() + " " + p->date.getDay() + " " + p->date.getMonth() + " " + p->date.getYear() +
+                                   " - Country: " + p->getCountry() +
+                                   " - Age: " + p->getAge()
+                                   );
 
-           //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
-           //ui->label_2->setText("Dati ricevuti");
-           //ui->tableView->(name +  chatid + covid);
-            //rimetti qtableview
            QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
            qDebug() << c0;
 
+           //string s = "ciao";
+           //cout <<"s: "<< s <<endl;
        }
-    }
+       delete p;
+
+       QList<Patient*>::iterator i;
+       for (i = patients_list.begin(); i != patients_list.end(); ++i){
+            (*i)->toString();
+       }
+    }   
 }

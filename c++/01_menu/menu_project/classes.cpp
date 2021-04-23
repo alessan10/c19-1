@@ -11,7 +11,7 @@ Person::~Person(){
     qDebug() << "Distruttore Person chiamato";
 }
 
-Date::~Date(){}
+//Date::~Date(){}
 
 void Date::conversion(QDate & q){
 
@@ -88,6 +88,16 @@ void Date::conversion(QDate & q){
     qDebug() << "Date::conversion --> Day of The week: " << this->dayOfWeek;
 
 
+}
+
+void Patient::toString()
+{
+    qDebug() << "Fullname: " << this->fullname;
+    qDebug() << "ChatId: " << this->chatId;
+    qDebug() << "Covid: " << this->covid;
+    qDebug() << "Date: " << this->date.getDayOfWeek() << " " << this->date.getDay() << " " << this->date.getMonth() << " " << this->date.getYear();
+    qDebug() << "Country: " << this->country;
+    qDebug() << "Age: " << this->age;
 }
 /*int main(){
     Date d = Date("23", "April", "2021", "Wed");
