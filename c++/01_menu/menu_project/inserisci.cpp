@@ -105,7 +105,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         QNetworkRequest request(url);
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-//        QByteArray data("{\"name\":\"value1\",\"covid\":\"value2\"}");
+        //QByteArray data("{\"name\":\"value1\",\"covid\":\"value2\"}");
         QNetworkReply *reply = mgr->post(request, data);
 
         QObject::connect(reply, &QNetworkReply::finished, [=]()

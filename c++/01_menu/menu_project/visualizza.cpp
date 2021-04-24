@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QList>
 #include <iostream>
+#include <QFile>
 
 using namespace std;
 
@@ -38,6 +39,7 @@ void Visualizza::on_pushButton_clicked()
     mNetReply = mNetManager->get(request);
     connect(mNetReply,&QIODevice::readyRead,this,&Visualizza::dataReadyRead);
     connect(mNetReply,&QNetworkReply::finished,this,&Visualizza::dataReadFinished);
+
 }
 
 void Visualizza::dataReadyRead()
@@ -83,7 +85,7 @@ void Visualizza::dataReadFinished()
 
            QJsonObject object = array.at(i).toObject().value("patient").toObject();
 
-           p->setFullName(object["name"].toString());
+           /*p->setFullName(object["name"].toString());
            p->setChatId(object["chatid"].toString());
            p->setCovid(object["covid"].toString());
            p->date.setDayOfWeek(object["weekday"].toString());
@@ -91,7 +93,19 @@ void Visualizza::dataReadFinished()
            p->date.setMonth(object["month"].toString());
            p->date.setYear(object["year"].toString());
            p->setCountry(object["country"].toString());
-           p->setAge(object["age"].toString());
+           p->setAge(object["age"].toString());*/
+
+           Patient *p = new Patient(
+               object["name"].toString(),
+               object["chatid"].toString(),
+               object["covid"].toString(),
+               object["weekday"].toString(),
+               object["day"].toString(),
+               object["month"].toString(),
+               object["year"].toString(),
+               object["country"].toString(),
+               object["age"].toString()
+           );
 
            patients_list.push_back(p);
 
@@ -116,5 +130,20 @@ void Visualizza::dataReadFinished()
        for (i = patients_list.begin(); i != patients_list.end(); ++i){
             (*i)->toString();
        }
+
+
+       QFile file("C:/Users/alexm/Downloads/out.txt");
+       if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+           return;
+       QTextStream out(&file);
+       QString stringa = "\"""\",\"Nome\",\"ChatId\",\"Covid\",\"Weekday\",\"Giorno\",\"Mese\",\"Anno\",\"Country\",\"Age\""; //sintassi comprensibile da R: \"text\"
+       out << stringa <<"\n";
+
+       int counter = 0;
+       for (i = patients_list.begin(); i != patients_list.end(); ++i){
+           counter ++;
+           out << "\"" << counter << "\"," << (*i)->toR() << "\n";
+       }
+       file.close();
     }   
 }

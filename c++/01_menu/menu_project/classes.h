@@ -56,6 +56,7 @@ class Patient: public Person {
         QString getChatId(){ return chatId; }
 
         void toString();
+        QString toR();
 };
 
 

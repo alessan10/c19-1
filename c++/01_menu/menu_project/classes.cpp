@@ -99,6 +99,21 @@ void Patient::toString()
     qDebug() << "Country: " << this->country;
     qDebug() << "Age: " << this->age;
 }
+
+QString Patient::toR()
+{
+    QString str =
+            "\"" + age + "\"," +
+            "\"" + country + "\"," +
+            "\"" + date.getDayOfWeek() + "\"," +
+            "\"" + date.getDay() + "\"," +
+            "\"" + date.getMonth() + "\"," +
+            "\"" + date.getYear() + "\"," +
+            "\"" + covid + "\"," +
+            "\"" + chatId + "\"," +
+            "\"" + fullname + "\"";
+    return str;
+}
 /*int main(){
     Date d = Date("23", "April", "2021", "Wed");
 
