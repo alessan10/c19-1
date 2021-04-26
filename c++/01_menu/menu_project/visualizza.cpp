@@ -132,11 +132,11 @@ void Visualizza::dataReadFinished()
        }
 
 
-       QFile file("C:/Users/alexm/Downloads/out.txt");
+       QFile file("C:/Users/alexm/Downloads/out.csv");
        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
            return;
        QTextStream out(&file);
-       QString stringa = "\"""\",\"Nome\",\"ChatId\",\"Covid\",\"Weekday\",\"Giorno\",\"Mese\",\"Anno\",\"Country\",\"Age\""; //sintassi comprensibile da R: \"text\"
+       QString stringa = "\"""\",\"Country\",\"Age\",\"Anno\",\"Weekday\",\"Giorno\",\"Mese\",\"ChatId\",\"Covid\",\"Nome\""; //sintassi comprensibile da R: \"text\"
        out << stringa <<"\n";
 
        int counter = 0;
