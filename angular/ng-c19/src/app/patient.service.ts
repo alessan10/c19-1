@@ -16,10 +16,13 @@ export class PatientService {
   constructor(private http:HttpClient) { }
 
   getPatients(): Observable<IPatient[]>{
+    //console.log(this.http.get<IPatient[]>(this._url));
+
     return this.http.get<IPatient[]>(this._url)
       .pipe(
         catchError(this.handleError)
       );
+
   }
 
   handleError(handleError: any): import("rxjs").OperatorFunction<IPatient[], any>{
