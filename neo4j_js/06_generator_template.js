@@ -101,7 +101,7 @@ while (array.length >1)
     if (array[dest] == undefined){
       break;
     }
-    str += '(' + node + ')-[:CONTACT]->(' + array[dest] + '),'+ '\n';
+    str += `(${ node })-[:CONTACT]->(${ array[dest] }),\n`;
     //console.log(str);
     var removed = array.splice(dest, 1);
     console.log("removed: ", removed );
