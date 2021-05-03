@@ -9,3 +9,7 @@ export interface IPatient{
   country: string;
   age: string;
 }
+
+export interface Patient{
+  patient: IPatient;
+}

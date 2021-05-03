@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { IPatient } from './IPatient';
+import { IPatient, Patient } from './IPatient';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { catchError} from 'rxjs/operators';
@@ -15,13 +15,14 @@ export class PatientService {
 
   constructor(private http:HttpClient) { }
 
-  getPatients(): Observable<IPatient[]>{
-    //console.log(this.http.get<IPatient[]>(this._url));
+  getPatients(): Observable<Patient[]>{
+    console.log(this.http.get<Patient[]>(this._url));
 
-    return this.http.get<IPatient[]>(this._url)
+    return this.http.get<Patient[]>(this._url)
       .pipe(
         catchError(this.handleError)
       );
+
 
   }
 
