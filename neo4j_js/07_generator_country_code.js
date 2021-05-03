@@ -18,7 +18,7 @@ var covid = [
 var array = []
 
 //Il numero di nodi del grafo viene stabilito come parametro in ingresso (process.argv[0] = node, process.arv[1] = 01_generator.js, process.argv[2]= 100 per es.)
-var totale = process.argv[2] || 200; //se non passiamo nulla in ingresso, il valore di default è 200
+var totale = process.argv[2] || 100; //se non passiamo nulla in ingresso, il valore di default è 100
 console.log("totale: ", totale);
 var flag = 1;
 
@@ -27,7 +27,7 @@ for (var i=0;i<totale; i++){
   flag = 1;
   var firstname = faker.name.firstName();
   var lastName = faker.name.lastName();
-  var country = faker.address.country(); 
+  var country = faker.address.countryCode(); 
   var age = Math.floor(Math.random()*75)+15; 
   
   //genero la stringa e tolgo la parte in eccesso
