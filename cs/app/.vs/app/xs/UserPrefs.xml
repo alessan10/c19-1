@@ -1,11 +1,19 @@
 ﻿<Properties StartupConfiguration="{C69F9E67-C909-4530-9095-46EBB0FE28F2}|Default">
   <MonoDevelop.Ide.ItemProperties.app.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.970B9E70-9D17-4229-8D88-C3A55CD44B9D" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="app/MainPage.xaml.cs">
+    <Files>
+      <File FileName="app/MainPage.xaml" Line="12" Column="56" />
+      <File FileName="app/MainPage.xaml.cs" Line="22" Column="10" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="app" expanded="True">
-            <Node name="app.iOS" selected="True" />
+            <Node name="app" expanded="True">
+              <Node name="MainPage.xaml" expanded="True">
+                <Node name="MainPage.xaml.cs" selected="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
