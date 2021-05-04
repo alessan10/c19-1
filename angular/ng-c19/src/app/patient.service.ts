@@ -17,18 +17,19 @@ export class PatientService {
 
   getPatients(): Observable<Patient[]>{
     console.log(this.http.get<Patient[]>(this._url));
-
     return this.http.get<Patient[]>(this._url)
       .pipe(
         catchError(this.handleError)
       );
-
-
   }
 
   handleError(handleError: any): import("rxjs").OperatorFunction<IPatient[], any>{
     throw new Error(handleError.message || "Server error");
-  };
+  }
+
+  // async getAsyncGraph() {
+  //   return await this.http.get<Patient[]>(this._url).toPromise();
+  // }
 
 }
 
