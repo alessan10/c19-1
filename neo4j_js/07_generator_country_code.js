@@ -14,6 +14,12 @@ var covid = [
   'positivo',
   'negativo'
 ]
+//genero un array di paesi
+var country = [
+  'IT','UK','ES','FR','GR','FI','DE','CZ','PT','NE','BE','CH','SI',
+  'DK','ES','FI','HU','LI','LT','BG','AT','EE','CY','IE','NL','RO','TR'
+]
+
 //inizializziamo un array che ci serve per l'algoritmo pseudocasuale per la generazione del grafo
 var array = []
 
@@ -27,9 +33,9 @@ for (var i=0;i<totale; i++){
   flag = 1;
   var firstname = faker.name.firstName();
   var lastName = faker.name.lastName();
-  var country = faker.address.countryCode(); 
+  //var country = faker.address.countryCode(); 
   var age = Math.floor(Math.random()*75)+15; 
-  
+
   //genero la stringa e tolgo la parte in eccesso
   var date = faker.date.past().toString();
   date = date.substring(0, 15);
@@ -50,12 +56,13 @@ for (var i=0;i<totale; i++){
   console.log("year = ", year);
 
   if (firstname.includes("'") || lastName.includes("'")) flag = 0 ;
-  var random = Math.floor(Math.random()*2 +1) -1;
+  var random_covid = Math.floor(Math.random()*2 +1) -1;
+  var random_country = Math.floor(Math.random()*27); //tra 0 e 26
   if (i==0){
     str = 'CREATE ';
   } 
   if (flag == 1){
-    str += `(${ firstname.toLowerCase() }_${ lastName.toLowerCase() }:Patient {name: "${ firstname } ${ lastName }", chatid: "-", covid: "${ covid[random] }", year: "${ year }", month: "${ month }", day: "${ day }", weekday: "${ weekday }", country: "${ country }", age: "${ age }"}),\n`;
+    str += `(${ firstname.toLowerCase() }_${ lastName.toLowerCase() }:Patient {name: "${ firstname } ${ lastName }", chatid: "-", covid: "${ covid[random_covid] }", year: "${ year }", month: "${ month }", day: "${ day }", weekday: "${ weekday }", country: "${ country[random_country] }", age: "${ age }"}),\n`;
     array.push(firstname.toLowerCase() + '_' + lastName.toLowerCase())
   }  
 }
