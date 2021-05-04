@@ -25,35 +25,37 @@ class Date{
 
 class Person{
     protected:
-        QString fullname, age, country;
+        QString fullname, country, age ;
     public:
-        Person(QString f, QString a, QString c): fullname(f), age(a), country(c){};
-        Person ():fullname(""), age(""), country(""){};
+        Person(QString f, QString c, QString a ): fullname(f), country(c), age(a) {};
+        Person ():fullname(""), country(""), age(""){};
         ~Person();
 
-        void setFullName(QString f){ fullname = f; }
-        void setAge(QString a){ age = a; }
+        void setFullName(QString f){ fullname = f; }        
         void setCountry (QString c){ country = c; }
-        QString getFullName(){ return fullname; }
-        QString getAge(){ return age; }
+        void setAge(QString a){ age = a; }
+
+        QString getFullName(){ return fullname; }        
         QString getCountry(){ return country; }
+        QString getAge(){ return age; }
 };
 
 class Patient: public Person {
     private:
-        QString covid;
         QString chatId;
+        QString covid;
     public:
         Date date;
-        Patient(QString f, QString cvd, QString chId, QString d, QString m, QString y, QString dow, QString a, QString c):
-            Person(f,a,c),covid(cvd), chatId(chId), date(d,m,y,dow){};
-        Patient ():Person(),covid(""), chatId(""), date(){};
+        Patient(QString f, QString chId, QString cvd,QString d, QString m, QString y, QString dow, QString a, QString c):
+            Person(f,a,c), chatId(chId), covid(cvd), date(d,m,y,dow){};
+        Patient ():Person(),chatId(""),covid(""), date(){};
         ~Patient(){}
 
-        void setCovid(QString cvd){ covid = cvd; }
         void setChatId(QString chId){ chatId = chId; }
-        QString getCovid(){ return covid; }
+        void setCovid(QString cvd){ covid = cvd; }
+
         QString getChatId(){ return chatId; }
+        QString getCovid(){ return covid; }
 
         void toString();
         QString toR();

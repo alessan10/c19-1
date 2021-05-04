@@ -97,7 +97,7 @@ void Visualizza::dataReadFinished()
 
            Patient *p = new Patient(
                object["name"].toString(),
-               object["chatid"].toString(),
+               object["chatId"].toString(),
                object["covid"].toString(),
                object["weekday"].toString(),
                object["day"].toString(),
@@ -108,6 +108,16 @@ void Visualizza::dataReadFinished()
            );
 
            patients_list.push_back(p);
+
+           //
+           QString stringa = "Nome: " + p->getFullName() +
+                   " - ChatID: "  + p->getChatId() +
+                   " - Covid: " + p->getCovid() +
+                   " - Data: " + p->date.getDayOfWeek() + " " + p->date.getDay() + " " + p->date.getMonth() + " " + p->date.getYear() +
+                   " - Country: " + p->getCountry() +
+                   " - Age: " + p->getAge();
+           qDebug() << "My string: \n" << stringa << "\n End my string \n";
+           //
 
            ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
                                    "Nome: " + p->getFullName() +
