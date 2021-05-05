@@ -14,6 +14,7 @@ SOURCES += \
     inserisci.cpp \
     main.cpp \
     mainwindow.cpp \
+    modifica.cpp \
     ricerca.cpp \
     stats.cpp \
     visualizza.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     date.h \
     inserisci.h \
     mainwindow.h \
+    modifica.h \
     ricerca.h \
     stats.h \
     visualizza.h \
@@ -32,6 +34,7 @@ HEADERS += \
 FORMS += \
     inserisci.ui \
     mainwindow.ui \
+    modifica.ui \
     ricerca.ui \
     stats.ui \
     visualizza.ui

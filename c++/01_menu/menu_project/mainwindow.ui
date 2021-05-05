@@ -76,7 +76,14 @@
     <addaction name="actionVisualizza_Database"/>
     <addaction name="actionVisualizza_Statistiche"/>
    </widget>
+   <widget class="QMenu" name="menuModifica_2">
+    <property name="title">
+     <string>Modifica</string>
+    </property>
+    <addaction name="actionModifica_Dati_Paziente"/>
+   </widget>
    <addaction name="menuOperazioni"/>
+   <addaction name="menuModifica_2"/>
    <addaction name="menuModifica"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -109,6 +116,11 @@
   <action name="actionVisualizza_Statistiche">
    <property name="text">
     <string>Visualizza Statistiche</string>
+   </property>
+  </action>
+  <action name="actionModifica_Dati_Paziente">
+   <property name="text">
+    <string>Modifica Dati Paziente</string>
    </property>
   </action>
  </widget>

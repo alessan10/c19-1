@@ -6,6 +6,7 @@
 #include "stats.h"
 #include "worker.h"
 #include "classes.h"
+#include "modifica.h"
 
 #include <QMessageBox>
 
@@ -65,4 +66,12 @@ void MainWindow::on_actionVisualizza_Statistiche_triggered()
     statsdialog.setWindowTitle("Visualizza Statistiche");
     statsdialog.setModal(true);
     statsdialog.exec();
+}
+
+void MainWindow::on_actionModifica_Dati_Paziente_triggered()
+{
+    Modifica modificadialog;
+    modificadialog.setWindowTitle("Modifica");
+    modificadialog.setModal(true);
+    modificadialog.exec();
 }

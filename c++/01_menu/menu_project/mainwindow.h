@@ -31,6 +31,8 @@ private slots:
 
     void on_actionVisualizza_Statistiche_triggered();
 
+    void on_actionModifica_Dati_Paziente_triggered();
+
 private:
     Ui::MainWindow *ui;
     Worker worker;
