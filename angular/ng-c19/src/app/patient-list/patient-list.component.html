@@ -1,6 +1,6 @@
 <div style="text-align: center;">
-  <button (click)="getGraph()" class="btn btn-primary m-4"> Get graph (Observable)</button>
-    <h2> Patients list: </h2>
+  <button (click)="getGraph()" class="btn btn-primary m-4"> Visualizza (Observable)</button>
+    <h2> Lista dei Pazienti: </h2>
 
     <h3> {{ errorMsg }} </h3>
       <div class="col-md-4" style="margin: auto">
@@ -16,8 +16,8 @@
                 <div class="accordion-body" style="text-align: left;">
                   <h6> {{ "Covid: " + patient.patient.covid }} </h6>
                   <h6> {{"Data tampone: "+ patient.patient.year + " " + patient.patient.month + " " + patient.patient.day + " " + patient.patient.weekday}} </h6>
-                  <h6> {{ "Country: " + patient.patient.country}} </h6>
-                  <h6> {{ "Age: " + patient.patient.age}} </h6>
+                  <h6> {{ "Nazionalità: " + patient.patient.country}} </h6>
+                  <h6> {{ "Età: " + patient.patient.age}} </h6>
                 </div>
               </div>
             </div>

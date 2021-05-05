@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Online Tracking System';
+  title = 'Sistema di Tracciamento dei Contagi';
 
 
 }
