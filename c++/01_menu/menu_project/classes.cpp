@@ -103,14 +103,14 @@ void Patient::toString()
 QString Patient::toR()
 {
     QString str =
+    		"\"" + country + "\"," +
             "\"" + age + "\"," +
-            "\"" + country + "\"," +
             "\"" + date.getDayOfWeek() + "\"," +
             "\"" + date.getDay() + "\"," +
             "\"" + date.getMonth() + "\"," +
             "\"" + date.getYear() + "\"," +
-            "\"" + covid + "\"," +
             "\"" + chatId + "\"," +
+            "\"" + covid + "\"," +
             "\"" + fullname + "\"";
     return str;
 }
