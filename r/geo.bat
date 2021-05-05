@@ -1,0 +1,1 @@
+C:\Program Files\R\R-4.0.5\bin\RScript.exe CMD BATCH D:\Alessandro\uniCT\Magistrale\Secondo_Anno\1_Advanced Programming Languages\Progetto_Esame\git_c19\c19\r\geographical_script.r

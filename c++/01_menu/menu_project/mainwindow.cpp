@@ -3,7 +3,6 @@
 #include "inserisci.h"
 #include "ricerca.h"
 #include "visualizza.h"
-#include "table.h"
 #include "stats.h"
 #include "worker.h"
 #include "classes.h"
@@ -58,15 +57,6 @@ void MainWindow::on_actionVisualizza_Database_triggered()
     visualizzadialog.setWindowTitle("Visualizza Grafico");
     visualizzadialog.setModal(true);
     visualizzadialog.exec();
-}
-
-void MainWindow::on_actionTable_triggered()
-{
-    Table tabledialog;
-    tabledialog.setWindowTitle("Tabella");
-    tabledialog.setModal(true);
-    tabledialog.exec();
-
 }
 
 void MainWindow::on_actionVisualizza_Statistiche_triggered()

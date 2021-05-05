@@ -16,7 +16,6 @@ SOURCES += \
     mainwindow.cpp \
     ricerca.cpp \
     stats.cpp \
-    table.cpp \
     visualizza.cpp \
     worker.cpp
 
@@ -27,7 +26,6 @@ HEADERS += \
     mainwindow.h \
     ricerca.h \
     stats.h \
-    table.h \
     visualizza.h \
     worker.h
 
@@ -36,7 +34,6 @@ FORMS += \
     mainwindow.ui \
     ricerca.ui \
     stats.ui \
-    table.ui \
     visualizza.ui
 
 # Default rules for deployment.

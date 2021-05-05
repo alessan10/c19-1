@@ -41,7 +41,7 @@
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Per visualizzare tutto il grafico, clicca su Visualizza</string>
+      <string>Per visualizzare il contenuto del database e generare il file delle statistiche per R, clicca su Visualizza</string>
      </property>
     </widget>
    </item>

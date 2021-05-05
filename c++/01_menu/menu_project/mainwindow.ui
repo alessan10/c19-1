@@ -51,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>903</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOperazioni">
@@ -71,11 +71,10 @@
    </widget>
    <widget class="QMenu" name="menuModifica">
     <property name="title">
-     <string>Modifica</string>
+     <string>Visualizza</string>
     </property>
     <addaction name="actionVisualizza_Database"/>
     <addaction name="actionVisualizza_Statistiche"/>
-    <addaction name="actionTable"/>
    </widget>
    <addaction name="menuOperazioni"/>
    <addaction name="menuModifica"/>
@@ -89,7 +88,7 @@
   </action>
   <action name="actionRicerca">
    <property name="text">
-    <string>Ricerca</string>
+    <string>Ricerca/Elimina</string>
    </property>
   </action>
   <action name="actionAbout_Our_Project">
@@ -105,11 +104,6 @@
   <action name="actionVisualizza_Database">
    <property name="text">
     <string>Visualizza Database</string>
-   </property>
-  </action>
-  <action name="actionTable">
-   <property name="text">
-    <string>Table</string>
    </property>
   </action>
   <action name="actionVisualizza_Statistiche">
