@@ -1,28 +1,30 @@
-<button (click)="getGraph()" class="btn btn-primary m-4"> Get graph</button>
-  <h2> Patients list: </h2>
+<div style="text-align: center;">
+  <button (click)="getGraph()" class="btn btn-primary m-4"> Get graph (Observable)</button>
+    <h2> Patients list: </h2>
 
-  <h3> {{ errorMsg }} </h3>
-    <div>
-      <div class="accordion accordion-flush" id="accordionExample">
-        <ul *ngFor="let patient of patients; index as i">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-heading{{i}}">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapse'+i" aria-expanded="false" [attr.aria-controls]="'flush-collapse'+i">
-              {{ patient.patient.name }}
-              </button>
-            </h2>
-            <div id="flush-collapse{{i}}" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">
-                <h6> {{ "Covid: " + patient.patient.covid }} </h6>
-                <h6> {{"Data tampone: "+ patient.patient.year + " " + patient.patient.month + " " + patient.patient.day + " " + patient.patient.weekday}} </h6>
-                <h6> {{ "Country: " + patient.patient.country}} </h6>
-                <h6> {{ "Age: " + patient.patient.age}} </h6>
+    <h3> {{ errorMsg }} </h3>
+      <div class="col-md-4" style="margin: auto">
+        <div class="accordion " id="accordionExample">
+          <ul *ngFor="let patient of patients; index as i">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-heading{{i}}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapse'+i" aria-expanded="false" [attr.aria-controls]="'flush-collapse'+i">
+                {{ patient.patient.name }}
+                </button>
+              </h2>
+              <div id="flush-collapse{{i}}" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body" style="text-align: left;">
+                  <h6> {{ "Covid: " + patient.patient.covid }} </h6>
+                  <h6> {{"Data tampone: "+ patient.patient.year + " " + patient.patient.month + " " + patient.patient.day + " " + patient.patient.weekday}} </h6>
+                  <h6> {{ "Country: " + patient.patient.country}} </h6>
+                  <h6> {{ "Age: " + patient.patient.age}} </h6>
+                </div>
               </div>
             </div>
-          </div>
-        </ul>
+          </ul>
+        </div>
       </div>
-    </div>
+</div>
 
 
 
