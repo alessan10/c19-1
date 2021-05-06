@@ -136,15 +136,12 @@ void Ricerca::on_button_elimina_clicked()
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
 
-    //QString fullname = ui->nome->text() + ui->cognome->text();
-    //qDebug() << "\n\n Elimina fullname: " << fullname;
-
     //Initialize our API data
     const QUrl API_ENDPOINT("http://localhost:8081/delete?name="+name+"%20"+surname);
     QNetworkRequest request;
     request.setUrl(API_ENDPOINT);
 
     mNetReply = mNetManager->get(request);
-    connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
-    connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
+    //connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
+    //connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
 }
