@@ -141,7 +141,29 @@ void Ricerca::on_button_elimina_clicked()
     QNetworkRequest request;
     request.setUrl(API_ENDPOINT);
 
-    mNetReply = mNetManager->get(request);
+    mNetReply = mNetManager->deleteResource(request);
+    qDebug() <<"\nmNetReply: " << mNetReply;
+
+    if(mNetReply->NoError == 0)
+    {
+        QMessageBox::information(this,"Informazione",
+                                 QString("L'utente di nome %1 %2 è stato eliminato correttamente").arg(name).arg(surname),
+                                 QMessageBox::Ok);
+
+        /*if ( ret == QMessageBox::Ok)
+        {
+            qDebug() << "User clicked on OK";
+        }*/
+    }
+    else
+    {
+        QMessageBox::warning(this,"Attenzione",
+                             QString("Non è stato possibile eliminare l'utente di nome %1 %2").arg(name).arg(surname),
+                             QMessageBox::Ok);
+    }
+
+
+
     //connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
     //connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
 }

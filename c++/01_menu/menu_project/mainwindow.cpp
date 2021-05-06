@@ -70,7 +70,7 @@ void MainWindow::on_actionVisualizza_Statistiche_triggered()
 
 void MainWindow::on_actionModifica_Dati_Paziente_triggered()
 {
-    Modifica modificadialog;
+    Modifica modificadialog(worker);
     modificadialog.setWindowTitle("Modifica");
     modificadialog.setModal(true);
     modificadialog.exec();

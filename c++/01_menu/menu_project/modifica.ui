@@ -112,7 +112,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="new_nome">
+       <property name="placeholderText">
+        <string/>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_2">
@@ -127,7 +131,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="new_cognome"/>
      </item>
     </layout>
    </item>
@@ -153,7 +157,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_4"/>
+      <widget class="QLineEdit" name="new_eta"/>
      </item>
      <item>
       <widget class="QLabel" name="label_5">
@@ -168,7 +172,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3"/>
+      <widget class="QLineEdit" name="new_paese"/>
      </item>
     </layout>
    </item>

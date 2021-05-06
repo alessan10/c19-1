@@ -577,6 +577,7 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		})
 		if err != nil {
 			log.Fatal(err)
+			return 500, err
 		}
 
 		fmt.Println("result :", result)
@@ -609,7 +610,7 @@ func main() {
 	if port, found = os.LookupEnv("PORT"); !found {
 		port = "8081"
 	}
-	panic(http.ListenAndServe(":"+port, serveMux));
+	panic(http.ListenAndServe(":"+port, serveMux))
 	//panic(http.ListenAndServe(":"+port, httpgzip.NewHandler(serveMux)))
 }
 
