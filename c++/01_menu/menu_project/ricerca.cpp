@@ -84,7 +84,7 @@ void Ricerca::dataReadFinished()
        QJsonDocument mDoc;
        mDoc = QJsonDocument::fromJson(*mDataBuffer);
 
-       qDebug() << mDoc.object().value("cperson").toArray().size();
+       qDebug() << mDoc.object().value("patient").toArray().size();
 
        /*
        //What if you get an object from the server
@@ -99,9 +99,9 @@ void Ricerca::dataReadFinished()
        for ( int i = 0; i < array.size(); i++)
        {
            //QJsonObject object = array.at(i).toObject();
-           //QJsonObject object1 = object["cperson"].toObject();
+           //QJsonObject object1 = object["patient"].toObject();
 
-           QJsonObject object = array.at(i).toObject().value("cperson").toObject();
+           QJsonObject object = array.at(i).toObject().value("patient").toObject();
            QString fullname = object["name"].toString();
            QString chatid = object["chatid"].toString();
            QString covid = object["covid"].toString();
@@ -124,7 +124,7 @@ void Ricerca::dataReadFinished()
            //ui->label_2->setText("Dati ricevuti");
            //ui->tableView->(name +  chatid + covid);
             //rimetti qtableview
-           QString c0 = mDoc.object().value("cperson").toArray().at(i).toObject().value("name").toString();
+           QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
            qDebug() << c0;
 
        }
@@ -135,6 +135,9 @@ void Ricerca::on_button_elimina_clicked()
 {
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
+
+    //QString fullname = ui->nome->text() + ui->cognome->text();
+    //qDebug() << "\n\n Elimina fullname: " << fullname;
 
     //Initialize our API data
     const QUrl API_ENDPOINT("http://localhost:8081/delete?name="+name+"%20"+surname);
