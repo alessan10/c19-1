@@ -73,5 +73,17 @@ void Modifica::dataReadFinished()
     }
 
     //https://stackoverflow.com/questions/26504626/custom-placeholder-in-qlineedit
+    /*nome e cognome da fullname
+    ui->new_cognome->text() = cognome;
+    ui->new_nome->text() = nome;
+    ui->new_eta = age;
+    ui->new_paese->text()=country;
+    ui->new_day = data->day;
+    ui->new_month = data->month;
+    ui->new_year = data->year;
+    ui->new_weekday = data->weekday;
+    ui->new_covid = covid;
+    set as placeholder;*/
+
 }
 

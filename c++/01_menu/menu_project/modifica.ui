@@ -198,7 +198,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_5">
+      <widget class="QComboBox" name="new_day">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -374,7 +374,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="new_month">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -455,7 +455,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_4">
+      <widget class="QComboBox" name="new_year">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -486,7 +486,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_2">
+      <widget class="QComboBox" name="new_weekday">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -559,7 +559,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_3">
+      <widget class="QComboBox" name="new_covid">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
