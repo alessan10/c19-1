@@ -470,7 +470,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		// query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
 		// CREATE (u)-[:HAS_ROLE]->(r)`
 
-		query3 := `CREATE (p:Patient { id: $id name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
+		query3 := `CREATE (p:Patient { id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
 							RETURN p.name as name`
 		result3, err3 := session.Run(query3, map[string]interface{}{
 			"id":      person.Id,
@@ -547,7 +547,7 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 		log.Println("ecco il body GRAPH:", req.Body)
 
 		query := `MATCH (p1:Patient) 
-		RETURN p1.id as id, p1.name as name, p1.surname as surname, p1.age as age p1.chatid as chatid, p1.covid as covid, p1.year as year, p1.month as month, p1.day as day, p1.weekday as weekday, p1.country as country`
+		RETURN p1.id as id, p1.name as name, p1.surname as surname, p1.age as age, p1.chatid as chatid, p1.covid as covid, p1.year as year, p1.month as month, p1.day as day, p1.weekday as weekday, p1.country as country`
 
 		result, err := session.Run(query, map[string]interface{}{})
 		if err != nil {
