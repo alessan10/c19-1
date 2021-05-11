@@ -185,19 +185,32 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("[ ENTRYPOINT ] : UPDATE ")
 		defer session.Close()
 
+		var person Patient
+
 		query := `MATCH (p:Patient {name: $name, surname: $surname})
-							SET p.covid = $covid
-							RETURN p.name as name, p.chatid as chatid, p.covid as covid, p.weekday as weekday, p.day as day, p.month as month, p.year as year, p2.country as country, p2.age as age`
+							SET p.id = id, p.name = new_name, p.surname = surname, p.age = new_age, p.chatid = new_chatid, p.covid = new_covid, p.year = new_year, p.month = new_month, p.day = new_day, p.weekday = new_weekday, p.country = new_country
+							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
 		// nameRegex := fmt.Sprintf("(?i).*%s.*", req.URL.Query()["q"][0])
 		fmt.Println("URL name: ", req.URL.Query()["name"][0])
 		fmt.Println("URL surname: ", req.URL.Query()["surname"][0])
-		fmt.Println("URL covid: ", req.URL.Query()["covid"][0])
+		//fmt.Println("URL covid: ", req.URL.Query()["covid"][0])
 		// fmt.Println("nameRegex", nameRegex)
 		result, err := session.Run(query, map[string]interface{}{
-			"name":    req.URL.Query()["name"][0],
-			"surname": req.URL.Query()["surname"][0],
-			"covid":   req.URL.Query()["covid"][0],
+			//"name":    req.URL.Query()["name"][0],
+			//"surname": req.URL.Query()["surname"][0],
+			//"covid":   req.URL.Query()["covid"][0],
+			"id":          person.Id,
+			"new_name":    person.Name,
+			"new_surname": person.Surname,
+			"new_age":     person.Age,
+			"new_chatid":  person.Chatid,
+			"new_covid":   person.Covid,
+			"new_year":    person.Year,
+			"new_month":   person.Month,
+			"new_day":     person.Day,
+			"new_weekday": person.WeekDay,
+			"new_country": person.Country,
 		})
 		if err != nil {
 			log.Fatal(err)
@@ -212,25 +225,25 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			fmt.Println("record: ", record.GetByIndex(0))
 			id, _ := record.Get("id")
 			fmt.Println("id: ", id)
-			name, _ := record.Get("name")
+			name, _ := record.Get("new_name")
 			fmt.Println("name: ", name)
-			surname, _ := record.Get("surname")
+			surname, _ := record.Get("new_surname")
 			fmt.Println("surname: ", surname)
-			age, _ := record.Get("age")
+			age, _ := record.Get("new_age")
 			fmt.Println("age: ", age)
-			chatid, _ := record.Get("chatid")
+			chatid, _ := record.Get("new_chatid")
 			fmt.Println("chatid: ", chatid)
-			covid, _ := record.Get("covid")
+			covid, _ := record.Get("new_covid")
 			fmt.Println("covid: ", covid)
-			year, _ := record.Get("year")
+			year, _ := record.Get("new_year")
 			fmt.Println("year: ", year)
-			month, _ := record.Get("month")
+			month, _ := record.Get("new_month")
 			fmt.Println("month: ", month)
-			day, _ := record.Get("day")
+			day, _ := record.Get("new_day")
 			fmt.Println("day: ", day)
-			weekday, _ := record.Get("weekday")
+			weekday, _ := record.Get("new_weekday")
 			fmt.Println("Day Of The Week: ", weekday)
-			country, _ := record.Get("country")
+			country, _ := record.Get("new_country")
 			fmt.Println("country: ", country)
 
 			patientResults = append(patientResults, PatientResult{Patient{
@@ -270,7 +283,7 @@ func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		query := `MATCH (p:Patient {name: $name})-[r:CONTACT]-()
 									DELETE r
 									SET p.covid = "healed"
-									RETURN p.name as name, p.chatid as chatid, p.covid as covid, p.weekday as weekday, p.day as day, p.month as month, p.year as year, p.country as country, p.age as age`
+									RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
 		fmt.Println("URL name: ", req.URL.Query()["name"][0])
 		result, err := session.Run(query, map[string]interface{}{
@@ -471,7 +484,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		// CREATE (u)-[:HAS_ROLE]->(r)`
 
 		query3 := `CREATE (p:Patient { id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
-							RETURN p.name as name`
+							RETURN p.id as id`
 		result3, err3 := session.Run(query3, map[string]interface{}{
 			"id":      person.Id,
 			"name":    person.Name,
@@ -497,25 +510,25 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		// CREATE (a)-[r:CONTACT]->(b)
 		// RETURN type(r)`
 
-		query4 := `MATCH (a:Patient),(b:Patient) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		query4 := `MATCH (a:Patient),(b:Patient) WHERE a.id = $id0 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.name = $name1 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.id = $id1 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.name = $name2 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.id = $id2 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.name = $name3 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.id = $id3 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
+		MATCH (a:Patient),(b:Patient) WHERE a.id = $id4 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
 
-		fmt.Println("patientResults[0].Name:", patientResults[0].Name)
-		fmt.Println("name_new:", person.Name)
+		fmt.Println("patientResults[0].Id:", patientResults[0].Id)
+		fmt.Println("id_new:", person.Id)
 		result4, err4 := session.Run(query4, map[string]interface{}{
-			"name0":    patientResults[0].Name,
-			"name1":    patientResults[1].Name,
-			"name2":    patientResults[2].Name,
-			"name3":    patientResults[3].Name,
-			"name4":    patientResults[4].Name,
-			"name_new": person.Name,
+			"id0":    patientResults[0].Id,
+			"id1":    patientResults[1].Id,
+			"id2":    patientResults[2].Id,
+			"id3":    patientResults[3].Id,
+			"id4":    patientResults[4].Id,
+			"id_new": person.Id,
 		})
 
 		if err4 != nil {
