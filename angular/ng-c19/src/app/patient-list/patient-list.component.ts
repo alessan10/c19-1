@@ -22,6 +22,10 @@ export class PatientListComponent implements OnInit {
     .subscribe( data => this.patients = data );
   }
 
+  async getGraphAsync(){
+    this.patients = await this._patientService.getAsyncGraph();
+  }
+
   // getPatient(){
   //   this.patients = this._patientService.getAsyncGraph();
   // }

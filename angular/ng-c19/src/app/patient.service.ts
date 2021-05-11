@@ -27,9 +27,15 @@ export class PatientService {
     throw new Error(handleError.message || "Server error");
   }
 
-  // async getAsyncGraph() {
-  //   return await this.http.get<Patient[]>(this._url).toPromise();
-  // }
+  async getAsyncGraph() {
+    return await this.http.get<Patient[]>(this._url).toPromise();
+  }
+
+  // getAsyncGraph = async () => await this.http.get<Patient[]>(this._url).toPromise();
+
+
+
+
 
 }
 

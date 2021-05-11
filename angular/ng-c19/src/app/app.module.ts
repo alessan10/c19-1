@@ -10,6 +10,8 @@ import { PatientService } from './patient.service';
 import { PatientInsertComponent } from './patient-insert/patient-insert.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,15 @@ import { HomeComponent } from './home/home.component';
     PatientListComponent,
     PatientInsertComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [PatientService],
   bootstrap: [AppComponent]
