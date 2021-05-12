@@ -497,8 +497,8 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		// query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
 		// CREATE (u)-[:HAS_ROLE]->(r)`
 
-		query3 := `CREATE (p:Patient { id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
-							RETURN p.id as id`
+		query3 := `CREATE (p:Patient {id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
+							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 		result3, err3 := session.Run(query3, map[string]interface{}{
 			"id":      person.Id,
 			"name":    person.Name,
@@ -524,25 +524,25 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		// CREATE (a)-[r:CONTACT]->(b)
 		// RETURN type(r)`
 
-		query4 := `MATCH (a:Patient),(b:Patient) WHERE a.id = $id0 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		query4 := `MATCH (a:Patient),(b:Patient) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.id = $id1 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name1 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.id = $id2 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name2 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.id = $id3 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name3 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
-		MATCH (a:Patient),(b:Patient) WHERE a.id = $id4 AND b.id = $id_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
+		MATCH (a:Patient),(b:Patient) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
 
 		fmt.Println("patientResults[0].Id:", patientResults[0].Id)
-		fmt.Println("id_new:", person.Id)
+		fmt.Println("name_new:", person.Name)
 		result4, err4 := session.Run(query4, map[string]interface{}{
-			"id0":    patientResults[0].Id,
-			"id1":    patientResults[1].Id,
-			"id2":    patientResults[2].Id,
-			"id3":    patientResults[3].Id,
-			"id4":    patientResults[4].Id,
-			"id_new": person.Id,
+			"name0":    patientResults[0].Id,
+			"name1":    patientResults[1].Id,
+			"name2":    patientResults[2].Id,
+			"name3":    patientResults[3].Id,
+			"name4":    patientResults[4].Id,
+			"name_new": person.Name,
 		})
 
 		if err4 != nil {
