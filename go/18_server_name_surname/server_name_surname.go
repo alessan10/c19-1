@@ -494,6 +494,8 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			}})
 		}
 
+		//new_id := cnt + 1
+		//fmt.Println("newID: ", new_id)
 		// query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
 		// CREATE (u)-[:HAS_ROLE]->(r)`
 
@@ -537,11 +539,11 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		fmt.Println("patientResults[0].Id:", patientResults[0].Id)
 		fmt.Println("name_new:", person.Name)
 		result4, err4 := session.Run(query4, map[string]interface{}{
-			"name0":    patientResults[0].Id,
-			"name1":    patientResults[1].Id,
-			"name2":    patientResults[2].Id,
-			"name3":    patientResults[3].Id,
-			"name4":    patientResults[4].Id,
+			"name0":    patientResults[0].Name,
+			"name1":    patientResults[1].Name,
+			"name2":    patientResults[2].Name,
+			"name3":    patientResults[3].Name,
+			"name4":    patientResults[4].Name,
 			"name_new": person.Name,
 		})
 
