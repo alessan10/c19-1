@@ -185,32 +185,46 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("[ ENTRYPOINT ] : UPDATE ")
 		defer session.Close()
 
+		decoder := json.NewDecoder(req.Body)
 		var person Patient
+		jsonerr := decoder.Decode(&person)
+		if jsonerr != nil {
+			panic(err)
+		}
 
-		query := `MATCH (p:Patient {name: $name, surname: $surname})
-							SET p.id = id, p.name = new_name, p.surname = surname, p.age = new_age, p.chatid = new_chatid, p.covid = new_covid, p.year = new_year, p.month = new_month, p.day = new_day, p.weekday = new_weekday, p.country = new_country
+		//log.Println("Id :", person.Id)
+		log.Println("Nome :", person.Name)
+		log.Println("Cognome :", person.Surname)
+		log.Println("Age :", person.Age)
+		log.Println("Chatid :", person.Chatid)
+		log.Println("Covid :", person.Covid)
+		log.Println("Year :", person.Year)
+		log.Println("Month :", person.Month)
+		log.Println("Day :", person.Day)
+		log.Println("Day of the week :", person.WeekDay)
+		log.Println("Country :", person.Country)
+
+		query := `MATCH (p:Patient) WHERE p.name = $old_name AND p.surname = $old_surname
+							SET p.name = $name, p.surname = $surname, p.age = $age, p.chatid = $chatid, p.covid = $covid, p.year = $year, p.month = $month, p.day = $day, p.weekday = $weekday, p.country = $country
 							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
-		// nameRegex := fmt.Sprintf("(?i).*%s.*", req.URL.Query()["q"][0])
-		fmt.Println("URL name: ", req.URL.Query()["name"][0])
-		fmt.Println("URL surname: ", req.URL.Query()["surname"][0])
-		//fmt.Println("URL covid: ", req.URL.Query()["covid"][0])
-		// fmt.Println("nameRegex", nameRegex)
+		fmt.Println("URL old_name: ", req.URL.Query()["old_name"][0])
+		fmt.Println("URL old_surname: ", req.URL.Query()["old_surname"][0])
+
 		result, err := session.Run(query, map[string]interface{}{
-			//"name":    req.URL.Query()["name"][0],
-			//"surname": req.URL.Query()["surname"][0],
-			//"covid":   req.URL.Query()["covid"][0],
-			"id":          person.Id,
-			"new_name":    person.Name,
-			"new_surname": person.Surname,
-			"new_age":     person.Age,
-			"new_chatid":  person.Chatid,
-			"new_covid":   person.Covid,
-			"new_year":    person.Year,
-			"new_month":   person.Month,
-			"new_day":     person.Day,
-			"new_weekday": person.WeekDay,
-			"new_country": person.Country,
+			"old_name":    req.URL.Query()["old_name"][0],
+			"old_surname": req.URL.Query()["old_surname"][0],
+			//"id":    person.Id,
+			"name":    person.Name,
+			"surname": person.Surname,
+			"age":     person.Age,
+			"chatid":  person.Chatid,
+			"covid":   person.Covid,
+			"year":    person.Year,
+			"month":   person.Month,
+			"day":     person.Day,
+			"weekday": person.WeekDay,
+			"country": person.Country,
 		})
 		if err != nil {
 			log.Fatal(err)
@@ -223,31 +237,31 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		for result.Next() {
 			record := result.Record()
 			fmt.Println("record: ", record.GetByIndex(0))
-			id, _ := record.Get("id")
-			fmt.Println("id: ", id)
-			name, _ := record.Get("new_name")
+			//id, _ := record.Get("id")
+			//fmt.Println("id: ", id)
+			name, _ := record.Get("name")
 			fmt.Println("name: ", name)
-			surname, _ := record.Get("new_surname")
+			surname, _ := record.Get("surname")
 			fmt.Println("surname: ", surname)
-			age, _ := record.Get("new_age")
+			age, _ := record.Get("age")
 			fmt.Println("age: ", age)
-			chatid, _ := record.Get("new_chatid")
+			chatid, _ := record.Get("chatid")
 			fmt.Println("chatid: ", chatid)
-			covid, _ := record.Get("new_covid")
+			covid, _ := record.Get("covid")
 			fmt.Println("covid: ", covid)
-			year, _ := record.Get("new_year")
+			year, _ := record.Get("year")
 			fmt.Println("year: ", year)
-			month, _ := record.Get("new_month")
+			month, _ := record.Get("month")
 			fmt.Println("month: ", month)
-			day, _ := record.Get("new_day")
+			day, _ := record.Get("day")
 			fmt.Println("day: ", day)
-			weekday, _ := record.Get("new_weekday")
+			weekday, _ := record.Get("weekday")
 			fmt.Println("Day Of The Week: ", weekday)
-			country, _ := record.Get("new_country")
+			country, _ := record.Get("country")
 			fmt.Println("country: ", country)
 
 			patientResults = append(patientResults, PatientResult{Patient{
-				Id:      id.(string),
+				//Id:      id.(string),
 				Name:    name.(string),
 				Surname: surname.(string),
 				Age:     age.(string),
