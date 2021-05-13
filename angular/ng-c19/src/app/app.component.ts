@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Sistema di Tracciamento dei Contagi';
-
+  isShown:boolean=false;
 
 }
