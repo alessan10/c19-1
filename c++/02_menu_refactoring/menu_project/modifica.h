@@ -28,6 +28,8 @@ private slots:
     void dataReadyRead();
     void dataReadFinished();
 
+    void on_button_modifica_clicked();
+
 private:
     Ui::Modifica *ui;
     QNetworkAccessManager * mNetManager;
