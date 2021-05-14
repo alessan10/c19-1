@@ -102,8 +102,16 @@ void Modifica::dataReadFinished()
             ui->new_nome->setText(name);
             ui->new_cognome->setText(surname);
             ui->new_eta->setText(age);
-
             ui->new_paese->setText(country);
+
+            int iday = day.toInt() -1;
+            ui->new_day->setCurrentIndex(iday);
+
+            ui->new_month->setCurrentText(month);
+            ui->new_year->setCurrentText(year);
+            ui->new_weekday->setCurrentText(weekday);
+
+            ui->new_covid->setCurrentText(covid);
 
         }
     }
@@ -120,3 +128,8 @@ ui->new_year = data->year;
 ui->new_weekday = data->weekday;
 ui->new_covid = covid;
 set as placeholder;*/
+
+void Modifica::on_button_modifica_clicked()
+{
+    //qua setto ui->new... ai nuovi valori, li impacchetto nel json e li mando con l'entrypoint update(?)
+}
