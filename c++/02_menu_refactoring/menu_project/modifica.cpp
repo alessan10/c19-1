@@ -1,6 +1,7 @@
 #include "modifica.h"
 #include "ui_modifica.h"
 #include "worker.h"
+#include "classes.h"
 
 #include <QNetworkRequest>
 #include <QJsonDocument>
@@ -10,6 +11,9 @@
 #include <QDebug>
 #include <QUrlQuery>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QDate>
+#include <QStringBuilder>
 
 Modifica::Modifica(Worker &worker, QWidget *parent) :
     QDialog(parent),
@@ -116,20 +120,102 @@ void Modifica::dataReadFinished()
         }
     }
 }
-//https://stackoverflow.com/questions/26504626/custom-placeholder-in-qlineedit
-/*nome e cognome da fullname
-ui->new_cognome->text() = cognome;
-ui->new_nome->text() = nome;
-ui->new_eta = age;
-ui->new_paese->text()=country;
-ui->new_day = data->day;
-ui->new_month = data->month;
-ui->new_year = data->year;
-ui->new_weekday = data->weekday;
-ui->new_covid = covid;
-set as placeholder;*/
 
 void Modifica::on_button_modifica_clicked()
 {
-    //qua setto ui->new... ai nuovi valori, li impacchetto nel json e li mando con l'entrypoint update(?)
+    QString new_name = ui->new_nome->text();
+    new_name.replace(" ","");
+
+    QString new_surname = ui->new_cognome->text();
+    new_surname.replace(" ","");
+
+    Patient p;
+    p.setName(new_name);
+    p.setSurname(new_surname);
+
+    QString new_age = ui->new_eta->text();
+    p.setAge(new_age);
+
+    QString new_country = ui->new_paese->text();
+    p.setCountry(new_country);
+
+    QString new_year = ui->new_year->currentText();
+    p.date.setYear(new_year);
+    QString new_month = ui->new_month->currentText();
+    p.date.setMonth(new_month);
+    QString new_day = ui->new_day->currentText();
+    p.date.setDay(new_day);
+    QString new_weekday = ui->new_weekday->currentText();
+    p.date.setDayOfWeek(new_weekday);
+
+    QString new_covid = ui->new_covid->currentText();
+    p.setCovid(new_covid);
+
+    qDebug() << "Modifica::save --> ID = " <<  p.getId();
+    qDebug() << "Modifica::save --> NOME = " <<  p.getName();
+    qDebug() << "Modifica::save --> COGNOME = " <<  p.getSurname();
+    qDebug() << "Modifica::save --> Eta = " << p.getAge();
+    qDebug() << "Modifica::save --> COVID = " << p.getCovid();
+    qDebug() << "Modifica::save --> Anno = " << p.date.getYear();
+    qDebug() << "Modifica::save --> Mese = " << p.date.getMonth();
+    qDebug() << "Modifica::save --> Giorno = " << p.date.getDay();
+    qDebug() << "Modifica::save --> Paese = " << p.getCountry();
+
+    cleanUp();
+
+    QJsonObject json;
+    //json["id"] = QString(p.getId());
+    json["name"] = QString(p.getName());
+    json["surname"] = QString(p.getSurname());
+    json["age"] =QString(p.getAge());
+    //json["chatid"] = QString(p.getChatId());
+    json["covid"] =QString(p.getCovid());
+    json["year"] =QString(p.date.getYear());
+    json["month"] = QString(p.date.getMonth());
+    json["day"] = QString(p.date.getDay());
+    json["weekday"] =QString(p.date.getDayOfWeek());
+    json["country"] =QString(p.getCountry());
+
+    QJsonDocument doc(json);
+    QByteArray data = doc.toJson();
+
+    QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
+    const QUrl url(QStringLiteral("http://localhost:8081/update"));
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = mgr->post(request, data);
+
+    QObject::connect(reply, &QNetworkReply::finished, [=]()
+    {
+        if(reply->error() == QNetworkReply::NoError)
+        {
+            QString contents = QString::fromUtf8(reply->readAll());
+            qDebug() << contents;
+            //se non ci sono errori mostra un dialog
+            QMessageBox::information(this,"Info","I dati dell'utente sono stati modificati correttamente.", QMessageBox::Ok);
+        }
+        else
+        {
+            QString err = reply->errorString();
+            qDebug() << err;
+        }
+        reply->deleteLater();
+    });
+}
+
+void Modifica::cleanUp(){
+    this->ui->nome->setText("");
+    this->ui->cognome->setText("");
+
+    this->ui->new_nome->setText("");
+    this->ui->new_cognome->setText("");
+    this->ui->new_eta->setText("");
+    this->ui->new_paese->setText("");
+
+    this->ui->new_day->clear();
+    this->ui->new_month->clear();
+    this->ui->new_year->clear();
+    this->ui->new_weekday->clear();
+    this->ui->new_covid->clear();
 }

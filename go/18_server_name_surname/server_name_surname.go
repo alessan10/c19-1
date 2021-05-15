@@ -49,54 +49,7 @@ func (nc *Neo4jConfiguration) newDriver() (neo4j.Driver, error) {
 	return neo4j.NewDriver(nc.Url, neo4j.BasicAuth(nc.Username, nc.Password, ""), unencrypted)
 }
 
-// func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
-// 	return func(w http.ResponseWriter, req *http.Request) {
-// 		w.Header().Set("Content-Type", "application/json")
-
-// 		sessionConfig := neo4j.SessionConfig{AccessMode: neo4j.AccessModeRead}
-// 		session, err := driver.NewSession(sessionConfig)
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-
-// 		defer session.Close()
-
-// 		query := `MATCH (p1:Patient)
-// 		where p1.name = "Adrian Weissnat"
-// 		return p1.name as name, p1.chatid as chatid, p1.covid as covid`
-// 		result, err := session.Run(query, map[string]interface{}{})
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-
-// 		fmt.Println("result :", result)
-
-// 		var patientResults []PatientResult
-
-// 		for result.Next() {
-// 			record := result.Record()
-// 			fmt.Println("record: ", record.GetByIndex(0))
-// 			name, _ := record.Get("name")
-// 			fmt.Println("name: ", name)
-// 			chatid, _ := record.Get("chatid")
-// 			fmt.Println("chatid: ", chatid)
-// 			covid, _ := record.Get("covid")
-// 			fmt.Println("covid: ", covid)
-// 			patientResults = append(patientResults, PatientResult{Patient{
-// 				Name:   name.(string),
-// 				Chatid: chatid.(string),
-// 				Covid:  covid.(string),
-// 			}})
-// 		}
-
-// 		err = json.NewEncoder(w).Encode(patientResults)
-// 		if err != nil {
-// 			log.Println("error writing search response:", err)
-// 		}
-// 	}
-// }
-
-func searchPersonFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -275,7 +228,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		log.Println("Nome :", person.Name)
 		log.Println("Cognome :", person.Surname)
 		log.Println("Age :", person.Age)
-		log.Println("Chatid :", person.Chatid)
+		//log.Println("Chatid :", person.Chatid)
 		log.Println("Covid :", person.Covid)
 		log.Println("Year :", person.Year)
 		log.Println("Month :", person.Month)
@@ -284,8 +237,8 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		log.Println("Country :", person.Country)
 
 		query := `MATCH (p:Patient) WHERE p.name = $old_name AND p.surname = $old_surname
-							SET p.name = $name, p.surname = $surname, p.age = $age, p.chatid = $chatid, p.covid = $covid, p.year = $year, p.month = $month, p.day = $day, p.weekday = $weekday, p.country = $country
-							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
+							SET p.name = $name, p.surname = $surname, p.age = $age, p.covid = $covid, p.year = $year, p.month = $month, p.day = $day, p.weekday = $weekday, p.country = $country
+							RETURN p.name as name, p.surname as surname, p.age as age, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
 		fmt.Println("URL old_name: ", req.URL.Query()["old_name"][0])
 		fmt.Println("URL old_surname: ", req.URL.Query()["old_surname"][0])
@@ -297,7 +250,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			"name":    person.Name,
 			"surname": person.Surname,
 			"age":     person.Age,
-			"chatid":  person.Chatid,
+			//"chatid":  person.Chatid,
 			"covid":   person.Covid,
 			"year":    person.Year,
 			"month":   person.Month,
@@ -324,8 +277,8 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			fmt.Println("surname: ", surname)
 			age, _ := record.Get("age")
 			fmt.Println("age: ", age)
-			chatid, _ := record.Get("chatid")
-			fmt.Println("chatid: ", chatid)
+			//chatid, _ := record.Get("chatid")
+			//fmt.Println("chatid: ", chatid)
 			covid, _ := record.Get("covid")
 			fmt.Println("covid: ", covid)
 			year, _ := record.Get("year")
@@ -344,7 +297,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 				Name:    name.(string),
 				Surname: surname.(string),
 				Age:     age.(string),
-				Chatid:  chatid.(string),
+				//Chatid:  chatid.(string),
 				Covid:   covid.(string),
 				Year:    year.(string),
 				Month:   month.(string),
@@ -757,13 +710,13 @@ func main() {
 	serveMux := http.NewServeMux()
 	//serveMux.HandleFunc("/", defaultHandler)
 	//serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database)) //GET di prova, inutile
-	serveMux.HandleFunc("/update", updateHandlerFunc(driver, configuration.Database))      // UPDATE --c19positive
-	serveMux.HandleFunc("/healed", healedHandlerFunc(driver, configuration.Database))      // DELETE --c19healed
-	serveMux.HandleFunc("/add", addHandlerFunc(driver, configuration.Database))            // ADD
-	serveMux.HandleFunc("/graph", graphHandlerFunc(driver, configuration.Database))        // RETURN ALL GRAPH
-	serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database))      // SEARCH A Patient and all of its DATA
-	serveMux.HandleFunc("/delete", deleteHandlerFunc(driver, configuration.Database))      // DELETE PERSON
-	serveMux.HandleFunc("/simplesearch", searchPersonFunc(driver, configuration.Database)) // search a person without relations (for update purpose)
+	serveMux.HandleFunc("/update", updateHandlerFunc(driver, configuration.Database))             // UPDATE --c19positive
+	serveMux.HandleFunc("/healed", healedHandlerFunc(driver, configuration.Database))             // DELETE --c19healed
+	serveMux.HandleFunc("/add", addHandlerFunc(driver, configuration.Database))                   // ADD
+	serveMux.HandleFunc("/graph", graphHandlerFunc(driver, configuration.Database))               // RETURN ALL GRAPH
+	serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database))             // SEARCH A Patient and all of its DATA
+	serveMux.HandleFunc("/delete", deleteHandlerFunc(driver, configuration.Database))             // DELETE PERSON
+	serveMux.HandleFunc("/simplesearch", simpleSearchHandlerFunc(driver, configuration.Database)) // search a person without relations (for update purpose)
 
 	var port string
 	var found bool

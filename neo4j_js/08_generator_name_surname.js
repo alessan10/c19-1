@@ -63,7 +63,7 @@ for (var i=0;i<totale; i++){
     str = 'CREATE ';
   } 
   if (flag == 1){
-    str += `(${ firstname.toLowerCase() }_${ lastname.toLowerCase() }:Patient {id: "${id}", name: "${ firstname }", surname: "${ lastname } ", age: "${ age }", chatid: "-", covid: "${ covid[random_covid] }", year: "${ year }", month: "${ month }", day: "${ day }", weekday: "${ weekday }", country: "${ country[random_country] }"}),\n`;
+    str += `(${ firstname.toLowerCase() }_${ lastname.toLowerCase() }:Patient {id: "${id}", name: "${ firstname }", surname: "${ lastname }", age: "${ age }", chatid: "-", covid: "${ covid[random_covid] }", year: "${ year }", month: "${ month }", day: "${ day }", weekday: "${ weekday }", country: "${ country[random_country] }"}),\n`;
     array.push(firstname.toLowerCase() + '_' + lastname.toLowerCase())
   }  
 }

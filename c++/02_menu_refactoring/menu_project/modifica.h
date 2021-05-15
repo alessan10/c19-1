@@ -22,6 +22,7 @@ class Modifica : public QDialog
 public:
     explicit Modifica(Worker & worker, QWidget *parent = nullptr);
     ~Modifica();
+    void cleanUp();
 
 private slots:
     void on_pushButton_clicked();
