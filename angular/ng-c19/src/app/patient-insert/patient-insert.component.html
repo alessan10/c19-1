@@ -1,4 +1,4 @@
-<div class="container-fluid col-sm-4" style="margin-top: 5%;">
+<div class="container-fluid col-sm-4 " style="margin-top: 5%;">
   <h2 >Inserisci nuovo Paziente:</h2>
   <form [formGroup] = "insertionForm" >
 
@@ -9,21 +9,23 @@
         [class.is-invalid]="insertionForm.get('name')?.invalid
                             && insertionForm.get('name')?.touched"
         formControlName="name" type="text" class="form-control">
-        <small
-            [class.d-none]="insertionForm.get('name')?.valid
-                            || insertionForm.get('name')?.untouched"
-            class="text-danger">Nome obbligatorio</small>
-      <!-- <div *ngIf="userName?.invalid && userName?.touched">
-        <small *ngIf="userName?.errors?.required" class="text-danger">Username is required</small>
-        <small *ngIf="userName?.errors?.minlength" class="text-danger">Username must be at least 3 characters</small>
-        <small *ngIf="userName?.errors?.forbiddenName" class="text-danger">
-          {{userName?.errors?.forbiddenName.value}} Username not allowed</small>
-      </div> -->
+
+      <div *ngIf="insertionForm.get('name')?.invalid && insertionForm.get('name')?.touched">
+        <small *ngIf="name?.errors?.required" class="text-danger">Nome obbligatorio</small>
+        <small *ngIf="name?.errors?.minlength" class="text-danger">Il nome deve essere almeno 2 caratteri</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label>Cognome</label>
-      <input formControlName="surname" type="text" class="form-control">
+      <input
+      [class.is-invalid]="insertionForm.get('surnname')?.invalid
+      && insertionForm.get('surname')?.touched"
+        formControlName="surname" type="text" class="form-control">
+      <div *ngIf="insertionForm.get('surname')?.invalid && insertionForm.get('surname')?.touched">
+        <small *ngIf="surname?.errors?.required" class="text-danger">Cognome obbligatorio</small>
+        <small *ngIf="surname?.errors?.minlength" class="text-danger">Il cognome deve essere almeno 2 caratteri</small>
+      </div>
     </div>
 
     <div class="form-group">
