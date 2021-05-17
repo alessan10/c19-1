@@ -164,5 +164,5 @@ void Visualizza::dataReadFinished()
        file.close();
     }   
 }
-//\"""\",
-//"\"" << "\"," <<
+// \"""\",
+// "\"" << "\"," <<

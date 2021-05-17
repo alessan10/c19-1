@@ -53,11 +53,6 @@ void Modifica::on_pushButton_clicked()
         connect(mNetReply,&QIODevice::readyRead,this,&Modifica::dataReadyRead);
         connect(mNetReply,&QNetworkReply::finished,this,&Modifica::dataReadFinished);
     }
-
-    //QLineEdit *new_name = new QLineEdit(this);
-    //new_name->setPlaceholderText(name);
-
-    //ui->new_name->text() = name
 }
 
 void Modifica::dataReadyRead()
@@ -70,6 +65,7 @@ void Modifica::dataReadFinished()
     if( mNetReply->error())
     {
         qDebug() << "Error : " << mNetReply->errorString();
+        QMessageBox::warning(this,"Attenzione","Non è stato trovato nessun utente!", QMessageBox::Ok);
     }
     else
     {
@@ -84,15 +80,11 @@ void Modifica::dataReadFinished()
 
         for ( int i = 0; i < array.size(); i++)
         {
-            //QJsonObject object = array.at(i).toObject();
-            //QJsonObject object1 = object["patient"].toObject();
-
             QJsonObject object = array.at(i).toObject().value("patient").toObject();
-            //QString id = object["id"].toString();
+
             QString name = object["name"].toString();
             QString surname = object["surname"].toString();
             QString age = object["age"].toString();
-            QString chatid = object["chatid"].toString();
             QString covid = object["covid"].toString();
             QString year = object["year"].toString();
             QString month = object["month"].toString();
@@ -100,8 +92,8 @@ void Modifica::dataReadFinished()
             QString weekday = object["weekday"].toString();
             QString country = object["country"].toString();
 
-            QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
-            qDebug() << c0;
+            //QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
+            //qDebug() << c0;
 
             ui->new_nome->setText(name);
             ui->new_cognome->setText(surname);
@@ -123,15 +115,19 @@ void Modifica::dataReadFinished()
 
 void Modifica::on_button_modifica_clicked()
 {
-    QString new_name = ui->new_nome->text();
-    new_name.replace(" ","");
-
-    QString new_surname = ui->new_cognome->text();
-    new_surname.replace(" ","");
-
     Patient p;
+
+    QString new_name = ui->new_nome->text();
+    QString new_surname = ui->new_cognome->text();
+
     p.setName(new_name);
     p.setSurname(new_surname);
+
+    p.getName();
+    p.getSurname();
+
+    qDebug() << "New name: " << p.getName();
+    qDebug() << "New surname: " << p.getSurname();
 
     QString new_age = ui->new_eta->text();
     p.setAge(new_age);
@@ -151,30 +147,18 @@ void Modifica::on_button_modifica_clicked()
     QString new_covid = ui->new_covid->currentText();
     p.setCovid(new_covid);
 
-    qDebug() << "Modifica::save --> ID = " <<  p.getId();
-    qDebug() << "Modifica::save --> NOME = " <<  p.getName();
-    qDebug() << "Modifica::save --> COGNOME = " <<  p.getSurname();
-    qDebug() << "Modifica::save --> Eta = " << p.getAge();
-    qDebug() << "Modifica::save --> COVID = " << p.getCovid();
-    qDebug() << "Modifica::save --> Anno = " << p.date.getYear();
-    qDebug() << "Modifica::save --> Mese = " << p.date.getMonth();
-    qDebug() << "Modifica::save --> Giorno = " << p.date.getDay();
-    qDebug() << "Modifica::save --> Paese = " << p.getCountry();
-
-    cleanUp();
-
     QJsonObject json;
-    //json["id"] = QString(p.getId());
     json["name"] = QString(p.getName());
     json["surname"] = QString(p.getSurname());
     json["age"] =QString(p.getAge());
-    //json["chatid"] = QString(p.getChatId());
     json["covid"] =QString(p.getCovid());
     json["year"] =QString(p.date.getYear());
     json["month"] = QString(p.date.getMonth());
     json["day"] = QString(p.date.getDay());
     json["weekday"] =QString(p.date.getDayOfWeek());
     json["country"] =QString(p.getCountry());
+
+    qDebug() << json;
 
     QJsonDocument doc(json);
     QByteArray data = doc.toJson();
@@ -198,10 +182,13 @@ void Modifica::on_button_modifica_clicked()
         else
         {
             QString err = reply->errorString();
+            QMessageBox::warning(this,"Attenzione","Update fallito.", QMessageBox::Ok);
             qDebug() << err;
         }
         reply->deleteLater();
     });
+    cleanUp();
+
 }
 
 void Modifica::cleanUp(){

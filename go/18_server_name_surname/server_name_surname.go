@@ -8,6 +8,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"strconv"
 	"strings" //per controllo errori
 
 	"github.com/neo4j/neo4j-go-driver/neo4j"
@@ -453,28 +454,35 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			fmt.Println("count: ", count)
 			cnt = count.(int64)
 
-			fmt.Println(" count", cnt)
+			fmt.Println("cnt", cnt)
 		}
 
 		//prendo count, genero 5 un 0 < rnd() < count -> RND1, RND2, RND3, RND4, RND5
 		var rnd [5]int64
+		var rndStr [5]string
 		for i := 0; i < 5; i++ {
 			rnd[i] = rand.Int63n(cnt)
 			//64 bit perchè potenzialmente l'app deve funzionare con più di 9 miliardi di persone
+			rndStr[i] = strconv.FormatInt(rnd[i], 10)
+			rndStr[i] = PadLeft(rndStr[i], "0", 3)
 			fmt.Println("rand: ", rnd[i])
-
+			fmt.Println("rndStr: ", rndStr[i])
 		}
 
 		// query2 := `MATCH (s) WHERE ID(s) IN [2, 5, 60, 80, 88] RETURN s`
-		query2 := `MATCH (s) WHERE ID(s) IN [$rnd0, $rnd1, $rnd2, $rnd3, $rnd4] 
-		RETURN s.id as id, s.name as name, s.surname as surname, s.age as age, s.chatid as chatid, s.covid as covid, s.year as year, s.month as month, s.day as day, s.weekday as weekday, s.country as country`
+		//ID(s) = id generato da NEO4J
+		// query2 := `MATCH (s) WHERE ID(s) IN [$rnd0, $rnd1, $rnd2, $rnd3, $rnd4]
+		// RETURN s.id as id, s.name as name, s.surname as surname, s.age as age, s.chatid as chatid, s.covid as covid, s.year as year, s.month as month, s.day as day, s.weekday as weekday, s.country as country`
+
+		query2 := `MATCH (n) WHERE n.id IN [$rndStr0, $rndStr1, $rndStr2, $rndStr3, $rndStr4] 
+						RETURN n.id as id, n.name as name, n.surname as surname, n.age as age, n.chatid as chatid, n.covid as covid, n.year as year, n.month as month, n.day as day, n.weekday as weekday, n.country as country`
 
 		result2, err2 := session.Run(query2, map[string]interface{}{
-			"rnd0": rnd[0],
-			"rnd1": rnd[1],
-			"rnd2": rnd[2],
-			"rnd3": rnd[3],
-			"rnd4": rnd[4],
+			"rndStr0": rndStr[0],
+			"rndStr1": rndStr[1],
+			"rndStr2": rndStr[2],
+			"rndStr3": rndStr[3],
+			"rndStr4": rndStr[4],
 		})
 
 		if err2 != nil {
@@ -526,15 +534,16 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			}})
 		}
 
-		//new_id := cnt + 1
-		//fmt.Println("newID: ", new_id)
-		// query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
+		new_id := cnt + 1
+		fmt.Println("newID: ", new_id)
+		stringID := strconv.Itoa(int(new_id))
+		//query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
 		// CREATE (u)-[:HAS_ROLE]->(r)`
 
 		query3 := `CREATE (p:Patient {id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
 							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 		result3, err3 := session.Run(query3, map[string]interface{}{
-			"id":      person.Id,
+			"id":      stringID,
 			"name":    person.Name,
 			"surname": person.Surname,
 			"age":     person.Age,
@@ -569,6 +578,10 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		MATCH (a:Patient),(b:Patient) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
 
 		fmt.Println("patientResults[0].Id:", patientResults[0].Id)
+		fmt.Println("patientResults[1].Id:", patientResults[1].Id)
+		fmt.Println("patientResults[2].Id:", patientResults[2].Id)
+		fmt.Println("patientResults[3].Id:", patientResults[3].Id)
+		fmt.Println("patientResults[4].Id:", patientResults[4].Id)
 		fmt.Println("name_new:", person.Name)
 		result4, err4 := session.Run(query4, map[string]interface{}{
 			"name0":    patientResults[0].Name,
@@ -748,4 +761,11 @@ func unsafeClose(closeable io.Closer) {
 	if err := closeable.Close(); err != nil {
 		log.Fatal(fmt.Errorf("could not close resource: %w", err))
 	}
+}
+
+func PadLeft(str, pad string, lenght int) string {
+	for len(str) < lenght {
+		str = pad + str
+	}
+	return str[0:lenght]
 }

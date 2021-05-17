@@ -106,7 +106,7 @@ void Patient::toString()
 QString Patient::toR()
 {
     QString str =
-    		"\"" + country + "\"," +
+            "\"" + country + "\"," +
             "\"" + date.getDayOfWeek() + "\"," +
             "\"" + date.getDay() + "\"," +
             "\"" + date.getMonth() + "\"," +
@@ -117,7 +117,6 @@ QString Patient::toR()
             "\"" + surname + "\"";
             "\"" + name + "\"";
             "\"" + id + "\"";
-
     return str;
 }
 /*int main(){

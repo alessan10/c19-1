@@ -33,7 +33,7 @@ class Person{
 
         void setId (QString i){ id = i; }
         void setName(QString n){ name = n; }
-        void setSurname(QString s){ name = s; }
+        void setSurname(QString s){ surname = s; }
         void setAge(QString a){ age = a; }
         void setCountry (QString c){ country = c; }
 
