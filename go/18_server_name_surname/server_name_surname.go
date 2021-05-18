@@ -65,7 +65,7 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 		log.Println("ecco il body SEARCH:", req.Body)
 
 		query := `MATCH (p:Patient) 
-						WHERE p.name = $name OR p.surname = $surname
+						WHERE p.name = $name AND p.surname = $surname
 						RETURN p.name as name, p.surname as surname, p.age as age, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
 		result, err := session.Run(query, map[string]interface{}{
@@ -144,7 +144,7 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		log.Println("ecco il body SEARCH:", req.Body)
 
 		query := `MATCH (p1:Patient)-[r:CONTACT]-(p2:Patient) 
-					WHERE p1.name = $name OR p1.surname = $surname  									
+					WHERE p1.name = $name AND p1.surname = $surname  									
 					RETURN p2.id as id, p2.name as name, p2.surname as surname, p2.age as age, p2.chatid as chatid, p2.covid as covid, p2.year as year, p2.month as month, p2.day as day, p2.weekday as weekday, p2.country as country`
 		result, err := session.Run(query, map[string]interface{}{
 			"name":    req.URL.Query()["name"][0],
@@ -692,7 +692,7 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("[ ENTRYPOINT ] : DELETE ")
 		defer session.Close()
 
-		query := `MATCH (p:Patient) WHERE p.name = $name OR p.surname = $surname 
+		query := `MATCH (p:Patient) WHERE p.name = $name AND p.surname = $surname 
 					DETACH DELETE p`
 
 		fmt.Println("URL name: ", req.URL.Query()["name"][0])

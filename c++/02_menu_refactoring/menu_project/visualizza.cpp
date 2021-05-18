@@ -152,12 +152,12 @@ void Visualizza::dataReadFinished()
        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
            return;
        QTextStream out(&file);
-       QString stringa = "\"Country\",\"Weekday\",\"Giorno\",\"Mese\",\"Anno\",\"Covid\",\"ChatId\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
+       QString stringa = "\"Country\",\"Weekday\",\"Anno\",\"Mese\",\"Giorno\",\"ChatId\",\"Covid\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
+       //QString stringa = "\"Country\",\"Weekday\",\"Giorno\",\"Mese\",\"Anno\",\"Covid\",\"ChatId\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
        out << stringa <<"\n";
 
-       //int counter = 0;
+
        for (i = patients_list.begin(); i != patients_list.end(); ++i){
-           //counter ++;
            qDebug() << "toR: " << (*i)->toR() << " toR end";
            out << (*i)->toR() << "\n";
        }

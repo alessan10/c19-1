@@ -32,10 +32,15 @@ Modifica::~Modifica()
     delete ui;
 }
 
+QString old_name, old_surname;
+
 void Modifica::on_pushButton_clicked()
 {
-    QString name = ui->nome->text();
-    QString surname = ui->cognome->text();
+    //QString name = ui->nome->text();
+    //QString surname = ui->cognome->text();
+
+    old_name = ui->nome->text();
+    old_surname = ui->cognome->text();
 
     if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty())
     {
@@ -45,7 +50,8 @@ void Modifica::on_pushButton_clicked()
     else
     {
         //Initialize our API data
-        const QUrl API_ENDPOINT("http://localhost:8081/simplesearch?name="+name+"&surname="+surname);
+        const QUrl API_ENDPOINT("http://localhost:8081/simplesearch?name="+old_name+"&surname="+old_surname);
+        //const QUrl API_ENDPOINT("http://localhost:8081/simplesearch?name="+name+"&surname="+surname);
         QNetworkRequest request;
         request.setUrl(API_ENDPOINT);
 
@@ -165,10 +171,20 @@ void Modifica::on_button_modifica_clicked()
     QJsonDocument doc(json);
     QByteArray data = doc.toJson();
 
+    /*
+    QString name, surname = "";
+    QString myurl = "http://localhost:8081/update?old_name="+name+"&old_surname"+surname;
+    */
+
     QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
-    const QUrl url(QStringLiteral("http://localhost:8081/update"));
+    //const QUrl API_ENDPOINT("http://localhost:8081/simplesearchCAMBIALO?name="+name+"&surname="+surname);
+    const QUrl url(QStringLiteral("http://localhost:8081/update?old_name=%1&old_surname=%2").arg(old_name, old_surname));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    //const QUrl API_ENDPOINT("");
+    //QNetworkRequest request;
+    //request.setUrl(API_ENDPOINT);
 
     QNetworkReply *reply = mgr->post(request, data);
 
