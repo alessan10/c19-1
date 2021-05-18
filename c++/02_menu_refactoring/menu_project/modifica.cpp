@@ -126,8 +126,8 @@ void Modifica::on_button_modifica_clicked()
     p.getName();
     p.getSurname();
 
-    qDebug() << "New name: " << p.getName();
-    qDebug() << "New surname: " << p.getSurname();
+    //qDebug() << "New name: " << p.getName();
+    //qDebug() << "New surname: " << p.getSurname();
 
     QString new_age = ui->new_eta->text();
     p.setAge(new_age);
@@ -148,9 +148,11 @@ void Modifica::on_button_modifica_clicked()
     p.setCovid(new_covid);
 
     QJsonObject json;
+    //json["id"] = QString(p.getId());
     json["name"] = QString(p.getName());
     json["surname"] = QString(p.getSurname());
     json["age"] =QString(p.getAge());
+    //json["chatid"] = QString(p.getChatId());
     json["covid"] =QString(p.getCovid());
     json["year"] =QString(p.date.getYear());
     json["month"] = QString(p.date.getMonth());
@@ -158,7 +160,7 @@ void Modifica::on_button_modifica_clicked()
     json["weekday"] =QString(p.date.getDayOfWeek());
     json["country"] =QString(p.getCountry());
 
-    qDebug() << json;
+    qDebug() << "new data: " << json;
 
     QJsonDocument doc(json);
     QByteArray data = doc.toJson();

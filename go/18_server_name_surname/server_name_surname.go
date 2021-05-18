@@ -247,11 +247,11 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		result, err := session.Run(query, map[string]interface{}{
 			"old_name":    req.URL.Query()["old_name"][0],
 			"old_surname": req.URL.Query()["old_surname"][0],
-			//"id":    person.Id,
+			//"id":          person.Id,
 			"name":    person.Name,
 			"surname": person.Surname,
 			"age":     person.Age,
-			//"chatid":  person.Chatid,
+			//"chatid":      person.Chatid,
 			"covid":   person.Covid,
 			"year":    person.Year,
 			"month":   person.Month,

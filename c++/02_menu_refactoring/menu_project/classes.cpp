@@ -114,8 +114,8 @@ QString Patient::toR()
             "\"" + chatId + "\"," +
             "\"" + covid + "\"," +
             "\"" + age + "\"," +
-            "\"" + surname + "\"";
-            "\"" + name + "\"";
+            "\"" + surname + "\",";
+            "\"" + name + "\",";
             "\"" + id + "\"";
     return str;
 }
