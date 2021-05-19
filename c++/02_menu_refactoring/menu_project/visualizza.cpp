@@ -156,7 +156,6 @@ void Visualizza::dataReadFinished()
        //QString stringa = "\"Country\",\"Weekday\",\"Giorno\",\"Mese\",\"Anno\",\"Covid\",\"ChatId\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
        out << stringa <<"\n";
 
-
        for (i = patients_list.begin(); i != patients_list.end(); ++i){
            qDebug() << "toR: " << (*i)->toR() << " toR end";
            out << (*i)->toR() << "\n";

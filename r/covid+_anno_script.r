@@ -1,6 +1,6 @@
 data = read.csv("C:/Users/alexm/Downloads/out.csv") #leggo il file
 data.ordered = data[order(match(data$Mese, month.abb)),] #ordino in base ai mesi
-data.positive = subset(data.ordered, Covid == "positivo", select = c(Country, Age, Anno, Giorno, Mese, ChatId, Covid, Nome)) #creo un subset con solo i positivi
+data.positive = subset(data.ordered, Covid == "positivo", select = c(Id, Nome, Cognome, Age, ChatId, Covid, Anno, Mese, Giorno, Weekday, Country)) #creo un subset con solo i positivi
 
 data.positive.year20 = with(data.positive, data.positive[(Anno == "2020"),]) #prendo solo i positivi del 2020
 month.vector.20 = data.positive.year20$Mese #estraggo i mesi del 2020 in un vettore
