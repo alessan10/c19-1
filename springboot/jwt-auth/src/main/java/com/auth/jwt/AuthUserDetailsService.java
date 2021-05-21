@@ -1,4 +1,4 @@
-package com.auth.jwt.service;
+package com.auth.jwt;
 
 import com.auth.jwt.entity.User;
 import com.auth.jwt.entity.UserRepository;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserService implements UserDetailsService {
+public class AuthUserDetailsService implements UserDetailsService {
     @Autowired
     UserRepository repository;
 
