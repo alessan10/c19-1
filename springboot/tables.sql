@@ -1,8 +1,8 @@
 CREATE TABLE user (
 		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(50) NOT NULL UNIQUE,
+    	email VARCHAR(50) NOT NULL UNIQUE,
 		name VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    	password VARCHAR(255) NOT NULL
     )ENGINE = 'InnoDB';
 
 CREATE TABLE user_roles (
@@ -10,7 +10,5 @@ CREATE TABLE user_roles (
 		roles varchar(255),		
 
 		FOREIGN KEY(user_id) 
-				REFERENCES user(id) 
-				ON UPDATE CASCADE 
-				ON DELETE CASCADE			
+				REFERENCES user(id) ON DELETE CASCADE ON UPDATE	CASCADE				
 		)ENGINE = 'InnoDB';

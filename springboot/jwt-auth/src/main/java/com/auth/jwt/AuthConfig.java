@@ -42,12 +42,14 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/login/**").permitAll() // Consenti a tutti l'accesso all'endpoint /user/login
                 .antMatchers("/user/all").hasAuthority("ADMIN") // Consenti soltanto agli utenti con ruolo ADMIN l'accesso a /user/all
                 .antMatchers(HttpMethod.DELETE, "/user/{id}").hasAuthority("ADMIN") // Consenti soltanto agli utenti con ruolo ADMIN la rimozione degli utenti
+                /*
                 .antMatchers(HttpMethod.GET, "/product/*").permitAll()  // Consenti a tutti l'operazione di GET all'endpoint /product
                 .antMatchers(HttpMethod.POST, "/product/add").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/product/{id}").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/product/{id}").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/order/{id}").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/order/all").hasAuthority("ADMIN")
+                */
                 .anyRequest().authenticated() // Tutte le altre richieste devono essere autenticate
                 .and()
                 .csrf().disable(); // Nel caso di REST API stateless, la protezione Cross-Site-Request-Forgery non serve
