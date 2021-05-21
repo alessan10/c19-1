@@ -38,6 +38,19 @@ private:
     QByteArray * mDataBuffer;
     Worker *worker;
     Patient *patient;
+    enum Columns{
+        ID,
+        Nome,
+        Cognome,
+        Eta,
+        ChatID,
+        Covid,
+        Anno,
+        Mese,
+        Giorno,
+        Giorno_della_settimana,
+        Paese
+    };
 };
 
 #endif // RICERCA_H

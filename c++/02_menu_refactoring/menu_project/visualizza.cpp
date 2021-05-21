@@ -12,6 +12,8 @@
 #include <iostream>
 #include <QFile>
 
+#include <QTabWidget>
+
 using namespace std;
 
 Visualizza::Visualizza(QWidget *parent) :
@@ -22,6 +24,11 @@ Visualizza::Visualizza(QWidget *parent) :
     mDataBuffer(new QByteArray)
 {
     ui->setupUi(this);
+
+    QStringList headers;
+    headers << "ID" << "Nome" << "Cognome" << "Età" << "ChatID" << "Covid" << "Anno" << "Mese" << "Giorno" << "Giorno della settimana" << "Paese";
+    ui->table->setColumnCount(11);
+    ui->table->setHorizontalHeaderLabels(headers);
 }
 
 Visualizza::~Visualizza()
@@ -125,7 +132,7 @@ void Visualizza::dataReadFinished()
            qDebug() << "My string: \n" << stringa << "\n End my string \n";
            //
 
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
+          /* ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
                                    "Id: " + p->getId() +
                                    " - Nome: " + p->getName() +
                                    " - Cognome: " + p->getSurname() +
@@ -137,7 +144,36 @@ void Visualizza::dataReadFinished()
                                    );
 
            QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
-           qDebug() << c0;
+           qDebug() << c0;*/
+
+           ui->table->insertRow(ui->table->rowCount());
+           int row = ui->table->rowCount() -1;
+
+           //per renderlo non modificabile -non riesco a farlo funzionare-
+           /*QTableWidgetItem *itemName = new QTableWidgetItem();
+           itemName->setFlags(itemName->flags() ^ Qt::ItemIsEditable);*/
+
+           ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
+
+           ui->table->setItem(row, Nome, new QTableWidgetItem(p->getName()));
+
+           ui->table->setItem(row, Cognome, new QTableWidgetItem(p->getSurname()));
+
+           ui->table->setItem(row, Eta, new QTableWidgetItem(p->getAge()));
+
+           ui->table->setItem(row, ChatID, new QTableWidgetItem(p->getChatId()));
+
+           ui->table->setItem(row, Covid, new QTableWidgetItem(p->getCovid()));
+
+           ui->table->setItem(row, Anno, new QTableWidgetItem(p->date.getYear()));
+
+           ui->table->setItem(row, Mese, new QTableWidgetItem(p->date.getMonth()));
+
+           ui->table->setItem(row, Giorno, new QTableWidgetItem(p->date.getDay()));
+
+           ui->table->setItem(row, Giorno_della_settimana, new QTableWidgetItem(p->date.getDayOfWeek()));
+
+           ui->table->setItem(row, Paese, new QTableWidgetItem(p->getCountry()));
 
        }
        delete p;

@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QUrlQuery>
 #include <QMessageBox>
+#include <QTabWidget>
 
 Ricerca::Ricerca(Worker &worker, QWidget *parent) :
     QDialog(parent),
@@ -21,6 +22,10 @@ Ricerca::Ricerca(Worker &worker, QWidget *parent) :
 {
     this->worker = &worker;
     ui->setupUi(this);
+    QStringList headers;
+    headers << "ID" << "Nome" << "Cognome" << "Età" << "ChatID" << "Covid" << "Anno" << "Mese" << "Giorno" << "Giorno della settimana" << "Paese";
+    ui->table->setColumnCount(11);
+    ui->table->setHorizontalHeaderLabels(headers);
 }
 
 Ricerca::~Ricerca()
@@ -40,7 +45,7 @@ void Ricerca::on_pushButton_clicked()
 
 void Ricerca::on_pushButton_clicked()
 {
-    ui->listWidget->clear();
+    ui->table->clear();
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
 
@@ -115,6 +120,7 @@ void Ricerca::dataReadFinished()
            QString country = object["country"].toString();
 
 
+           /*
            ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
                                    "Id: " + id +
                                    " - Nome: " + name +
@@ -126,12 +132,39 @@ void Ricerca::dataReadFinished()
                                    " - Country:  "+ country
                                    );
 
-           //ui->label->("["+ QString::number(i+1) + "] " + name + chatid + covid );
-           //ui->label_2->setText("Dati ricevuti");
-           //ui->tableView->(name +  chatid + covid);
-            //rimetti qtableview
+
            QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
-           qDebug() << c0;
+           qDebug() << c0;*/
+
+           ui->table->insertRow(ui->table->rowCount());
+           int row = ui->table->rowCount() -1;
+
+           //per renderlo non modificabile -non riesco a farlo funzionare-
+           /*QTableWidgetItem *itemName = new QTableWidgetItem();
+           itemName->setFlags(itemName->flags() ^ Qt::ItemIsEditable);*/
+
+           ui->table->setItem(row, ID, new QTableWidgetItem(id));
+
+           ui->table->setItem(row, Nome, new QTableWidgetItem(name));
+
+           ui->table->setItem(row, Cognome, new QTableWidgetItem(surname));
+
+           ui->table->setItem(row, Eta, new QTableWidgetItem(age));
+
+           ui->table->setItem(row, ChatID, new QTableWidgetItem(chatid));
+
+           ui->table->setItem(row, Covid, new QTableWidgetItem(covid));
+
+           ui->table->setItem(row, Anno, new QTableWidgetItem(year));
+
+           ui->table->setItem(row, Mese, new QTableWidgetItem(month));
+
+           ui->table->setItem(row, Giorno, new QTableWidgetItem(day));
+
+           ui->table->setItem(row, Giorno_della_settimana, new QTableWidgetItem(weekday));
+
+           ui->table->setItem(row, Paese, new QTableWidgetItem(country));
+
 
        }
     }

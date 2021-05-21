@@ -32,6 +32,21 @@ private:
     QNetworkAccessManager * mNetManager;
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
+
+    enum Columns{
+        ID,
+        Nome,
+        Cognome,
+        Eta,
+        ChatID,
+        Covid,
+        Anno,
+        Mese,
+        Giorno,
+        Giorno_della_settimana,
+        Paese
+    };
+
 };
 
 #endif // VISUALIZZA_H
