@@ -41,12 +41,20 @@
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Per visualizzare il contenuto del database e generare il file delle statistiche per R, clicca su Visualizza</string>
+      <string>Per visualizzare il contenuto del database, clicca su &quot;Visualizza&quot;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>

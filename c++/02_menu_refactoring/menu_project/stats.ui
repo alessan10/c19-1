@@ -69,16 +69,19 @@
         </font>
        </property>
        <property name="text">
-        <string>Per creare le statistiche in R devi generare un file .csv cliccando sul bottone in basso!</string>
+        <string>Per creare le statistiche in R devi prima generare un file in fomrato .csv cliccando sul bottone &quot;GENERA&quot; in basso!</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="generateButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>

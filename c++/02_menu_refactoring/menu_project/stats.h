@@ -2,9 +2,16 @@
 #define STATS_H
 
 #include <QDialog>
+#include <QWidget>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
-namespace Ui {
-class Stats;
+#include "classes.h"
+
+namespace Ui
+{
+    class Stats;
 }
 
 class Stats : public QDialog
@@ -16,10 +23,16 @@ public:
     ~Stats();
 
 private slots:
-    void on_positive_weekday_clicked();
+    void dataReadyRead();
+    void dataReadFinished();
+
+    void on_generateButton_clicked();
 
 private:
     Ui::Stats *ui;
+    QNetworkAccessManager * mNetManager;
+    QNetworkReply * mNetReply;
+    QByteArray * mDataBuffer;
 };
 
 #endif // STATS_H

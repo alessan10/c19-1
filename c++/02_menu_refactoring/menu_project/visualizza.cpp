@@ -142,6 +142,7 @@ void Visualizza::dataReadFinished()
        }
        delete p;
 
+       /* MOVED IN stats.cpp
        QList<Patient*>::iterator i;
        for (i = patients_list.begin(); i != patients_list.end(); ++i){
             (*i)->toString();
@@ -160,7 +161,7 @@ void Visualizza::dataReadFinished()
            qDebug() << "toR: " << (*i)->toR() << " toR end";
            out << (*i)->toR() << "\n";
        }
-       file.close();
+       file.close();*/
     }   
 }
 // \"""\",
