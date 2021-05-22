@@ -28,6 +28,9 @@ private slots:
 
     void on_generateButton_clicked();
 
+
+    void on_positive_country_clicked();
+
 private:
     Ui::Stats *ui;
     QNetworkAccessManager * mNetManager;

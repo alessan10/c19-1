@@ -12,6 +12,7 @@
 #include <iostream>
 #include <QFile>
 #include <QMessageBox>
+#include <QPixmap>
 using namespace std;
 
 Stats::Stats(QWidget *parent) :
@@ -136,3 +137,9 @@ void Stats::dataReadFinished()
 }
 // \"""\",
 // "\"" << "\"," <<
+
+void Stats::on_positive_country_clicked()
+{
+    QPixmap pix("C:/Users/alexm/Downloads/countryPLOT.jpeg");
+    ui->imageLabel->setPixmap(pix);
+}

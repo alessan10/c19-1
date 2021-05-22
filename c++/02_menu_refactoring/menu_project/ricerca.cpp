@@ -43,7 +43,7 @@ void Ricerca::on_pushButton_clicked()
     connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
 }*/
 
-void Ricerca::on_pushButton_clicked()
+void Ricerca::on_searchButton_clicked()
 {
     ui->table->clear();
     QString name = ui->nome->text();
@@ -75,9 +75,11 @@ void Ricerca::dataReadyRead()
 
 void Ricerca::dataReadFinished()
 {
-    if( mNetReply->error())
+    if( mNetReply->error() || mDataBuffer->isEmpty())
     {
         qDebug() << "Error : " << mNetReply->errorString();
+        QMessageBox::warning(this, "Attenzione", "Non è stato trovato alcun risultato.", QMessageBox::Ok);
+
     }
     else
     {
@@ -170,7 +172,7 @@ void Ricerca::dataReadFinished()
     }
 }
 
-void Ricerca::on_button_elimina_clicked()
+void Ricerca::on_deleteButton_clicked()
 {
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
@@ -211,3 +213,4 @@ void Ricerca::on_button_elimina_clicked()
     //connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
     //connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
 }
+

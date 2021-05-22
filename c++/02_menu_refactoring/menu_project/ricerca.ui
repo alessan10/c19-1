@@ -79,7 +79,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="searchButton">
      <property name="font">
       <font>
        <pointsize>14</pointsize>
@@ -156,7 +156,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="button_elimina">
+    <widget class="QPushButton" name="deleteButton">
      <property name="font">
       <font>
        <pointsize>14</pointsize>

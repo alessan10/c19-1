@@ -25,11 +25,10 @@ public:
 
 
 private slots:
-    void on_pushButton_clicked();
+    void on_searchButton_clicked();
     void dataReadyRead();
-    void dataReadFinished();
-
-    void on_button_elimina_clicked();
+    void dataReadFinished();   
+    void on_deleteButton_clicked();
 
 private:
     Ui::Ricerca *ui;
