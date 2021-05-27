@@ -120,8 +120,9 @@ void Stats::dataReadFinished()
            QMessageBox::information(this, "Attenzione", "Il file è stato creato correttamente!",
                                     QMessageBox::Ok);
            QTextStream out(&file);
-           QString stringa = "\"Country\",\"Weekday\",\"Anno\",\"Mese\",\"Giorno\",\"ChatId\",\"Covid\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
+           //stringa buonaQString stringa = "\"Country\",\"Weekday\",\"Anno\",\"Mese\",\"Giorno\",\"ChatId\",\"Covid\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
            //QString stringa = "\"Country\",\"Weekday\",\"Giorno\",\"Mese\",\"Anno\",\"Covid\",\"ChatId\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
+           QString stringa = "\"Id\",\"Nome\",\"Cognome\",\"Age\",\"ChatId\",\"Covid\",\"Anno\",\"Mese\",\"Giorno\",\"Weekday\",\"Country\"";
            out << stringa <<"\n";
 
            for (i = patients_list.begin(); i != patients_list.end(); ++i){

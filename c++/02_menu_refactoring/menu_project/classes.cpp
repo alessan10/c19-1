@@ -102,7 +102,7 @@ void Patient::toString()
     qDebug() << "Country: " << this->country;
 
 }
-
+/*funzione buona
 QString Patient::toR()
 {
     QString str =
@@ -118,18 +118,22 @@ QString Patient::toR()
             "\"" + name + "\","
             "\"" + id + "\"";
     return str;
-}
-/*int main(){
-    Date d = Date("23", "April", "2021", "Wed");
-
-  d.setDay("45");
-    d.toString();
-    Person *p = new Person("Andrea", "Calabretta");
-    p->printName();
-    delete p;
-
-    Patient *cp = new Patient("Caio", "Mario","negativo", "-", "23", "Aprile", "2021", "Wed");
-    cp->toString();
-    delete cp;
 }*/
+
+QString Patient::toR()
+{
+    QString str =
+            "\"" + id + "\"," +
+            "\"" + name + "\"," +
+            "\"" + surname + "\"," +
+            "\"" + age + "\"," +
+            "\"" + chatId + "\"," +
+            "\"" + covid + "\"," +
+            "\"" + date.getYear() + "\"," +
+            "\"" + date.getMonth() + "\"," +
+            "\"" + date.getDay() + "\"," +
+            "\"" + date.getDayOfWeek() + "\"," +
+            "\"" + country + "\"";
+    return str;
+}
 
