@@ -62,7 +62,7 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 		fmt.Println("[ ENTRYPOINT ] : SEARCH PERSON WITHOUT RELATIONS ")
 		defer session.Close()
 
-		log.Println("ecco il body SEARCH:", req.Body)
+		//log.Println("ecco il body SEARCH:", req.Body)
 
 		query := `MATCH (p:Patient) 
 						WHERE p.name = $name AND p.surname = $surname
@@ -131,7 +131,8 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 }
 
 func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, req *http.Request) {
+
+	res := func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		sessionConfig := neo4j.SessionConfig{AccessMode: neo4j.AccessModeRead}
@@ -158,6 +159,8 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("result :", result)
 
 		var patientResults []PatientResult
+		/*patientResults = getResult(result, patientResults)
+		fmt.Println("a: ", patientResults)*/
 
 		for result.Next() {
 			record := result.Record()
@@ -205,10 +208,11 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			log.Println("error writing search response:", err)
 		}
 	}
+	return res
 }
 
 func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, req *http.Request) {
+	res := func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		sessionConfig := neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite}
@@ -314,8 +318,10 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			log.Println("error writing search response:", err)
 		}
 	}
+	return res
 }
 
+//WHAT TO DO WITH HEALED?
 func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -394,7 +400,7 @@ func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 }
 
 func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, req *http.Request) {
+	res := func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		sessionConfig := neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite}
@@ -604,10 +610,11 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			log.Println("error writing search response:", err5)
 		}
 	}
+	return res
 }
 
 func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, req *http.Request) {
+	res := func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
@@ -679,10 +686,11 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 			log.Println("error writing search response:", err)
 		}
 	}
+	return res
 }
 
 func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, req *http.Request) {
+	res := func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		sessionConfig := neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite}
@@ -709,6 +717,7 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("result :", result)
 
 	}
+	return res
 }
 
 func main() {
@@ -722,8 +731,7 @@ func main() {
 	defer unsafeClose(driver)
 
 	serveMux := http.NewServeMux()
-	//serveMux.HandleFunc("/", defaultHandler)
-	//serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database)) //GET di prova, inutile
+
 	serveMux.HandleFunc("/update", updateHandlerFunc(driver, configuration.Database))             // UPDATE --c19positive
 	serveMux.HandleFunc("/healed", healedHandlerFunc(driver, configuration.Database))             // DELETE --c19healed
 	serveMux.HandleFunc("/add", addHandlerFunc(driver, configuration.Database))                   // ADD
@@ -738,7 +746,7 @@ func main() {
 		port = "8081"
 	}
 	panic(http.ListenAndServe(":"+port, serveMux))
-	//panic(http.ListenAndServe(":"+port, httpgzip.NewHandler(serveMux)))
+
 }
 
 func parseConfiguration() *Neo4jConfiguration {
@@ -764,9 +772,46 @@ func unsafeClose(closeable io.Closer) {
 	}
 }
 
+//to add padding in ID when created by the client
 func PadLeft(str, pad string, lenght int) string {
 	for len(str) < lenght {
 		str = pad + str
 	}
 	return str[0:lenght]
 }
+
+/* NOT WORKING
+func getResult(r neo4j.Result, s []PatientResult) (res []PatientResult) {
+	for r.Next() {
+		record := r.Record()
+		record.GetByIndex(0)
+		id, _ := record.Get("id")
+		name, _ := record.Get("name")
+		surname, _ := record.Get("surname")
+		age, _ := record.Get("age")
+		chatid, _ := record.Get("chatid")
+		covid, _ := record.Get("covid")
+		year, _ := record.Get("year")
+		month, _ := record.Get("month")
+		day, _ := record.Get("day")
+		weekday, _ := record.Get("weekday")
+		country, _ := record.Get("country")
+
+		s = append(s, PatientResult{Patient{
+			Id:      id.(string),
+			Name:    name.(string),
+			Surname: surname.(string),
+			Age:     age.(string),
+			Chatid:  chatid.(string),
+			Covid:   covid.(string),
+			Year:    year.(string),
+			Month:   month.(string),
+			Day:     day.(string),
+			WeekDay: weekday.(string),
+			Country: country.(string),
+		}})
+
+	}
+	return res
+}
+*/
