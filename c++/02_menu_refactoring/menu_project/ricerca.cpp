@@ -22,6 +22,7 @@ Ricerca::Ricerca(Worker &worker, QWidget *parent) :
 {
     this->worker = &worker;
     ui->setupUi(this);
+
     QStringList headers;
     headers << "ID" << "Nome" << "Cognome" << "Età" << "ChatID" << "Covid" << "Anno" << "Mese" << "Giorno" << "Giorno della settimana" << "Paese";
     ui->table->setColumnCount(11);
@@ -45,7 +46,11 @@ void Ricerca::on_pushButton_clicked()
 
 void Ricerca::on_searchButton_clicked()
 {
-    ui->table->clear();
+    QStringList headers;
+    headers << "ID" << "Nome" << "Cognome" << "Età" << "ChatID" << "Covid" << "Anno" << "Mese" << "Giorno" << "Giorno della settimana" << "Paese";
+    ui->table->setColumnCount(11);
+    ui->table->setHorizontalHeaderLabels(headers);
+
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
 
