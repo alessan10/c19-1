@@ -10,7 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     classes.cpp \
-    date.cpp \
     inserisci.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -22,7 +21,6 @@ SOURCES += \
 
 HEADERS += \
     classes.h \
-    date.h \
     inserisci.h \
     mainwindow.h \
     modifica.h \

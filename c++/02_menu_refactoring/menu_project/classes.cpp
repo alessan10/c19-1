@@ -8,7 +8,7 @@ void Date::toString(){
 }
 
 Person::~Person(){
-    qDebug() << "Distruttore Person chiamato";
+    qDebug() << "Person destructor called";
 }
 
 //Date::~Date(){}

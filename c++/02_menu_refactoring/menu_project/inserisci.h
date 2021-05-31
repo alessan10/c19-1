@@ -5,7 +5,6 @@
 #include <QAbstractButton>
 
 #include "worker.h"
-#include "date.h"
 #include "classes.h"
 
 namespace Ui
