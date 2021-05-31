@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QDate>
+#include <QJsonObject>
 
 class Date{
     private:
@@ -53,6 +54,8 @@ class Patient: public Person {
         Patient(QString i, QString n, QString s, QString a, QString chId, QString cvd, QString y, QString m, QString d, QString dow,  QString c):
             Person(i,n,s,a,c), chatId(chId), covid(cvd), date(y,m,d,dow){};
         Patient ():Person(),chatId(""),covid(""), date(){};
+        Patient(QJsonObject json);
+        QJsonObject toJson();
         ~Patient(){}
 
         void setChatId(QString chId){ chatId = chId; }

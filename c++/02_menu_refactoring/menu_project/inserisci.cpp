@@ -74,8 +74,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
         cleanUp();
 
-
-        QJsonObject jsonToPost = worker->getJsonFromPatient(p);
+        QJsonObject jsonToPost = p.toJson();
 
         delete &p;
 

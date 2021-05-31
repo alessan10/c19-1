@@ -83,39 +83,17 @@ void Modifica::dataReadFinished()
         qDebug() << mDoc.object().value("patient").toArray().size();
 
         QJsonArray array = mDoc.array();
+        Patient *p = new Patient();
 
         for ( int i = 0; i < array.size(); i++)
         {
             QJsonObject object = array.at(i).toObject().value("patient").toObject();
+            *p = Patient(object);
 
-            QString name = object["name"].toString();
-            QString surname = object["surname"].toString();
-            QString age = object["age"].toString();
-            QString covid = object["covid"].toString();
-            QString year = object["year"].toString();
-            QString month = object["month"].toString();
-            QString day = object["day"].toString();
-            QString weekday = object["weekday"].toString();
-            QString country = object["country"].toString();
-
-            //QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
-            //qDebug() << c0;
-
-            ui->new_nome->setText(name);
-            ui->new_cognome->setText(surname);
-            ui->new_eta->setText(age);
-            ui->new_paese->setText(country);
-
-            int iday = day.toInt() -1;
-            ui->new_day->setCurrentIndex(iday);
-
-            ui->new_month->setCurrentText(month);
-            ui->new_year->setCurrentText(year);
-            ui->new_weekday->setCurrentText(weekday);
-
-            ui->new_covid->setCurrentText(covid);
-
+            setUiFieldsFromPatient(p);
         }
+        delete p;
+
     }
 }
 
@@ -223,4 +201,22 @@ void Modifica::cleanUp(){
     this->ui->new_year->clear();
     this->ui->new_weekday->clear();
     this->ui->new_covid->clear();
+}
+
+void Modifica::setUiFieldsFromPatient(Patient *p)
+{
+    ui->new_nome->setText(p->getName());
+    ui->new_cognome->setText(p->getSurname());
+    ui->new_eta->setText(p->getAge());
+    ui->new_paese->setText(p->getCountry());
+
+    int iday = p->date.getDay().toInt() -1;
+    ui->new_day->setCurrentIndex(iday);
+
+    ui->new_month->setCurrentText(p->date.getMonth());
+    ui->new_year->setCurrentText(p->date.getYear());
+    ui->new_weekday->setCurrentText(p->date.getDayOfWeek());
+
+    ui->new_covid->setCurrentText(p->getCovid());
+
 }

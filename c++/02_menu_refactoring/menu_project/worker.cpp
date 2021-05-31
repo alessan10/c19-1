@@ -122,21 +122,6 @@ void Worker::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
     qInfo() << "sslErrors";
 }
 
-QJsonObject Worker::getJsonFromPatient(Patient &p)
-{
-    QJsonObject json;
-    json["id"] = QString(p.getId());
-    json["name"] = QString(p.getName());
-    json["surname"] = QString(p.getSurname());
-    json["age"] =QString(p.getAge());
-    json["chatid"] = QString(p.getChatId());
-    json["covid"] =QString(p.getCovid());
-    json["year"] =QString(p.date.getYear());
-    json["month"] = QString(p.date.getMonth());
-    json["day"] = QString(p.date.getDay());
-    json["weekday"] =QString(p.date.getDayOfWeek());
-    json["country"] =QString(p.getCountry());
 
-    return json;
-}
+
 

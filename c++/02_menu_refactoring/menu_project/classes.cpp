@@ -7,6 +7,8 @@ void Date::toString(){
     qDebug() <<  dayOfWeek << " " << day << " "<< month << " "<< year;
 }
 
+
+
 Person::~Person(){
     qDebug() << "Person destructor called";
 }
@@ -90,16 +92,46 @@ void Date::conversion(QDate & q){
 
 }
 
+Patient::Patient(QJsonObject object)
+{
+    setName( object["name"].toString());
+    setSurname ( object["surname"].toString());
+    setAge( object["age"].toString());
+    setCovid( object["covid"].toString());
+    date.setYear(object["year"].toString());
+    date.setMonth( object["month"].toString());
+    date.setDay( object["day"].toString());
+    date.setDayOfWeek( object["weekday"].toString());
+    setCountry( object["country"].toString());
+}
+
+QJsonObject  Patient::toJson()
+{
+    QJsonObject json;
+    json["id"] = QString(id);
+    json["name"] = QString(name);
+    json["surname"] = QString(surname);
+    json["age"] =QString(age);
+    json["chatid"] = QString(chatId);
+    json["covid"] =QString(covid);
+    json["year"] =QString(date.getYear());
+    json["month"] = QString(date.getMonth());
+    json["day"] = QString(date.getDay());
+    json["weekday"] =QString(date.getDayOfWeek());
+    json["country"] =QString(country);
+
+    return json;
+}
 void Patient::toString()
 {
-    qDebug() << "Id: " << this->id;
-    qDebug() << "Name: " << this->name;
-    qDebug() << "Surname: " << this->surname;
-    qDebug() << "Age: " << this->age;
-    qDebug() << "ChatId: " << this->chatId;
-    qDebug() << "Covid: " << this->covid;
-    qDebug() << "Date: " << this->date.getYear() << " " << this->date.getMonth() << " " << this->date.getDay() << " " << this->date.getDayOfWeek();
-    qDebug() << "Country: " << this->country;
+    qDebug() << "Id: " << id;
+    qDebug() << "Name: " << name;
+    qDebug() << "Surname: " << surname;
+    qDebug() << "Age: " << age;
+    qDebug() << "ChatId: " << chatId;
+    qDebug() << "Covid: " << covid;
+    qDebug() << "Date: " << date.getYear() << " " << date.getMonth() << " " << date.getDay() << " " << date.getDayOfWeek();
+    qDebug() << "Country: " << country;
 
 }
 /*funzione buona

@@ -23,6 +23,7 @@ public:
     explicit Modifica(Worker & worker, QWidget *parent = nullptr);
     ~Modifica();
     void cleanUp();
+    void setUiFieldsFromPatient(Patient *patient);
 
 private slots:
     void on_pushButton_clicked();

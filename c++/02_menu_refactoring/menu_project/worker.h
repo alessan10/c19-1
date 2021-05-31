@@ -24,7 +24,7 @@ public slots:
 
      void get(QString location);
      void post(QString location, QByteArray data);
-     QJsonObject getJsonFromPatient(const Patient &patient);
+
 
 private slots:
 
