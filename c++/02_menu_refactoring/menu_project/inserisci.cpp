@@ -75,7 +75,9 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         cleanUp();
 
 
-        QJsonObject jsonToPost = getJsonFromPatient(p);
+        QJsonObject jsonToPost = worker->getJsonFromPatient(p);
+
+        delete &p;
 
         qDebug() << jsonToPost;
         QJsonDocument doc(jsonToPost);
@@ -116,20 +118,3 @@ void Inserisci::cleanUp(){
     this->ui->eta->setText("");
 }
 
-QJsonObject Inserisci::getJsonFromPatient(Patient p){
-    QJsonObject json;
-    json["id"] = QString(p.getId());
-    json["name"] = QString(p.getName());
-    json["surname"] = QString(p.getSurname());
-    json["age"] =QString(p.getAge());
-    json["chatid"] = QString(p.getChatId());
-    json["covid"] =QString(p.getCovid());
-    json["year"] =QString(p.date.getYear());
-    json["month"] = QString(p.date.getMonth());
-    json["day"] = QString(p.date.getDay());
-    json["weekday"] =QString(p.date.getDayOfWeek());
-    json["country"] =QString(p.getCountry());
-
-    return json;
-
-}

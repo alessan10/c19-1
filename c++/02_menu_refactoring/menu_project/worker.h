@@ -8,6 +8,8 @@
 #include <QNetworkRequest>
 #include <QAuthenticator>
 #include <QNetworkProxy>
+#include <QJsonObject>
+#include <classes.h>
 
 
 class Worker : public QObject
@@ -22,7 +24,7 @@ public slots:
 
      void get(QString location);
      void post(QString location, QByteArray data);
-
+     QJsonObject getJsonFromPatient(const Patient &patient);
 
 private slots:
 
