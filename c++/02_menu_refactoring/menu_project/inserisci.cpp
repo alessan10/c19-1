@@ -74,6 +74,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
         cleanUp();
 
+
         QJsonObject jsonToPost = getJsonFromPatient(p);
 
         qDebug() << jsonToPost;
@@ -115,7 +116,7 @@ void Inserisci::cleanUp(){
     this->ui->eta->setText("");
 }
 
-QJsonObject getJsonFromPatient(Patient &p){
+QJsonObject Inserisci::getJsonFromPatient(Patient p){
     QJsonObject json;
     json["id"] = QString(p.getId());
     json["name"] = QString(p.getName());
