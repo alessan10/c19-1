@@ -56,55 +56,28 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         QString surname = ui->cognome->text();
         surname.replace(" ",""); //rimuoviamo eventuali spazi
 
-        Patient p;
+        Patient &p = *(new Patient());
         p.setName(name);
         p.setSurname(surname);
-        //p.setFullName(name+" "+ surname);
-        //qDebug() << "Fullname" <<p.getFullName();
 
         p.setChatId("-");
-        //QString covid;
+
         ui->radio_positivo->isChecked()? p.setCovid("positivo") : p.setCovid("negativo");
 
         QDate calend = ui->calendar->selectedDate() ;
         QDate &cld = calend;
         p.date.conversion(cld);
 
-
-        //QString country = ui->paese->text();
         p.setCountry(ui->paese->text());
 
-        //QString age = ui->eta->text();
         p.setAge(ui->eta->text());
-
-        qDebug() << "Inserisci::save --> ID = " <<  p.getId();
-        qDebug() << "Inserisci::save --> NOME = " <<  p.getName();
-        qDebug() << "Inserisci::save --> COGNOME = " <<  p.getSurname();
-        qDebug() << "Inserisci::save --> Eta = " << p.getAge();
-        qDebug() << "Inserisci::save --> COVID = " << p.getCovid();
-        qDebug() << "Inserisci::save --> Anno = " << p.date.getYear();
-        qDebug() << "Inserisci::save --> Mese = " << p.date.getMonth();
-        qDebug() << "Inserisci::save --> Giorno = " << p.date.getDay();    
-        qDebug() << "Inserisci::save --> Paese = " << p.getCountry();        
 
         cleanUp();
 
-        QJsonObject json;
-        json["id"] = QString(p.getId());
-        json["name"] = QString(p.getName());
-        json["surname"] = QString(p.getSurname());
-        json["age"] =QString(p.getAge());
-        json["chatid"] = QString(p.getChatId());
-        json["covid"] =QString(p.getCovid());
-        json["year"] =QString(p.date.getYear());
-        json["month"] = QString(p.date.getMonth());
-        json["day"] = QString(p.date.getDay());
-        json["weekday"] =QString(p.date.getDayOfWeek());
-        json["country"] =QString(p.getCountry());
+        QJsonObject jsonToPost = getJsonFromPatient(p);
 
-
-        qDebug() << json;
-        QJsonDocument doc(json);
+        qDebug() << jsonToPost;
+        QJsonDocument doc(jsonToPost);
         QByteArray data = doc.toJson();
 
         QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
@@ -131,6 +104,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
             }
             reply->deleteLater();
         });
+
     }
 }
 
@@ -139,4 +113,22 @@ void Inserisci::cleanUp(){
     this->ui->cognome->setText("");
     this->ui->paese->setText("");
     this->ui->eta->setText("");
+}
+
+QJsonObject getJsonFromPatient(Patient &p){
+    QJsonObject json;
+    json["id"] = QString(p.getId());
+    json["name"] = QString(p.getName());
+    json["surname"] = QString(p.getSurname());
+    json["age"] =QString(p.getAge());
+    json["chatid"] = QString(p.getChatId());
+    json["covid"] =QString(p.getCovid());
+    json["year"] =QString(p.date.getYear());
+    json["month"] = QString(p.date.getMonth());
+    json["day"] = QString(p.date.getDay());
+    json["weekday"] =QString(p.date.getDayOfWeek());
+    json["country"] =QString(p.getCountry());
+
+    return json;
+
 }

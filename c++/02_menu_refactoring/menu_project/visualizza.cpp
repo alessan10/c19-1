@@ -119,7 +119,7 @@ void Visualizza::dataReadFinished()
            patients_list.push_back(p);
 
            //
-           QString stringa =
+           QString tmpPatient =
                    "Id: " + p->getId() +
                    " - Nome: " + p->getName() +
                    " - Cognome: " + p->getSurname() +
@@ -129,7 +129,7 @@ void Visualizza::dataReadFinished()
                    " - Data: " + p->date.getYear() + " " + p->date.getMonth() + " " + p->date.getDay() + " " + p->date.getDayOfWeek() +
                    " - Country: " + p->getCountry();
 
-           qDebug() << "My string: \n" << stringa << "\n End my string \n";
+           qDebug() << "My current Patient is: \n" << tmpPatient << "\n End current Patient \n";
            //
 
           /* ui->listWidget->addItem("["+ QString::number(i+1) + "] " +

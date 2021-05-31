@@ -87,7 +87,7 @@ void Stats::dataReadFinished()
 
            patients_list.push_back(p);
 
-           QString stringa =
+           QString tmpPatient =
                    "Id: " + p->getId() +
                    " - Nome: " + p->getName() +
                    " - Cognome: " + p->getSurname() +
@@ -97,7 +97,7 @@ void Stats::dataReadFinished()
                    " - Data: " + p->date.getYear() + " " + p->date.getMonth() + " " + p->date.getDay() + " " + p->date.getDayOfWeek() +
                    " - Country: " + p->getCountry();
 
-           qDebug() << "My string: \n" << stringa << "\n End my string \n";
+           qDebug() << "My Current Patient is: \n" << tmpPatient << "\n End current Patient \n";
 
            QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
            qDebug() << c0;

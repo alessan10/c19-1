@@ -20,6 +20,7 @@ public:
     explicit Inserisci(Worker &worker, QWidget *parent = nullptr);
     ~Inserisci();
     void cleanUp();
+    QJsonObject getJsonFromPatient(Patient &patient);
 
 private slots:
     //void on_buttonBox_clicked(QAbstractButton *button);
