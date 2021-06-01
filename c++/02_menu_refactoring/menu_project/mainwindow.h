@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-     MainWindow(Worker &worker, Patient &patient, QWidget *parent = nullptr);
+     MainWindow(Worker &worker, QWidget *parent = nullptr);
     //MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 

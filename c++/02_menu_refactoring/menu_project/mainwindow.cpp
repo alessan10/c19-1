@@ -10,9 +10,8 @@
 
 #include <QMessageBox>
 
-MainWindow::MainWindow(Worker &worker, Patient &patient, QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(Worker &worker, QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     QPixmap pix(":/images/page-GraphDatabase1.png");
@@ -45,7 +44,7 @@ void MainWindow::on_actioninserisci_triggered()
 
 void MainWindow::on_actionRicerca_triggered()
 {
-    Ricerca ricercadialog(worker);//(worker)
+    Ricerca ricercadialog(worker);
     ricercadialog.setWindowTitle("Ricerca");
     ricercadialog.setModal(true);
     ricercadialog.exec();
