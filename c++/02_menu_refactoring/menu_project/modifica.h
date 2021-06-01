@@ -24,6 +24,7 @@ public:
     ~Modifica();
     void cleanUp();
     void setUiFieldsFromPatient(Patient *patient);
+    void setPatientFromUiFields( Patient & patient);
 
 private slots:
     void on_pushButton_clicked();

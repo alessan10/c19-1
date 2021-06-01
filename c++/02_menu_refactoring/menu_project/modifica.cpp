@@ -96,70 +96,19 @@ void Modifica::dataReadFinished()
 
 void Modifica::on_button_modifica_clicked()
 {
-    Patient p;
-
-    QString new_name = ui->new_nome->text();
-    QString new_surname = ui->new_cognome->text();
-
-    p.setName(new_name);
-    p.setSurname(new_surname);
-
-    p.getName();
-    p.getSurname();
-
-    //qDebug() << "New name: " << p.getName();
-    //qDebug() << "New surname: " << p.getSurname();
-
-    QString new_age = ui->new_eta->text();
-    p.setAge(new_age);
-
-    QString new_country = ui->new_paese->text();
-    p.setCountry(new_country);
-
-    QString new_year = ui->new_year->currentText();
-    p.date.setYear(new_year);
-    QString new_month = ui->new_month->currentText();
-    p.date.setMonth(new_month);
-    QString new_day = ui->new_day->currentText();
-    p.date.setDay(new_day);
-    QString new_weekday = ui->new_weekday->currentText();
-    p.date.setDayOfWeek(new_weekday);
-
-    QString new_covid = ui->new_covid->currentText();
-    p.setCovid(new_covid);
-
-    QJsonObject json;
-    //json["id"] = QString(p.getId());
-    json["name"] = QString(p.getName());
-    json["surname"] = QString(p.getSurname());
-    json["age"] =QString(p.getAge());
-    //json["chatid"] = QString(p.getChatId());
-    json["covid"] =QString(p.getCovid());
-    json["year"] =QString(p.date.getYear());
-    json["month"] = QString(p.date.getMonth());
-    json["day"] = QString(p.date.getDay());
-    json["weekday"] =QString(p.date.getDayOfWeek());
-    json["country"] =QString(p.getCountry());
+    Patient &p = *(new Patient());
+    setPatientFromUiFields(p);
+    QJsonObject json = p.toJson();
 
     qDebug() << "new data: " << json;
 
     QJsonDocument doc(json);
     QByteArray data = doc.toJson();
 
-    /*
-    QString name, surname = "";
-    QString myurl = "http://localhost:8081/update?old_name="+name+"&old_surname"+surname;
-    */
-
     QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
-    //const QUrl API_ENDPOINT("http://localhost:8081/simplesearchCAMBIALO?name="+name+"&surname="+surname);
     const QUrl url(QStringLiteral("http://localhost:8081/update?old_name=%1&old_surname=%2").arg(old_name, old_surname));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    //const QUrl API_ENDPOINT("");
-    //QNetworkRequest request;
-    //request.setUrl(API_ENDPOINT);
 
     QNetworkReply *reply = mgr->post(request, data);
 
@@ -216,4 +165,16 @@ void Modifica::setUiFieldsFromPatient(Patient *p)
 
     ui->new_covid->setCurrentText(p->getCovid());
 
+}
+
+void Modifica::setPatientFromUiFields( Patient &p){
+    p.setName( ui->new_nome->text());
+    p.setSurname( ui->new_cognome->text());
+    p.setAge( ui->new_eta->text());
+    p.setCountry( ui->new_paese->text());
+    p.date.setYear( ui->new_year->currentText());
+    p.date.setMonth(ui->new_month->currentText());
+    p.date.setDay(ui->new_day->currentText());
+    p.date.setDayOfWeek(ui->new_weekday->currentText());
+    p.setCovid(ui->new_covid->currentText());
 }

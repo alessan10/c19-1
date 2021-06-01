@@ -9,8 +9,8 @@ class Date{
     private:
         QString day, month, year, dayOfWeek;
     public:
+        Date(){}
         Date(QString d, QString m, QString y, QString dow): day(d),month(m), year(y), dayOfWeek(dow){}
-        Date():day(""), month(""), year(""), dayOfWeek(""){}
         ~Date(){}
         void setDay(QString d){ day = d; }
         void setMonth(QString m){ month = m; }
@@ -28,8 +28,8 @@ class Person{
     protected:
         QString id, name, surname, age, country ;
     public:
+        Person(){};
         Person(QString i, QString n, QString s, QString a, QString c): id(i), name(n), surname(s), age(a), country(c){};
-        Person ():id(""), name(""), surname(""), age(""), country(""){};
         ~Person();
 
         void setId (QString i){ id = i; }
@@ -51,9 +51,9 @@ class Patient: public Person {
         QString covid;
     public:
         Date date;
+        Patient(){};
         Patient(QString i, QString n, QString s, QString a, QString chId, QString cvd, QString y, QString m, QString d, QString dow,  QString c):
             Person(i,n,s,a,c), chatId(chId), covid(cvd), date(y,m,d,dow){};
-        Patient ():Person(),chatId(""),covid(""), date(){};
         Patient(QJsonObject json);
 
         ~Patient(){}
