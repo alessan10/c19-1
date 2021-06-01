@@ -55,7 +55,7 @@ class Patient: public Person {
             Person(i,n,s,a,c), chatId(chId), covid(cvd), date(y,m,d,dow){};
         Patient ():Person(),chatId(""),covid(""), date(){};
         Patient(QJsonObject json);
-        QJsonObject toJson();
+
         ~Patient(){}
 
         void setChatId(QString chId){ chatId = chId; }
@@ -65,6 +65,7 @@ class Patient: public Person {
         QString getCovid(){ return covid; }
 
         void toString();
+        QJsonObject toJson();
         QString toR();
 };
 

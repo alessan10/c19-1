@@ -45,40 +45,40 @@ void Date::conversion(QDate & q){
     switch (q.month()) {
     case 1:
         this->month = "Jen";
-    break;
+        break;
     case 2:
         this->month = "Feb";
-    break;
+        break;
     case 3:
         this->month = "Mar";
-    break;
+        break;
     case 4:
         this->month = "Apr";
-    break;
+        break;
     case 5:
         this->month = "May";
-    break;
+        break;
     case 6:
         this->month = "Jun";
-    break;
+        break;
     case 7:
         this->month = "Jul";
-    break;
+        break;
     case 8:
         this->month = "Aug";
-    break;
+        break;
     case 9:
         this->month = "Sep";
-    break;
+        break;
     case 10:
         this->month = "Oct";
-    break;
+        break;
     case 11:
         this->month = "Nov";
-    break;
+        break;
     case 12:
         this->month = "Dec";
-    break;
+        break;
     }
 
     this->year = QString::number(q.year());

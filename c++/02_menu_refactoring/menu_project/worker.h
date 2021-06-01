@@ -9,7 +9,6 @@
 #include <QAuthenticator>
 #include <QNetworkProxy>
 #include <QJsonObject>
-#include <classes.h>
 
 
 class Worker : public QObject

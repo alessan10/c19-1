@@ -81,17 +81,14 @@ void Modifica::dataReadFinished()
         mDoc = QJsonDocument::fromJson(*mDataBuffer);
 
         qDebug() << mDoc.object().value("patient").toArray().size();
-
         QJsonArray array = mDoc.array();
         Patient *p = new Patient();
 
-        for ( int i = 0; i < array.size(); i++)
-        {
-            QJsonObject object = array.at(i).toObject().value("patient").toObject();
-            *p = Patient(object);
+        QJsonObject jsonPatient = array.at(0).toObject().value("patient").toObject();
+        *p = Patient(jsonPatient);
 
-            setUiFieldsFromPatient(p);
-        }
+        setUiFieldsFromPatient(p);
+
         delete p;
 
     }
