@@ -12,14 +12,14 @@ namespace Ui
 class Inserisci;
 }
 
-class Inserisci : public QDialog
+class Inserisci : public QDialog, private GuiUtility
 {
     Q_OBJECT
 
 public:
     explicit Inserisci(Worker &worker, QWidget *parent = nullptr);
     ~Inserisci();
-    void cleanUp();
+    void cleanUp() override;
 
 private slots:
     //void on_buttonBox_clicked(QAbstractButton *button);

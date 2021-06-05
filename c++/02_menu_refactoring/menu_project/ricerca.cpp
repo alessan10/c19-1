@@ -17,8 +17,7 @@ Ricerca::Ricerca(Worker &worker, QWidget *parent) :
     ui(new Ui::Ricerca),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
-    mDataBuffer(new QByteArray),
-    worker(nullptr)
+    mDataBuffer(new QByteArray)
 {
     this->worker = &worker;
     ui->setupUi(this);
@@ -33,16 +32,7 @@ Ricerca::~Ricerca()
 {
     delete ui;
 }
-/*
-void Ricerca::on_pushButton_clicked()
-{
-    //QString name = "Kian";
-    //QString surname = "Kemmer";
-    worker->get("http://localhost:8081/search?name=Kian%20Kemmer");
-    //worker.get("http://localhost:8081/search?name="+name+"%20"+surname);
-    connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
-    connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
-}*/
+
 
 void Ricerca::on_searchButton_clicked()
 {
@@ -50,6 +40,7 @@ void Ricerca::on_searchButton_clicked()
     headers << "ID" << "Nome" << "Cognome" << "Età" << "ChatID" << "Covid" << "Anno" << "Mese" << "Giorno" << "Giorno della settimana" << "Paese";
     ui->table->setColumnCount(11);
     ui->table->setHorizontalHeaderLabels(headers);
+
 
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
@@ -61,6 +52,12 @@ void Ricerca::on_searchButton_clicked()
     }
     else
     {
+        cleanUp();
+        worker = new Worker();
+        mNetReply= nullptr;
+        mDataBuffer = new QByteArray();
+        mNetManager = new QNetworkAccessManager();
+
         //Initialize our API data
         const QUrl API_ENDPOINT("http://localhost:8081/search?name="+name+"&surname="+surname);
         QNetworkRequest request;
@@ -91,89 +88,33 @@ void Ricerca::dataReadFinished()
        qDebug() << "Data fetch finished : " << QString(*mDataBuffer);
 
        //Turn the data into a json document
-       //QJsonDocument doc = QJsonDocument::fromJson(*mDataBuffer);
 
-       QJsonDocument mDoc;
-       mDoc = QJsonDocument::fromJson(*mDataBuffer);
+       QJsonDocument * mDoc = new QJsonDocument() ;
+       *mDoc = QJsonDocument::fromJson(*mDataBuffer);
 
-       qDebug() << mDoc.object().value("patient").toArray().size();
-
-       /*
-       //What if you get an object from the server
-       QJsonDocument objectDoc = QJsonDocument::fromJson(*mDataBuffer);
-       QJsonObject obObject = objectDoc.toVariant().toJsonObject();
-       */
+       qDebug() << mDoc->object().value("patient").toArray().size();
 
        //Turn document into json array
 
-       QJsonArray array = mDoc.array();
+       QJsonArray * array = new QJsonArray();
+       * array = mDoc->array();
 
-       for ( int i = 0; i < array.size(); i++)
+       //for each patient print a row in the table with patient's data
+       for ( int i = 0; i < array->size(); i++)
        {
-           //QJsonObject object = array.at(i).toObject();
-           //QJsonObject object1 = object["patient"].toObject();
-
-           QJsonObject object = array.at(i).toObject().value("patient").toObject();
-           QString id = object["id"].toString();
-           QString name = object["name"].toString();
-           QString surname = object["surname"].toString();
-           QString age = object["age"].toString();
-           QString chatid = object["chatid"].toString();
-           QString covid = object["covid"].toString();
-           QString year = object["year"].toString();
-           QString month = object["month"].toString();
-           QString day = object["day"].toString();
-           QString weekday = object["weekday"].toString();
-           QString country = object["country"].toString();
-
-
-           /*
-           ui->listWidget->addItem("["+ QString::number(i+1) + "] " +
-                                   "Id: " + id +
-                                   " - Nome: " + name +
-                                   " - Cognome: " + surname +
-                                   " - Age: " + age +
-                                   " - ChatID: "  + chatid +
-                                   " - Covid: " + covid +
-                                   " - Data: " + year + " " + month + " " + day + " " + weekday +
-                                   " - Country:  "+ country
-                                   );
-
-
-           QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
-           qDebug() << c0;*/
-
-           ui->table->insertRow(ui->table->rowCount());
-           int row = ui->table->rowCount() -1;
-
-           //per renderlo non modificabile -non riesco a farlo funzionare-
-           /*QTableWidgetItem *itemName = new QTableWidgetItem();
-           itemName->setFlags(itemName->flags() ^ Qt::ItemIsEditable);*/
-
-           ui->table->setItem(row, ID, new QTableWidgetItem(id));
-
-           ui->table->setItem(row, Nome, new QTableWidgetItem(name));
-
-           ui->table->setItem(row, Cognome, new QTableWidgetItem(surname));
-
-           ui->table->setItem(row, Eta, new QTableWidgetItem(age));
-
-           ui->table->setItem(row, ChatID, new QTableWidgetItem(chatid));
-
-           ui->table->setItem(row, Covid, new QTableWidgetItem(covid));
-
-           ui->table->setItem(row, Anno, new QTableWidgetItem(year));
-
-           ui->table->setItem(row, Mese, new QTableWidgetItem(month));
-
-           ui->table->setItem(row, Giorno, new QTableWidgetItem(day));
-
-           ui->table->setItem(row, Giorno_della_settimana, new QTableWidgetItem(weekday));
-
-           ui->table->setItem(row, Paese, new QTableWidgetItem(country));
-
-
+           QJsonObject jsonPatient = array->at(i).toObject().value("patient").toObject();
+           Patient p  =  Patient(jsonPatient);
+           ui->table->insertRow(i);
+           patientToTable(&p, i);
        }
+
+       delete mDoc;
+       delete array;
+       delete mNetReply;
+       delete mNetManager;
+       delete mDataBuffer;
+       delete worker;
+
     }
 }
 
@@ -200,11 +141,6 @@ void Ricerca::on_deleteButton_clicked()
         QMessageBox::information(this,"Informazione",
                                  QString("L'utente di nome %1 %2 è stato eliminato correttamente").arg(name).arg(surname),
                                  QMessageBox::Ok);
-
-        /*if ( ret == QMessageBox::Ok)
-        {
-            qDebug() << "User clicked on OK";
-        }*/
     }
     else
     {
@@ -213,9 +149,26 @@ void Ricerca::on_deleteButton_clicked()
                              QMessageBox::Ok);
     }
 
+}
 
+void Ricerca::cleanUp(){
+    int rowsTot = ui->table->rowCount();
 
-    //connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
-    //connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::dataReadFinished);
+    for (int row = 0; row < rowsTot; row++)
+        ui->table->removeRow(0);
+}
+
+void Ricerca::patientToTable(Patient *p, int row){
+    ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
+    ui->table->setItem(row, Nome, new QTableWidgetItem(p->getName()));
+    ui->table->setItem(row, Cognome, new QTableWidgetItem(p->getSurname()));
+    ui->table->setItem(row, Eta, new QTableWidgetItem(p->getAge()));
+    ui->table->setItem(row, ChatID, new QTableWidgetItem(p->getChatId()));
+    ui->table->setItem(row, Covid, new QTableWidgetItem(p->getCovid()));
+    ui->table->setItem(row, Anno, new QTableWidgetItem(p->date.getYear()));
+    ui->table->setItem(row, Mese, new QTableWidgetItem(p->date.getMonth()));
+    ui->table->setItem(row, Giorno, new QTableWidgetItem(p->date.getDay()));
+    ui->table->setItem(row, Giorno_della_settimana, new QTableWidgetItem(p->date.getDayOfWeek()));
+    ui->table->setItem(row, Paese, new QTableWidgetItem(p->getCountry()));
 }
 

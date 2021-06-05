@@ -15,14 +15,14 @@ namespace Ui
 class Modifica;
 }
 
-class Modifica : public QDialog
+class Modifica : public QDialog, private GuiUtility
 {
     Q_OBJECT
 
 public:
     explicit Modifica(Worker & worker, QWidget *parent = nullptr);
     ~Modifica();
-    void cleanUp();
+    void cleanUp() override;
     void setUiFieldsFromPatient(Patient *patient);
     void setPatientFromUiFields( Patient & patient);
 

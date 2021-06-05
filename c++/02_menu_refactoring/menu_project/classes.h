@@ -69,5 +69,11 @@ class Patient: public Person {
         QString toR();
 };
 
+class GuiUtility{
+    private:
+        virtual void cleanUp() = 0;
+
+};
+
 
 #endif // CLASSES_H
