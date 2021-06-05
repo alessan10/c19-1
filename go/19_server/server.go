@@ -62,8 +62,6 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 		fmt.Println("[ ENTRYPOINT ] : SEARCH PERSON WITHOUT RELATIONS ")
 		defer session.Close()
 
-		//log.Println("ecco il body SEARCH:", req.Body)
-
 		query := `MATCH (p:Patient) 
 						WHERE p.name = $name AND p.surname = $surname
 						RETURN p.name as name, p.surname as surname, p.age as age, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
@@ -77,42 +75,24 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 			log.Fatal(err)
 		}
 
-		fmt.Println("result :", result)
-
 		var patientResults []PatientResult
 
 		for result.Next() {
 			record := result.Record()
-			fmt.Println("record: ", record.GetByIndex(0))
-			//id, _ := record.Get("id")
-			//fmt.Println("id: ", id)
 			name, _ := record.Get("name")
-			fmt.Println("name: ", name)
 			surname, _ := record.Get("surname")
-			fmt.Println("surname: ", surname)
 			age, _ := record.Get("age")
-			fmt.Println("age: ", age)
-			//chatid, _ := record.Get("chatid")
-			//fmt.Println("chatid: ", chatid)
 			covid, _ := record.Get("covid")
-			fmt.Println("covid: ", covid)
 			year, _ := record.Get("year")
-			fmt.Println("year: ", year)
 			month, _ := record.Get("month")
-			fmt.Println("month: ", month)
 			day, _ := record.Get("day")
-			fmt.Println("day: ", day)
 			weekday, _ := record.Get("weekday")
-			fmt.Println("Day Of The Week: ", weekday)
 			country, _ := record.Get("country")
-			fmt.Println("country: ", country)
 
 			patientResults = append(patientResults, PatientResult{Patient{
-				//Id:      id.(string),
 				Name:    name.(string),
 				Surname: surname.(string),
 				Age:     age.(string),
-				//Chatid:  chatid.(string),
 				Covid:   covid.(string),
 				Year:    year.(string),
 				Month:   month.(string),
@@ -123,9 +103,20 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 		}
 
 		err = json.NewEncoder(w).Encode(patientResults)
-		if err != nil {
-			log.Println("error writing search response:", err)
+
+		if len(patientResults) == 0 {
+			log.Println("Error: person not found, empty response: ", err)
+		} else {
+			fmt.Println("ENCODED: ", patientResults)
 		}
+
+		/*
+			if err != nil {
+				log.Println("Error writing search response: ", err)
+				return
+			} else {
+				fmt.Println("ENCODED: \n", patientResults)
+			}*/
 	}
 	return res
 }
@@ -143,8 +134,6 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		fmt.Println("[ ENTRYPOINT ] : SEARCH ")
 		defer session.Close()
 
-		log.Println("ecco il body SEARCH:", req.Body)
-
 		query := `MATCH (p1:Patient)-[r:CONTACT]-(p2:Patient) 
 					WHERE p1.name = $name AND p1.surname = $surname  									
 					RETURN p2.id as id, p2.name as name, p2.surname as surname, p2.age as age, p2.chatid as chatid, p2.covid as covid, p2.year as year, p2.month as month, p2.day as day, p2.weekday as weekday, p2.country as country`
@@ -156,37 +145,21 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			log.Fatal(err)
 		}
 
-		fmt.Println("result :", result)
-
 		var patientResults []PatientResult
-		/*patientResults = getResult(result, patientResults)
-		fmt.Println("a: ", patientResults)*/
 
 		for result.Next() {
 			record := result.Record()
-			fmt.Println("record: ", record.GetByIndex(0))
 			id, _ := record.Get("id")
-			fmt.Println("id: ", id)
 			name, _ := record.Get("name")
-			fmt.Println("name: ", name)
 			surname, _ := record.Get("surname")
-			fmt.Println("surname: ", surname)
 			age, _ := record.Get("age")
-			fmt.Println("age: ", age)
 			chatid, _ := record.Get("chatid")
-			fmt.Println("chatid: ", chatid)
 			covid, _ := record.Get("covid")
-			fmt.Println("covid: ", covid)
 			year, _ := record.Get("year")
-			fmt.Println("year: ", year)
 			month, _ := record.Get("month")
-			fmt.Println("month: ", month)
 			day, _ := record.Get("day")
-			fmt.Println("day: ", day)
 			weekday, _ := record.Get("weekday")
-			fmt.Println("Day Of The Week: ", weekday)
 			country, _ := record.Get("country")
-			fmt.Println("country: ", country)
 
 			patientResults = append(patientResults, PatientResult{Patient{
 				Id:      id.(string),
@@ -204,8 +177,11 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		}
 
 		err = json.NewEncoder(w).Encode(patientResults)
-		if err != nil {
-			log.Println("error writing search response:", err)
+
+		if len(patientResults) == 0 {
+			log.Println("Error: person not found, empty response: ", err)
+		} else {
+			fmt.Println("ENCODED: ", patientResults)
 		}
 	}
 	return res
@@ -230,18 +206,6 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			panic(err)
 		}
 
-		//log.Println("Id :", person.Id)
-		log.Println("Nome :", person.Name)
-		log.Println("Cognome :", person.Surname)
-		log.Println("Age :", person.Age)
-		//log.Println("Chatid :", person.Chatid)
-		log.Println("Covid :", person.Covid)
-		log.Println("Year :", person.Year)
-		log.Println("Month :", person.Month)
-		log.Println("Day :", person.Day)
-		log.Println("Day of the week :", person.WeekDay)
-		log.Println("Country :", person.Country)
-
 		query := `MATCH (p:Patient) WHERE p.name = $old_name AND p.surname = $old_surname
 							SET p.name = $name, p.surname = $surname, p.age = $age, p.covid = $covid, p.year = $year, p.month = $month, p.day = $day, p.weekday = $weekday, p.country = $country
 							RETURN p.name as name, p.surname as surname, p.age as age, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
@@ -252,58 +216,38 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		result, err := session.Run(query, map[string]interface{}{
 			"old_name":    req.URL.Query()["old_name"][0],
 			"old_surname": req.URL.Query()["old_surname"][0],
-			//"id":          person.Id,
-			"name":    person.Name,
-			"surname": person.Surname,
-			"age":     person.Age,
-			//"chatid":      person.Chatid,
-			"covid":   person.Covid,
-			"year":    person.Year,
-			"month":   person.Month,
-			"day":     person.Day,
-			"weekday": person.WeekDay,
-			"country": person.Country,
+			"name":        person.Name,
+			"surname":     person.Surname,
+			"age":         person.Age,
+			"covid":       person.Covid,
+			"year":        person.Year,
+			"month":       person.Month,
+			"day":         person.Day,
+			"weekday":     person.WeekDay,
+			"country":     person.Country,
 		})
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		fmt.Println("result :", result)
-
 		var patientResults []PatientResult
 
 		for result.Next() {
 			record := result.Record()
-			fmt.Println("record: ", record.GetByIndex(0))
-			//id, _ := record.Get("id")
-			//fmt.Println("id: ", id)
 			name, _ := record.Get("name")
-			fmt.Println("name: ", name)
 			surname, _ := record.Get("surname")
-			fmt.Println("surname: ", surname)
 			age, _ := record.Get("age")
-			fmt.Println("age: ", age)
-			//chatid, _ := record.Get("chatid")
-			//fmt.Println("chatid: ", chatid)
 			covid, _ := record.Get("covid")
-			fmt.Println("covid: ", covid)
 			year, _ := record.Get("year")
-			fmt.Println("year: ", year)
 			month, _ := record.Get("month")
-			fmt.Println("month: ", month)
 			day, _ := record.Get("day")
-			fmt.Println("day: ", day)
 			weekday, _ := record.Get("weekday")
-			fmt.Println("Day Of The Week: ", weekday)
 			country, _ := record.Get("country")
-			fmt.Println("country: ", country)
 
 			patientResults = append(patientResults, PatientResult{Patient{
-				//Id:      id.(string),
 				Name:    name.(string),
 				Surname: surname.(string),
 				Age:     age.(string),
-				//Chatid:  chatid.(string),
 				Covid:   covid.(string),
 				Year:    year.(string),
 				Month:   month.(string),
@@ -314,8 +258,11 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		}
 
 		err = json.NewEncoder(w).Encode(patientResults)
-		if err != nil {
-			log.Println("error writing search response:", err)
+
+		if len(patientResults) == 0 {
+			log.Println("Error: person not found, empty response: ", err)
+		} else {
+			fmt.Println("UPDATED CORRECTLY: ", patientResults)
 		}
 	}
 	return res
@@ -411,25 +358,12 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		fmt.Println("[ ENTRYPOINT ] : ADD ")
 		defer session.Close()
 
-		log.Println("ecco il body ADD:", req.Body)
 		decoder := json.NewDecoder(req.Body)
 		var person Patient
 		jsonerr := decoder.Decode(&person)
 		if jsonerr != nil {
 			panic(err)
 		}
-
-		log.Println("Id :", person.Id)
-		log.Println("Nome :", person.Name)
-		log.Println("Cognome :", person.Surname)
-		log.Println("Age :", person.Age)
-		log.Println("Chatid :", person.Chatid)
-		log.Println("Covid :", person.Covid)
-		log.Println("Year :", person.Year)
-		log.Println("Month :", person.Month)
-		log.Println("Day :", person.Day)
-		log.Println("Day of the week :", person.WeekDay)
-		log.Println("Country :", person.Country)
 
 		//----CONTROLLO ERRRORI----
 
@@ -442,7 +376,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			fmt.Println("[MISSING]: SURNAME", checkSurname)
 		}
 
-		//-----FINE----
+		//-----FINE-----
 
 		query1 := `MATCH (n) RETURN count(n) as count`
 		result1, err1 := session.Run(query1, map[string]interface{}{})
@@ -451,17 +385,12 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			log.Fatal(err1)
 		}
 
-		fmt.Println("result1 :", result1)
-
 		var cnt int64
 		for result1.Next() {
 			record := result1.Record()
-			fmt.Println("record: ", record.GetByIndex(0))
 			count, _ := record.Get("count")
-			fmt.Println("count: ", count)
 			cnt = count.(int64)
-
-			fmt.Println("cnt", cnt)
+			fmt.Println("DB ENTRIES COUNTER: ", cnt)
 		}
 
 		//prendo count, genero 5 un 0 < rnd() < count -> RND1, RND2, RND3, RND4, RND5
@@ -469,17 +398,12 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		var rndStr [5]string
 		for i := 0; i < 5; i++ {
 			rnd[i] = rand.Int63n(cnt)
-			//64 bit perchè potenzialmente l'app deve funzionare con più di 9 miliardi di persone
+			//converto in 64 bit
 			rndStr[i] = strconv.FormatInt(rnd[i], 10)
 			rndStr[i] = PadLeft(rndStr[i], "0", 3)
-			fmt.Println("rand: ", rnd[i])
-			fmt.Println("rndStr: ", rndStr[i])
+			//fmt.Println("rand: ", rnd[i]) deve essere uguale a quello di sotto
+			//fmt.Println("rndStr: ", rndStr[i])
 		}
-
-		// query2 := `MATCH (s) WHERE ID(s) IN [2, 5, 60, 80, 88] RETURN s`
-		//ID(s) = id generato da NEO4J
-		// query2 := `MATCH (s) WHERE ID(s) IN [$rnd0, $rnd1, $rnd2, $rnd3, $rnd4]
-		// RETURN s.id as id, s.name as name, s.surname as surname, s.age as age, s.chatid as chatid, s.covid as covid, s.year as year, s.month as month, s.day as day, s.weekday as weekday, s.country as country`
 
 		query2 := `MATCH (n) WHERE n.id IN [$rndStr0, $rndStr1, $rndStr2, $rndStr3, $rndStr4] 
 						RETURN n.id as id, n.name as name, n.surname as surname, n.age as age, n.chatid as chatid, n.covid as covid, n.year as year, n.month as month, n.day as day, n.weekday as weekday, n.country as country`
@@ -496,35 +420,21 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			log.Fatal(err2)
 		}
 
-		fmt.Println("result2 :", result2)
-
 		var patientResults []PatientResult
 
 		for result2.Next() {
 			record := result2.Record()
-			fmt.Println("record: ", record.GetByIndex(0))
 			id, _ := record.Get("id")
-			fmt.Println("id: ", id)
 			name, _ := record.Get("name")
-			fmt.Println("name: ", name)
 			surname, _ := record.Get("surname")
-			fmt.Println("surname: ", surname)
 			age, _ := record.Get("age")
-			fmt.Println("age: ", age)
 			chatid, _ := record.Get("chatid")
-			fmt.Println("chatid: ", chatid)
 			covid, _ := record.Get("covid")
-			fmt.Println("covid: ", covid)
 			year, _ := record.Get("year")
-			fmt.Println("year: ", year)
 			month, _ := record.Get("month")
-			fmt.Println("month: ", month)
 			day, _ := record.Get("day")
-			fmt.Println("day: ", day)
 			weekday, _ := record.Get("weekday")
-			fmt.Println("Day Of The Week: ", weekday)
 			country, _ := record.Get("country")
-			fmt.Println("country: ", country)
 
 			patientResults = append(patientResults, PatientResult{Patient{
 				Id:      id.(string),
@@ -541,11 +451,15 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			}})
 		}
 
+		if len(patientResults) == 0 {
+			log.Println("Error QUERY 2: empty response: ", err)
+		} else {
+			fmt.Println("ENCODED: ", patientResults)
+		}
+
 		new_id := cnt + 1
-		fmt.Println("newID: ", new_id)
+		fmt.Println("NEW ID: ", new_id)
 		stringID := strconv.Itoa(int(new_id))
-		//query3 := `MATCH (u:User {username:'admin'}), (r:Role {name:'ROLE_WEB_USER'})
-		// CREATE (u)-[:HAS_ROLE]->(r)`
 
 		query3 := `CREATE (p:Patient {id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
 							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
@@ -565,9 +479,9 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 
 		if err3 != nil {
 			log.Fatal(err3)
+			fmt.Println("QUERY 3 ISSUE: ", result3)
 		}
 
-		fmt.Println("result3 :", result3)
 		//FUNZIONAAAAA -->
 		// query4 := `MATCH (a:Patient),(b:Patient)
 		// WHERE a.name = $name0 AND b.name = $name_new
@@ -584,12 +498,14 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		UNION
 		MATCH (a:Patient),(b:Patient) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
 
-		fmt.Println("patientResults[0].Id:", patientResults[0].Id)
-		fmt.Println("patientResults[1].Id:", patientResults[1].Id)
-		fmt.Println("patientResults[2].Id:", patientResults[2].Id)
-		fmt.Println("patientResults[3].Id:", patientResults[3].Id)
-		fmt.Println("patientResults[4].Id:", patientResults[4].Id)
-		fmt.Println("name_new:", person.Name)
+		fmt.Printf("NEW PATIENT (ID: %v) linked with below patient: \n", new_id)
+		fmt.Printf("ID[0]: %v,\nID[1]: %v,\nID[2]: %v,\nID[3]: %v,\nID[4]: %v\n",
+			patientResults[0].Id,
+			patientResults[1].Id,
+			patientResults[2].Id,
+			patientResults[3].Id,
+			patientResults[4].Id)
+
 		result4, err4 := session.Run(query4, map[string]interface{}{
 			"name0":    patientResults[0].Name,
 			"name1":    patientResults[1].Name,
@@ -601,9 +517,8 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 
 		if err4 != nil {
 			log.Fatal(err4)
+			fmt.Println("QUERY 4 ISSUE: ", result4)
 		}
-
-		fmt.Println("result4 :", result4)
 
 		err5 := json.NewEncoder(w).Encode(patientResults)
 		if err5 != nil {
@@ -626,8 +541,6 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 		fmt.Println("[ ENTRYPOINT ] : GRAPH ")
 		defer session.Close()
 
-		log.Println("ecco il body GRAPH:", req.Body)
-
 		query := `MATCH (p1:Patient) 
 		RETURN p1.id as id, p1.name as name, p1.surname as surname, p1.age as age, p1.chatid as chatid, p1.covid as covid, p1.year as year, p1.month as month, p1.day as day, p1.weekday as weekday, p1.country as country`
 
@@ -636,35 +549,21 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 			log.Fatal(err)
 		}
 
-		fmt.Println("result :", result)
-
 		var patientResults []PatientResult
 
 		for result.Next() {
 			record := result.Record()
-			fmt.Println("record: ", record.GetByIndex(0))
 			id, _ := record.Get("id")
-			fmt.Println("id: ", id)
 			name, _ := record.Get("name")
-			fmt.Println("name: ", name)
 			surname, _ := record.Get("surname")
-			fmt.Println("surname: ", surname)
 			age, _ := record.Get("age")
-			fmt.Println("age: ", age)
 			chatid, _ := record.Get("chatid")
-			fmt.Println("chatid: ", chatid)
 			covid, _ := record.Get("covid")
-			fmt.Println("covid: ", covid)
 			year, _ := record.Get("year")
-			fmt.Println("year: ", year)
 			month, _ := record.Get("month")
-			fmt.Println("month: ", month)
 			day, _ := record.Get("day")
-			fmt.Println("day: ", day)
 			weekday, _ := record.Get("weekday")
-			fmt.Println("Day Of The Week: ", weekday)
 			country, _ := record.Get("country")
-			fmt.Println("country: ", country)
 
 			patientResults = append(patientResults, PatientResult{Patient{
 				Id:      id.(string),
@@ -682,9 +581,13 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 		}
 
 		err = json.NewEncoder(w).Encode(patientResults)
-		if err != nil {
-			log.Println("error writing search response:", err)
+
+		if len(patientResults) == 0 {
+			log.Println("Error: database not found, empty response: ", err)
+		} else {
+			fmt.Printf("ENCODED: %v and counting...", patientResults[0])
 		}
+
 	}
 	return res
 }
@@ -704,18 +607,18 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		query := `MATCH (p:Patient) WHERE p.name = $name AND p.surname = $surname 
 					DETACH DELETE p`
 
-		fmt.Println("URL name: ", req.URL.Query()["name"][0])
-		fmt.Println("URL surname: ", req.URL.Query()["surname"][0])
 		result, err := session.Run(query, map[string]interface{}{
 			"name":    req.URL.Query()["name"][0],
 			"surname": req.URL.Query()["surname"][0],
 		})
 		if err != nil {
 			log.Fatal(err)
+			fmt.Println("result :", result)
+		} else {
+			fmt.Printf("DELETED: \n")
+			fmt.Println("URL name: ", req.URL.Query()["name"][0])
+			fmt.Println("URL surname: ", req.URL.Query()["surname"][0])
 		}
-
-		fmt.Println("result :", result)
-
 	}
 	return res
 }
@@ -779,39 +682,3 @@ func PadLeft(str, pad string, lenght int) string {
 	}
 	return str[0:lenght]
 }
-
-/* NOT WORKING
-func getResult(r neo4j.Result, s []PatientResult) (res []PatientResult) {
-	for r.Next() {
-		record := r.Record()
-		record.GetByIndex(0)
-		id, _ := record.Get("id")
-		name, _ := record.Get("name")
-		surname, _ := record.Get("surname")
-		age, _ := record.Get("age")
-		chatid, _ := record.Get("chatid")
-		covid, _ := record.Get("covid")
-		year, _ := record.Get("year")
-		month, _ := record.Get("month")
-		day, _ := record.Get("day")
-		weekday, _ := record.Get("weekday")
-		country, _ := record.Get("country")
-
-		s = append(s, PatientResult{Patient{
-			Id:      id.(string),
-			Name:    name.(string),
-			Surname: surname.(string),
-			Age:     age.(string),
-			Chatid:  chatid.(string),
-			Covid:   covid.(string),
-			Year:    year.(string),
-			Month:   month.(string),
-			Day:     day.(string),
-			WeekDay: weekday.(string),
-			Country: country.(string),
-		}})
-
-	}
-	return res
-}
-*/
