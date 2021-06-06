@@ -268,84 +268,6 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 	return res
 }
 
-//WHAT TO DO WITH HEALED?
-func healedHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-
-		sessionConfig := neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite}
-		session, err := driver.NewSession(sessionConfig)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println("[ ENTRYPOINT ] : HEALED ")
-		defer session.Close()
-
-		query := `MATCH (p:Patient {name: $name})-[r:CONTACT]-()
-									DELETE r
-									SET p.covid = "healed"
-									RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
-
-		fmt.Println("URL name: ", req.URL.Query()["name"][0])
-		result, err := session.Run(query, map[string]interface{}{
-			"name": req.URL.Query()["name"][0],
-		})
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		fmt.Println("result :", result)
-
-		var patientResults []PatientResult
-
-		for result.Next() {
-			record := result.Record()
-			fmt.Println("record: ", record.GetByIndex(0))
-			id, _ := record.Get("id")
-			fmt.Println("id: ", id)
-			name, _ := record.Get("name")
-			fmt.Println("name: ", name)
-			surname, _ := record.Get("surname")
-			fmt.Println("surname: ", surname)
-			age, _ := record.Get("age")
-			fmt.Println("age: ", age)
-			chatid, _ := record.Get("chatid")
-			fmt.Println("chatid: ", chatid)
-			covid, _ := record.Get("covid")
-			fmt.Println("covid: ", covid)
-			year, _ := record.Get("year")
-			fmt.Println("year: ", year)
-			month, _ := record.Get("month")
-			fmt.Println("month: ", month)
-			day, _ := record.Get("day")
-			fmt.Println("day: ", day)
-			weekday, _ := record.Get("weekday")
-			fmt.Println("Day Of The Week: ", weekday)
-			country, _ := record.Get("country")
-			fmt.Println("country: ", country)
-
-			patientResults = append(patientResults, PatientResult{Patient{
-				Id:      id.(string),
-				Name:    name.(string),
-				Surname: surname.(string),
-				Age:     age.(string),
-				Chatid:  chatid.(string),
-				Covid:   covid.(string),
-				Year:    year.(string),
-				Month:   month.(string),
-				Day:     day.(string),
-				WeekDay: weekday.(string),
-				Country: country.(string),
-			}})
-		}
-
-		err = json.NewEncoder(w).Encode(patientResults)
-		if err != nil {
-			log.Println("error writing search response:", err)
-		}
-	}
-}
-
 func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
 	res := func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -636,7 +558,6 @@ func main() {
 	serveMux := http.NewServeMux()
 
 	serveMux.HandleFunc("/update", updateHandlerFunc(driver, configuration.Database))             // UPDATE --c19positive
-	serveMux.HandleFunc("/healed", healedHandlerFunc(driver, configuration.Database))             // DELETE --c19healed
 	serveMux.HandleFunc("/add", addHandlerFunc(driver, configuration.Database))                   // ADD
 	serveMux.HandleFunc("/graph", graphHandlerFunc(driver, configuration.Database))               // RETURN ALL GRAPH
 	serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database))             // SEARCH A Patient and all of its DATA
