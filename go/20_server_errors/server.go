@@ -534,14 +534,13 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		})
 		if err != nil {
 			log.Fatal(err)
+		}
 
-			http.Error(w, "Unable to delete", 500)
-		} else {
 			fmt.Printf("DELETED: \n")
 			fmt.Println("result :", result)
 			fmt.Println("URL name: ", req.URL.Query()["name"][0])
 			fmt.Println("URL surname: ", req.URL.Query()["surname"][0])
-		}
+
 	}
 }
 
