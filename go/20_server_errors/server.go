@@ -102,21 +102,14 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 			}})
 		}
 
-		err = json.NewEncoder(w).Encode(patientResults)
+
 
 		if len(patientResults) == 0 {
-			log.Println("Error: person not found, empty response: ", err)
+			http.Error(w, "Error: Person not fount", http.StatusNotFound)
 		} else {
+			err = json.NewEncoder(w).Encode(patientResults)
 			fmt.Println("ENCODED: ", patientResults)
 		}
-
-		/*
-			if err != nil {
-				log.Println("Error writing search response: ", err)
-				return
-			} else {
-				fmt.Println("ENCODED: \n", patientResults)
-			}*/
 	}
 
 }
