@@ -260,8 +260,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			}})
 		}
 
-
-
+		
 		if len(patientResults) == 0 {
 			http.Error(w, "Error: Patient not found", http.StatusNotFound)
 		} else {
@@ -295,128 +294,118 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		checkName := strings.Compare(person.Name, "")
 		checkSurname := strings.Compare(person.Surname, "")
 
-		if checkName == 0 {
-			fmt.Println("[MISSING]: NAME", checkName)
-		} else if checkSurname == 0 {
-			fmt.Println("[MISSING]: SURNAME", checkSurname)
-		}
+		if checkName == 0 || checkSurname == 0 {
+			http.Error(w, "Error: Missing Name or Surname ", http.StatusBadRequest)
+		} else{
 
-		//-----FINE-----
+			query1 := `MATCH (n) RETURN count(n) as count`
+			result1, err1 := session.Run(query1, map[string]interface{}{})
 
-		query1 := `MATCH (n) RETURN count(n) as count`
-		result1, err1 := session.Run(query1, map[string]interface{}{})
+			if err1 != nil {
+				log.Fatal(err1)
+			}
 
-		if err1 != nil {
-			log.Fatal(err1)
-		}
+			var cnt int64
+			for result1.Next() {
+				record := result1.Record()
+				count, _ := record.Get("count")
+				cnt = count.(int64)
+				fmt.Println("DB ENTRIES COUNTER: ", cnt)
+			}
 
-		var cnt int64
-		for result1.Next() {
-			record := result1.Record()
-			count, _ := record.Get("count")
-			cnt = count.(int64)
-			fmt.Println("DB ENTRIES COUNTER: ", cnt)
-		}
+			//prendo count, genero 5 un 0 < rnd() < count -> RND1, RND2, RND3, RND4, RND5
+			var rnd [5]int64
+			var rndStr [5]string
+			for i := 0; i < 5; i++ {
+				rnd[i] = rand.Int63n(cnt)
+				//converto in 64 bit
+				rndStr[i] = strconv.FormatInt(rnd[i], 10)
+				rndStr[i] = PadLeft(rndStr[i], "0", 3)
+				//fmt.Println("rand: ", rnd[i]) deve essere uguale a quello di sotto
+				//fmt.Println("rndStr: ", rndStr[i])
+			}
 
-		//prendo count, genero 5 un 0 < rnd() < count -> RND1, RND2, RND3, RND4, RND5
-		var rnd [5]int64
-		var rndStr [5]string
-		for i := 0; i < 5; i++ {
-			rnd[i] = rand.Int63n(cnt)
-			//converto in 64 bit
-			rndStr[i] = strconv.FormatInt(rnd[i], 10)
-			rndStr[i] = PadLeft(rndStr[i], "0", 3)
-			//fmt.Println("rand: ", rnd[i]) deve essere uguale a quello di sotto
-			//fmt.Println("rndStr: ", rndStr[i])
-		}
-
-		//prendo 5 pazienti random dal grafo
-		query2 := `MATCH (n) WHERE n.id IN [$rndStr0, $rndStr1, $rndStr2, $rndStr3, $rndStr4] 
+			//prendo 5 pazienti random dal grafo
+			query2 := `MATCH (n) WHERE n.id IN [$rndStr0, $rndStr1, $rndStr2, $rndStr3, $rndStr4] 
 						RETURN n.id as id, n.name as name, n.surname as surname, n.age as age, n.chatid as chatid, n.covid as covid, n.year as year, n.month as month, n.day as day, n.weekday as weekday, n.country as country`
 
-		result2, err2 := session.Run(query2, map[string]interface{}{
-			"rndStr0": rndStr[0],
-			"rndStr1": rndStr[1],
-			"rndStr2": rndStr[2],
-			"rndStr3": rndStr[3],
-			"rndStr4": rndStr[4],
-		})
+			result2, err2 := session.Run(query2, map[string]interface{}{
+				"rndStr0": rndStr[0],
+				"rndStr1": rndStr[1],
+				"rndStr2": rndStr[2],
+				"rndStr3": rndStr[3],
+				"rndStr4": rndStr[4],
+			})
 
-		if err2 != nil {
-			log.Fatal(err2)
-		}
+			if err2 != nil {
+				log.Fatal(err2)
+			}
 
-		var patientResults []PatientResult
+			var patientResults []PatientResult
 
-		for result2.Next() {
-			record := result2.Record()
-			id, _ := record.Get("id")
-			name, _ := record.Get("name")
-			surname, _ := record.Get("surname")
-			age, _ := record.Get("age")
-			chatid, _ := record.Get("chatid")
-			covid, _ := record.Get("covid")
-			year, _ := record.Get("year")
-			month, _ := record.Get("month")
-			day, _ := record.Get("day")
-			weekday, _ := record.Get("weekday")
-			country, _ := record.Get("country")
+			for result2.Next() {
+				record := result2.Record()
+				id, _ := record.Get("id")
+				name, _ := record.Get("name")
+				surname, _ := record.Get("surname")
+				age, _ := record.Get("age")
+				chatid, _ := record.Get("chatid")
+				covid, _ := record.Get("covid")
+				year, _ := record.Get("year")
+				month, _ := record.Get("month")
+				day, _ := record.Get("day")
+				weekday, _ := record.Get("weekday")
+				country, _ := record.Get("country")
 
-			patientResults = append(patientResults, PatientResult{Patient{
-				Id:      id.(string),
-				Name:    name.(string),
-				Surname: surname.(string),
-				Age:     age.(string),
-				Chatid:  chatid.(string),
-				Covid:   covid.(string),
-				Year:    year.(string),
-				Month:   month.(string),
-				Day:     day.(string),
-				WeekDay: weekday.(string),
-				Country: country.(string),
-			}})
-		}
+				patientResults = append(patientResults, PatientResult{Patient{
+					Id:      id.(string),
+					Name:    name.(string),
+					Surname: surname.(string),
+					Age:     age.(string),
+					Chatid:  chatid.(string),
+					Covid:   covid.(string),
+					Year:    year.(string),
+					Month:   month.(string),
+					Day:     day.(string),
+					WeekDay: weekday.(string),
+					Country: country.(string),
+				}})
+			}
 
-		if len(patientResults) == 0 {
-			log.Println("Error QUERY 2: empty response: ", err)
-		} else {
-			fmt.Println("ENCODED: ", patientResults)
-		}
+			if len(patientResults) == 0 {
+				log.Println("Error QUERY 2: empty response: ", err)
+			} else {
+				fmt.Println("ENCODED: ", patientResults)
+			}
 
-		new_id := cnt + 1
-		fmt.Println("NEW ID: ", new_id)
-		stringID := strconv.Itoa(int(new_id))
+			new_id := cnt + 1
+			fmt.Println("NEW ID: ", new_id)
+			stringID := strconv.Itoa(int(new_id))
 
-		//creo il nuovo paziente inizialmente come nodo isolato
-		query3 := `CREATE (p:Patient {id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
+			//creo il nuovo paziente inizialmente come nodo isolato
+			query3 := `CREATE (p:Patient {id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
 							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
-		result3, err3 := session.Run(query3, map[string]interface{}{
-			"id":      stringID,
-			"name":    person.Name,
-			"surname": person.Surname,
-			"age":     person.Age,
-			"chatid":  person.Chatid,
-			"covid":   person.Covid,
-			"year":    person.Year,
-			"month":   person.Month,
-			"day":     person.Day,
-			"weekday": person.WeekDay,
-			"country": person.Country,
-		})
+			result3, err3 := session.Run(query3, map[string]interface{}{
+				"id":      stringID,
+				"name":    person.Name,
+				"surname": person.Surname,
+				"age":     person.Age,
+				"chatid":  person.Chatid,
+				"covid":   person.Covid,
+				"year":    person.Year,
+				"month":   person.Month,
+				"day":     person.Day,
+				"weekday": person.WeekDay,
+				"country": person.Country,
+			})
 
-		if err3 != nil {
-			log.Fatal(err3)
-			fmt.Println("QUERY 3 ISSUE: ", result3)
-		}
+			if err3 != nil {
+				log.Fatal(err3)
+				fmt.Println("QUERY 3 ISSUE: ", result3)
+			}
 
-		//FUNZIONAAAAA -->
-		// query4 := `MATCH (a:Patient),(b:Patient)
-		// WHERE a.name = $name0 AND b.name = $name_new
-		// CREATE (a)-[r:CONTACT]->(b)
-		// RETURN type(r)`
-
-		//collego il nuovo paziente appena creato ai 5 pazienti random presi precedentemente dal grafo
-		query4 := `MATCH (a:Patient),(b:Patient) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
+			//collego il nuovo paziente appena creato ai 5 pazienti random presi precedentemente dal grafo
+			query4 := `MATCH (a:Patient),(b:Patient) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
 		MATCH (a:Patient),(b:Patient) WHERE a.name = $name1 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
@@ -426,32 +415,36 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		UNION
 		MATCH (a:Patient),(b:Patient) WHERE a.name = $name4 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)`
 
-		fmt.Printf("NEW PATIENT (ID: %v) linked with below patient: \n", new_id)
-		fmt.Printf("ID[0]: %v,\nID[1]: %v,\nID[2]: %v,\nID[3]: %v,\nID[4]: %v\n",
-			patientResults[0].Id,
-			patientResults[1].Id,
-			patientResults[2].Id,
-			patientResults[3].Id,
-			patientResults[4].Id)
+			fmt.Printf("NEW PATIENT (ID: %v) linked with below patient: \n", new_id)
+			fmt.Printf("ID[0]: %v,\nID[1]: %v,\nID[2]: %v,\nID[3]: %v,\nID[4]: %v\n",
+				patientResults[0].Id,
+				patientResults[1].Id,
+				patientResults[2].Id,
+				patientResults[3].Id,
+				patientResults[4].Id)
 
-		result4, err4 := session.Run(query4, map[string]interface{}{
-			"name0":    patientResults[0].Name,
-			"name1":    patientResults[1].Name,
-			"name2":    patientResults[2].Name,
-			"name3":    patientResults[3].Name,
-			"name4":    patientResults[4].Name,
-			"name_new": person.Name,
-		})
+			result4, err4 := session.Run(query4, map[string]interface{}{
+				"name0":    patientResults[0].Name,
+				"name1":    patientResults[1].Name,
+				"name2":    patientResults[2].Name,
+				"name3":    patientResults[3].Name,
+				"name4":    patientResults[4].Name,
+				"name_new": person.Name,
+			})
 
-		if err4 != nil {
-			log.Fatal(err4)
-			fmt.Println("QUERY 4 ISSUE: ", result4)
+			if err4 != nil {
+				log.Fatal(err4)
+				fmt.Println("QUERY 4 ISSUE: ", result4)
+			}
+
+			err5 := json.NewEncoder(w).Encode(patientResults)
+			if err5 != nil {
+				log.Println("error writing search response:", err5)
+			}
 		}
 
-		err5 := json.NewEncoder(w).Encode(patientResults)
-		if err5 != nil {
-			log.Println("error writing search response:", err5)
-		}
+
+
 	}
 
 }
