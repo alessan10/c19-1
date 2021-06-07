@@ -260,7 +260,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			}})
 		}
 
-		
+
 		if len(patientResults) == 0 {
 			http.Error(w, "Error: Patient not found", http.StatusNotFound)
 		} else {
