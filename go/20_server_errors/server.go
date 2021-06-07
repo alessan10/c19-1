@@ -179,7 +179,6 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 
 		if len(patientResults) == 0 {
-			//log.Prinln("Error: person not found, empty response: ", err)
 			http.Error(w, "Error: Patient not found", http.StatusNotFound)
 
 		} else {
@@ -331,6 +330,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 			//fmt.Println("rndStr: ", rndStr[i])
 		}
 
+		//prendo 5 pazienti random dal grafo
 		query2 := `MATCH (n) WHERE n.id IN [$rndStr0, $rndStr1, $rndStr2, $rndStr3, $rndStr4] 
 						RETURN n.id as id, n.name as name, n.surname as surname, n.age as age, n.chatid as chatid, n.covid as covid, n.year as year, n.month as month, n.day as day, n.weekday as weekday, n.country as country`
 
@@ -387,6 +387,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		fmt.Println("NEW ID: ", new_id)
 		stringID := strconv.Itoa(int(new_id))
 
+		//creo il nuovo paziente inizialmente come nodo isolato
 		query3 := `CREATE (p:Patient {id: $id, name: $name, surname: $surname, age: $age, chatid: $chatid, covid: $covid, year: $year, month: $month, day: $day, weekday: $weekday, country: $country })
 							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 		result3, err3 := session.Run(query3, map[string]interface{}{
@@ -414,6 +415,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 		// CREATE (a)-[r:CONTACT]->(b)
 		// RETURN type(r)`
 
+		//collego il nuovo paziente appena creato ai 5 pazienti random presi precedentemente dal grafo
 		query4 := `MATCH (a:Patient),(b:Patient) WHERE a.name = $name0 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
 		UNION
 		MATCH (a:Patient),(b:Patient) WHERE a.name = $name1 AND b.name = $name_new CREATE (a)-[r:CONTACT]->(b) RETURN type(r)
@@ -506,11 +508,11 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 			}})
 		}
 
-		err = json.NewEncoder(w).Encode(patientResults)
-
 		if len(patientResults) == 0 {
-			log.Println("Error: database not found, empty response: ", err)
+			http.Error(w, "Graph is empty", http.StatusOK)
+
 		} else {
+			err = json.NewEncoder(w).Encode(patientResults)
 			fmt.Printf("ENCODED: %v and counting...", patientResults[0])
 		}
 
@@ -539,9 +541,11 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		})
 		if err != nil {
 			log.Fatal(err)
-			fmt.Println("result :", result)
+
+			http.Error(w, "Unable to delete", 500)
 		} else {
 			fmt.Printf("DELETED: \n")
+			fmt.Println("result :", result)
 			fmt.Println("URL name: ", req.URL.Query()["name"][0])
 			fmt.Println("URL surname: ", req.URL.Query()["surname"][0])
 		}
