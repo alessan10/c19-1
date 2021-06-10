@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
@@ -35,12 +36,14 @@ public:
     QFrame *line;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_2;
-    QPushButton *positive_month;
+    QComboBox *year_comboBox;
+    QPushButton *positive_year;
     QFrame *line_2;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
     QPushButton *positive_age;
     QFrame *line_4;
+    QPushButton *pushButton;
     QLabel *imageLabel;
 
     void setupUi(QDialog *Stats)
@@ -146,13 +149,23 @@ public:
 
         horizontalLayout_3->addWidget(label_2);
 
-        positive_month = new QPushButton(Stats);
-        positive_month->setObjectName(QString::fromUtf8("positive_month"));
-        sizePolicy1.setHeightForWidth(positive_month->sizePolicy().hasHeightForWidth());
-        positive_month->setSizePolicy(sizePolicy1);
-        positive_month->setFont(font2);
+        year_comboBox = new QComboBox(Stats);
+        year_comboBox->addItem(QString());
+        year_comboBox->addItem(QString());
+        year_comboBox->setObjectName(QString::fromUtf8("year_comboBox"));
+        sizePolicy1.setHeightForWidth(year_comboBox->sizePolicy().hasHeightForWidth());
+        year_comboBox->setSizePolicy(sizePolicy1);
+        year_comboBox->setFont(font2);
 
-        horizontalLayout_3->addWidget(positive_month);
+        horizontalLayout_3->addWidget(year_comboBox);
+
+        positive_year = new QPushButton(Stats);
+        positive_year->setObjectName(QString::fromUtf8("positive_year"));
+        sizePolicy1.setHeightForWidth(positive_year->sizePolicy().hasHeightForWidth());
+        positive_year->setSizePolicy(sizePolicy1);
+        positive_year->setFont(font2);
+
+        horizontalLayout_3->addWidget(positive_year);
 
 
         verticalLayout_2->addLayout(horizontalLayout_3);
@@ -193,6 +206,11 @@ public:
 
         verticalLayout_2->addWidget(line_4);
 
+        pushButton = new QPushButton(Stats);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        verticalLayout_2->addWidget(pushButton);
+
         imageLabel = new QLabel(Stats);
         imageLabel->setObjectName(QString::fromUtf8("imageLabel"));
         sizePolicy1.setHeightForWidth(imageLabel->sizePolicy().hasHeightForWidth());
@@ -219,10 +237,14 @@ public:
         generateButton->setText(QCoreApplication::translate("Stats", "Genera", nullptr));
         label_5->setText(QCoreApplication::translate("Stats", "Andamento dei positivi in funzione del paese", nullptr));
         positive_country->setText(QCoreApplication::translate("Stats", "VAI", nullptr));
-        label_2->setText(QCoreApplication::translate("Stats", "Andamento dei positivi in funzione dei mesi", nullptr));
-        positive_month->setText(QCoreApplication::translate("Stats", "VAI", nullptr));
+        label_2->setText(QCoreApplication::translate("Stats", "Andamento dei positivi in base all'anno", nullptr));
+        year_comboBox->setItemText(0, QCoreApplication::translate("Stats", "2020", nullptr));
+        year_comboBox->setItemText(1, QCoreApplication::translate("Stats", "2021", nullptr));
+
+        positive_year->setText(QCoreApplication::translate("Stats", "VAI", nullptr));
         label_4->setText(QCoreApplication::translate("Stats", "Andamento dei positivi in funzione dell'et\303\240", nullptr));
         positive_age->setText(QCoreApplication::translate("Stats", "VAI", nullptr));
+        pushButton->setText(QCoreApplication::translate("Stats", "PROVA", nullptr));
         imageLabel->setText(QString());
     } // retranslateUi
 

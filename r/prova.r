@@ -1,0 +1,6 @@
+#library(imager)
+print ("Ciao")
+#fpath <- system.file('extdata/parrots.png',package='imager')
+#parrots <- load.image(fpath)
+#plot(parrots)
+Sys.sleep(10)

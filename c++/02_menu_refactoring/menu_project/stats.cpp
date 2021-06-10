@@ -141,6 +141,32 @@ void Stats::dataReadFinished()
 
 void Stats::on_positive_country_clicked()
 {
-    QPixmap pix("C:/Users/alexm/Downloads/countryPLOT.jpeg");
-    ui->imageLabel->setPixmap(pix);
+    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\geographical_script.r");
+
+    /*QPixmap pix("C:/Users/alexm/Downloads/countryPLOT.jpeg");
+    ui->imageLabel->setPixmap(pix);*/
+}
+
+void Stats::on_positive_year_clicked()
+{
+    if (ui->year_comboBox->currentIndex() == 0){
+        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_anno_script.r");
+    } else {
+        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_anno_script.r");
+
+    }
+
+
+}
+
+void Stats::on_positive_age_clicked()
+{
+    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_eta.r");
+
+}
+
+void Stats::on_pushButton_clicked()
+{
+    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\prova.r");
+
 }

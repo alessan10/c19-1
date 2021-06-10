@@ -161,7 +161,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Andamento dei positivi in funzione dei mesi</string>
+        <string>Andamento dei positivi in base all'anno</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -169,7 +169,32 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="positive_month">
+      <widget class="QComboBox" name="year_comboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>2020</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2021</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="positive_year">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -242,6 +267,13 @@
     <widget class="Line" name="line_4">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>PROVA</string>
      </property>
     </widget>
    </item>
