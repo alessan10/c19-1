@@ -43,14 +43,13 @@ public:
     QLabel *label_4;
     QPushButton *positive_age;
     QFrame *line_4;
-    QPushButton *pushButton;
     QLabel *imageLabel;
 
     void setupUi(QDialog *Stats)
     {
         if (Stats->objectName().isEmpty())
             Stats->setObjectName(QString::fromUtf8("Stats"));
-        Stats->resize(976, 794);
+        Stats->resize(1042, 1028);
         verticalLayout_2 = new QVBoxLayout(Stats);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_5 = new QHBoxLayout();
@@ -206,16 +205,11 @@ public:
 
         verticalLayout_2->addWidget(line_4);
 
-        pushButton = new QPushButton(Stats);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-
-        verticalLayout_2->addWidget(pushButton);
-
         imageLabel = new QLabel(Stats);
         imageLabel->setObjectName(QString::fromUtf8("imageLabel"));
         sizePolicy1.setHeightForWidth(imageLabel->sizePolicy().hasHeightForWidth());
         imageLabel->setSizePolicy(sizePolicy1);
-        imageLabel->setMinimumSize(QSize(800, 550));
+        imageLabel->setMinimumSize(QSize(1024, 768));
         imageLabel->setFrameShape(QFrame::Box);
         imageLabel->setAlignment(Qt::AlignCenter);
 
@@ -244,7 +238,6 @@ public:
         positive_year->setText(QCoreApplication::translate("Stats", "VAI", nullptr));
         label_4->setText(QCoreApplication::translate("Stats", "Andamento dei positivi in funzione dell'et\303\240", nullptr));
         positive_age->setText(QCoreApplication::translate("Stats", "VAI", nullptr));
-        pushButton->setText(QCoreApplication::translate("Stats", "PROVA", nullptr));
         imageLabel->setText(QString());
     } // retranslateUi
 

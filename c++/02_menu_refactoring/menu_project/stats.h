@@ -28,14 +28,12 @@ private slots:
 
     void on_generateButton_clicked();
 
-
     void on_positive_country_clicked();
 
     void on_positive_year_clicked();
 
     void on_positive_age_clicked();
 
-    void on_pushButton_clicked();
 
 private:
     Ui::Stats *ui;

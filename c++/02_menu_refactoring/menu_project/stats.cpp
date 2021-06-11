@@ -1,7 +1,6 @@
 #include "stats.h"
 #include "ui_stats.h"
 
-//#include "stdafx.h"
 #include <QNetworkRequest>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -23,6 +22,9 @@ Stats::Stats(QWidget *parent) :
     mDataBuffer(new QByteArray)
 {
     ui->setupUi(this);
+    ui->positive_country->setEnabled(false);
+    ui->positive_year->setEnabled(false);
+    ui->positive_age->setEnabled(false);
 }
 
 Stats::~Stats()
@@ -120,8 +122,6 @@ void Stats::dataReadFinished()
            QMessageBox::information(this, "Attenzione", "Il file è stato creato correttamente!",
                                     QMessageBox::Ok);
            QTextStream out(&file);
-           //stringa buonaQString stringa = "\"Country\",\"Weekday\",\"Anno\",\"Mese\",\"Giorno\",\"ChatId\",\"Covid\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
-           //QString stringa = "\"Country\",\"Weekday\",\"Giorno\",\"Mese\",\"Anno\",\"Covid\",\"ChatId\",\"Age\",\"Cognome\",\"Nome\",\"Id\""; //sintassi comprensibile da R: \"text\"
            QString stringa = "\"Id\",\"Nome\",\"Cognome\",\"Age\",\"ChatId\",\"Covid\",\"Anno\",\"Mese\",\"Giorno\",\"Weekday\",\"Country\"";
            out << stringa <<"\n";
 
@@ -141,19 +141,28 @@ void Stats::dataReadFinished()
 
 void Stats::on_positive_country_clicked()
 {
+    //vai a togliere i set enable = false
+    //se il file è stato generato o se il bottone è stato premuto? meglio la prima!
     system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\geographical_script.r");
 
-    /*QPixmap pix("C:/Users/alexm/Downloads/countryPLOT.jpeg");
-    ui->imageLabel->setPixmap(pix);*/
+    QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/geographychal_plot.jpg");
+    ui->imageLabel->setPixmap(pix);
 }
 
 void Stats::on_positive_year_clicked()
 {
     if (ui->year_comboBox->currentIndex() == 0){
-        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_anno_script.r");
-    } else {
-        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_anno_script.r");
+        qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
+        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_2020_script.r");
 
+        QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_2020_plot.jpg");
+        ui->imageLabel->setPixmap(pix);
+    } else {
+        qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
+        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_2021_script.r");
+
+        QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_2021_plot.jpg");
+            ui->imageLabel->setPixmap(pix);
     }
 
 
@@ -163,10 +172,6 @@ void Stats::on_positive_age_clicked()
 {
     system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_eta.r");
 
-}
-
-void Stats::on_pushButton_clicked()
-{
-    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\prova.r");
-
+    /*QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/");
+    ui->imageLabel->setPixmap(pix);*/
 }

@@ -7,20 +7,22 @@
 
 class Date{
     private:
-        QString day, month, year, dayOfWeek;
+        QString year, month, day, dayOfWeek;
     public:
         Date(){}
-        Date(QString d, QString m, QString y, QString dow): day(d),month(m), year(y), dayOfWeek(dow){}
+        Date(QString y, QString m, QString d, QString dow): year(y),month(m), day(d), dayOfWeek(dow){}
         ~Date(){}
-        void setDay(QString d){ day = d; }
-        void setMonth(QString m){ month = m; }
         void setYear(QString y){ year = y; }
+        void setMonth(QString m){ month = m; }
+        void setDay(QString d){ day = d; }
         void setDayOfWeek(QString dow){ dayOfWeek = dow; }
-        QString getDay(){ return day; }
-        QString getMonth(){ return month; }
+
         QString getYear(){ return year; }
+        QString getMonth(){ return month; }
+        QString getDay(){ return day; }
         QString getDayOfWeek(){ return dayOfWeek; }
-        void toString();        
+
+        void toString();
         void conversion(QDate &q);//per cambiare il formato dei mesi dal numero alla parola (8->August) (1->Lunedì)
 };
 
