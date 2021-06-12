@@ -1,12 +1,4 @@
-non c'è bisogno di creare exe, bastano i sorgenti di c++
-la documentazione la puoi fare in MD
-il progetto lo puoi consegnare su github, su teams carica un link ed eventuali info per accedere alla repo
-la gestione errori di go va fatta ma in maniera spicciola. Non dev'essere un programma robusto ma mostrare di saper scrivere il codice
-gli script R prova a lanciarli con la libreria RScript. è più sensato ma se non ci riesci amen
-
-
-
---------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 
 [cpp] la funzione cleanUP() è comune a diverse classi ma varia il corpo, possiamo fare qualcosa per rendere il codice più pulito?
  
