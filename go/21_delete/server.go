@@ -564,6 +564,7 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			if err != nil {
 				log.Fatal(err)
 			}
+			err = json.NewEncoder(w).Encode(patientResults)
 			fmt.Printf("DELETED: \n")
 			fmt.Println("result :", result)
 			fmt.Println("URL name: ", req.URL.Query()["name"][0])

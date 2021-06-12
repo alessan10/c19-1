@@ -118,32 +118,18 @@ void Ricerca::dataReadFinished()
     }
 }
 
-void Ricerca::on_deleteButton_clicked()
+void Ricerca::deleteFinished()
 {
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
-    qDebug() << "name: " << name;
-    qDebug() << "surname" << surname;
 
-    //Initialize our API data
-    worker = new Worker();
-    mNetReply= nullptr;
-    mDataBuffer = new QByteArray();
-    mNetManager = new QNetworkAccessManager();
-
-    const QUrl API_ENDPOINT("http://localhost:8081/delete?name="+name+"&surname="+surname);
-    QNetworkRequest request;
-    request.setUrl(API_ENDPOINT);
-
-    mNetReply = mNetManager->deleteResource(request);
-    qDebug() <<"\nmNetReply: " << mNetReply;
-
-    if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty())
+    if( mNetReply->error() || mDataBuffer->isEmpty())
     {
-        QMessageBox::warning(this,"Attenzione","Inserisci nome e cognome.", QMessageBox::Ok);
+        qDebug() << "Error : " << mNetReply->errorString();
+        QMessageBox::warning(this, "Attenzione", "Non è stato trovato alcun risultato.", QMessageBox::Ok);
 
     }
-    else if(mNetReply->NoError == 0)
+    else
     {
         QMessageBox::information(this,"Informazione",
                                  QString("L'utente di nome %1 %2 è stato eliminato correttamente").arg(name).arg(surname),
@@ -152,13 +138,41 @@ void Ricerca::on_deleteButton_clicked()
         ui->nome->clear();
         ui->cognome->clear();
     }
-    else
-    {
-        QMessageBox::warning(this,"Attenzione",
-                             QString("Non è stato possibile eliminare l'utente di nome %1 %2").arg(name).arg(surname),
-                             QMessageBox::Ok);
-    }
 
+       delete mNetReply;
+       delete mNetManager;
+       delete mDataBuffer;
+       delete worker;
+}
+
+void Ricerca::on_deleteButton_clicked()
+{
+    QString name = ui->nome->text();
+    QString surname = ui->cognome->text();
+    qDebug() << "name: " << name;
+    qDebug() << "surname" << surname;
+
+    if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty())
+    {
+        QMessageBox::warning(this,"Attenzione","Inserisci nome e cognome.", QMessageBox::Ok);
+
+    }else{
+
+        //Initialize our API data
+        worker = new Worker();
+        mNetReply= nullptr;
+        mDataBuffer = new QByteArray();
+        mNetManager = new QNetworkAccessManager();
+
+        const QUrl API_ENDPOINT("http://localhost:8081/delete?name="+name+"&surname="+surname);
+        QNetworkRequest request;
+        request.setUrl(API_ENDPOINT);
+
+        mNetReply = mNetManager->deleteResource(request);
+        connect(mNetReply,&QIODevice::readyRead,this,&Ricerca::dataReadyRead);
+        connect(mNetReply,&QNetworkReply::finished,this,&Ricerca::deleteFinished);
+
+    }
 }
 
 void Ricerca::cleanUp(){

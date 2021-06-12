@@ -29,6 +29,7 @@ private slots:
     void on_searchButton_clicked();
     void dataReadyRead();
     void dataReadFinished();   
+    void deleteFinished();
     void on_deleteButton_clicked();
 
 private:
