@@ -32,7 +32,7 @@ L'idea di fondo è la seguente: a differenza di Immuni, in cui il contagiato non
 
 - ##### 2. Scelte implementative
 
-![](D:\Alessandro\uniCT\Magistrale\Secondo_Anno\1_Advanced_Programming_Languages\Progetto_Esame\git_c19\c19\z.CONSEGNA\documentazione\Diagram.jpg)
+![img](https://github.com/andrea-calabretta/c19/blob/main/z.CONSEGNA/documentazione/Diagram.jpg)
 
 Come evidenziato dalla precedente immagine, abbiamo deciso di utilizzare le seguenti tecnologie:
 
@@ -79,7 +79,6 @@ Database noSQL nel quale vengono memorizzati gli utenti e le loro interazioni. L
 
     ![img](https://lh5.googleusercontent.com/bKmIuutiC_l5zs4xwevsgFwbdSc_RAHKR9RhLOPk6IOnlkDbn0iJyGur-zmcpeLUXeu8o5NU1C4IUWy-IHMZU3HNKjloJHZ7hCiJVyFyrWnUDSbHOykFw5Na420DtCh7tvHazR1v)
     
-
   - Avviare il server Go digitando sul terminale il comando: *<u>go run server.go</u>*
     Dopo aver consentito l'accesso richiesto dal firewall, sarà possibile visualizzare sul terminale il messaggio “SERVER UP" qualora la procedura sia andata a buon fine.
     A questo punto è possibile avviare il client oppure registrarsi al database tramite bot Telegram. 
