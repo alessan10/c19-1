@@ -122,8 +122,15 @@ void Ricerca::on_deleteButton_clicked()
 {
     QString name = ui->nome->text();
     QString surname = ui->cognome->text();
+    qDebug() << "name: " << name;
+    qDebug() << "surname" << surname;
 
     //Initialize our API data
+    worker = new Worker();
+    mNetReply= nullptr;
+    mDataBuffer = new QByteArray();
+    mNetManager = new QNetworkAccessManager();
+
     const QUrl API_ENDPOINT("http://localhost:8081/delete?name="+name+"&surname="+surname);
     QNetworkRequest request;
     request.setUrl(API_ENDPOINT);
@@ -141,6 +148,9 @@ void Ricerca::on_deleteButton_clicked()
         QMessageBox::information(this,"Informazione",
                                  QString("L'utente di nome %1 %2 è stato eliminato correttamente").arg(name).arg(surname),
                                  QMessageBox::Ok);
+        cleanUp();
+        ui->nome->clear();
+        ui->cognome->clear();
     }
     else
     {

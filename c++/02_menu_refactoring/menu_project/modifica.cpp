@@ -118,7 +118,7 @@ void Modifica::on_button_modifica_clicked()
         {
             QString contents = QString::fromUtf8(reply->readAll());
             qDebug() << contents;
-            //se non ci sono errori mostra un dialog
+
             QMessageBox::information(this,"Info","I dati dell'utente sono stati modificati correttamente.", QMessageBox::Ok);
         }
         else

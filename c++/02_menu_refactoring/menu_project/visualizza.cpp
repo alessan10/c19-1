@@ -105,16 +105,8 @@ void Visualizza::dataReadFinished()
                    " - Data: " + p->date.getYear() + " " + p->date.getMonth() + " " + p->date.getDay() + " " + p->date.getDayOfWeek() +
                    " - Country: " + p->getCountry();
 
-           qDebug() << "My current Patient is: \n" << tmpPatient << "\n End current Patient \n";
-           //
-
-
            ui->table->insertRow(ui->table->rowCount());
            int row = ui->table->rowCount() -1;
-
-           //per renderlo non modificabile -non riesco a farlo funzionare-
-           /*QTableWidgetItem *itemName = new QTableWidgetItem();
-           itemName->setFlags(itemName->flags() ^ Qt::ItemIsEditable);*/
 
            ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
 

@@ -130,10 +130,11 @@ void Stats::dataReadFinished()
                out << (*i)->toR() << "\n";
            }
            file.close();
+
+           ui->positive_country->setEnabled(true);
+           ui->positive_year->setEnabled(true);
+           ui->positive_age->setEnabled(true);
        }
-
-
-
     }
 }
 // \"""\",
@@ -141,11 +142,9 @@ void Stats::dataReadFinished()
 
 void Stats::on_positive_country_clicked()
 {
-    //vai a togliere i set enable = false
-    //se il file è stato generato o se il bottone è stato premuto? meglio la prima!
-    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\geographical_script.r");
+    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\geo_script.r");
 
-    QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/geographychal_plot.jpg");
+    QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/geo_plot.jpg");
     ui->imageLabel->setPixmap(pix);
 }
 
@@ -172,6 +171,6 @@ void Stats::on_positive_age_clicked()
 {
     system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_eta.r");
 
-    /*QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/");
-    ui->imageLabel->setPixmap(pix);*/
+    QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_eta_plot.jpg");
+    ui->imageLabel->setPixmap(pix);
 }

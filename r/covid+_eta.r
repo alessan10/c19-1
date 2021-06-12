@@ -8,5 +8,7 @@ eta.vector = data.positive$Age #estraggo le età e le mettoin un vettore
 eta.vector.sorted = sort(eta.vector, decreasing = FALSE) #li ordino dal più piccolo al più grande
 eta.vector.counter = table(eta.vector.sorted) #conto quante volte si ripete ciascun valore di età
 
+jpeg("covid+_eta_plot.jpg", width = 1024, height = 768)
 dotplot(eta.vector.counter~eta.vector.sorted, ylab = "positivi", xlab="età")
+dev.off()
 #SISTEMALO!
