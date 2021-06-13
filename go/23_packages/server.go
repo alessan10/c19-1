@@ -129,13 +129,13 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 			log.Fatal(err)
 		}
 
-		patientResults := *resultToPatientsArray(&result)
+		patientsArray := *resultToPatientsArray(&result)
 
-		if len(patientResults) == 0 {
+		if len(patientsArray) == 0 {
 			http.Error(w, "Error: Patient not found", http.StatusNotFound)
 		} else {
-			fmt.Println("UPDATED CORRECTLY: ", patientResults)
-			err = json.NewEncoder(w).Encode(patientResults)
+			fmt.Println("UPDATED CORRECTLY: ", patientsArray)
+			err = json.NewEncoder(w).Encode(patientsArray)
 		}
 	}
 }
