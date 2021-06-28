@@ -32,7 +32,7 @@ L'idea di fondo è la seguente: a differenza di Immuni, in cui il contagiato non
 
 - ##### 2. Scelte implementative
 
-![img](https://github.com/andrea-calabretta/c19/blob/main/utils/documentazione/Diagram.jpg)
+![](D:\Alessandro\uniCT\Magistrale\Secondo_Anno\1_Advanced_Programming_Languages\Progetto_Esame\git_c19\c19\utils\documentazione\Diagram.jpg)
 
 Come evidenziato dalla precedente immagine, abbiamo deciso di utilizzare le seguenti tecnologie:
 
