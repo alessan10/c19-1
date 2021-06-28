@@ -32,7 +32,7 @@ L'idea di fondo è la seguente: a differenza di Immuni, in cui il contagiato non
 
 - ##### 2. Scelte implementative
 
-![]([c19/Diagram.jpg at alessandro · andrea-calabretta/c19 (github.com)](https://github.com/andrea-calabretta/c19/blob/alessandro/utils/documentazione/Diagram.jpg))
+![img]([c19/Diagram.jpg at alessandro · andrea-calabretta/c19 (github.com)](https://github.com/andrea-calabretta/c19/blob/alessandro/utils/documentazione/Diagram.jpg))
 
 Come evidenziato dalla precedente immagine, abbiamo deciso di utilizzare le seguenti tecnologie:
 
