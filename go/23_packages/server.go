@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/neo4j/neo4j-go-driver/neo4j"
 	"io"
 	"log"
 	"math/rand"
@@ -11,8 +10,9 @@ import (
 	"os"
 	"strconv"
 	"strings" //per controllo errori
-)
 
+	"github.com/neo4j/neo4j-go-driver/neo4j"
+)
 
 func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
@@ -28,7 +28,7 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 
 		query := `MATCH (p:Patient) 
 						WHERE p.name = $name AND p.surname = $surname
-						RETURN p.name as name, p.surname as surname, p.age as age, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
+						RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
 		result, err := session.Run(query, map[string]interface{}{
 			"name":    req.URL.Query()["name"][0],
@@ -107,7 +107,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 		query := `MATCH (p:Patient) WHERE p.name = $old_name AND p.surname = $old_surname
 							SET p.name = $name, p.surname = $surname, p.age = $age, p.covid = $covid, p.year = $year, p.month = $month, p.day = $day, p.weekday = $weekday, p.country = $country
-							RETURN p.name as name, p.surname as surname, p.age as age, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
+							RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
 		fmt.Println("URL old_name: ", req.URL.Query()["old_name"][0])
 		fmt.Println("URL old_surname: ", req.URL.Query()["old_surname"][0])
@@ -115,9 +115,11 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 		result, err := session.Run(query, map[string]interface{}{
 			"old_name":    req.URL.Query()["old_name"][0],
 			"old_surname": req.URL.Query()["old_surname"][0],
+			"id":          person.Id,
 			"name":        person.Name,
 			"surname":     person.Surname,
 			"age":         person.Age,
+			"chatid":      person.Chatid,
 			"covid":       person.Covid,
 			"year":        person.Year,
 			"month":       person.Month,
@@ -335,7 +337,7 @@ func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 
 		query := `MATCH (p:Patient) 
 						WHERE p.name = $name AND p.surname = $surname
-						RETURN p.name as name, p.surname as surname, p.age as age, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
+						RETURN p.id as id, p.name as name, p.surname as surname, p.age as age, p.chatid as chatid, p.covid as covid, p.year as year, p.month as month, p.day as day, p.weekday as weekday, p.country as country`
 
 		result, err := session.Run(query, map[string]interface{}{
 			"name":    req.URL.Query()["name"][0],
@@ -382,10 +384,10 @@ func main() {
 	defer unsafeClose(driver)
 
 	/*
-	ServeMux is an HTTP request multiplexer.
-	It matches the URL of each incoming request against a list of registered patterns and calls the handler for the pattern
-	that most closely matches the URL.
-	 */
+		ServeMux is an HTTP request multiplexer.
+		It matches the URL of each incoming request against a list of registered patterns and calls the handler for the pattern
+		that most closely matches the URL.
+	*/
 	serveMux := http.NewServeMux() //NewServeMux allocates and returns a new ServeMux.
 
 	// HandleFunc registers the handler function for the given pattern.
@@ -405,7 +407,6 @@ func main() {
 
 }
 
-
 func unsafeClose(closeable io.Closer) {
 	if err := closeable.Close(); err != nil {
 		log.Fatal(fmt.Errorf("could not close resource: %w", err))
@@ -419,6 +420,3 @@ func PadLeft(str, pad string, lenght int) string {
 	}
 	return str[0:lenght]
 }
-
-
-

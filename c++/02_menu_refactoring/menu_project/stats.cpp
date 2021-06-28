@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QFileDialog>
 using namespace std;
 
 Stats::Stats(QWidget *parent) :
@@ -112,6 +113,33 @@ void Stats::dataReadFinished()
             (*i)->toString();
        }
 
+       /*
+       //QFileDialog object
+       QFileDialog objFlDlg(this);
+       //Set the file dialog option to show the directory only
+       objFlDlg.setOption(QFileDialog::ShowDirsOnly, true);
+       //Show the file dialog as a save file dialog
+       objFlDlg.setAcceptMode(QFileDialog::AcceptSave);
+       //The constant file name
+       objFlDlg.selectFile("out.csv");
+       //Make the file dialog file name read only
+       //The file name entering widget is a QLineEdit
+       //So find the widget in the QFileDialog
+
+
+       //QList<QLineEdit *> lst =objFlDlg.findChildren<QLineEdit *>();
+       //qDebug() << lst.count();
+       //if(lst.count()==1){
+       //lst.at(0)->setReadOnly(true);
+       //}else{
+       //Need to be handled if more than one QLineEdit found
+       //}
+       //Show the file dialog
+       //If save button clicked
+       if(objFlDlg.exec()){
+           qDebug() << objFlDlg.selectedFiles().at(0)+".c";
+           qDebug() << objFlDlg.selectedFiles().at(0)+".h";
+        }*/
 
        QFile file("C:/Users/alexm/Downloads/out.csv");
        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)){
