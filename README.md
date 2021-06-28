@@ -55,10 +55,6 @@ In particolare, le statistiche sono utili a visualizzare:
 - l'andamento dei positivi in un dato anno;
 - l'andamento dei positivi in base all'età.
 
-###### App mobile: C#
-
-...
-
 ###### Database: NEO4J
 
 Database noSQL nel quale vengono memorizzati gli utenti e le loro interazioni. La scelta di un "graph database" ci permette di memorizzare efficientemente le relazioni tra i pazienti evitando replicazioni di dati. Per popolare inizialmente il database abbiamo implementato un algoritmo JavaScript che genera un numero di soggetti fittizi con i relativi campi (nome, cognome, ecc.) da inserire nel DB.
@@ -70,22 +66,26 @@ Database noSQL nel quale vengono memorizzati gli utenti e le loro interazioni. L
   - Scaricare e avviare Neo4J Desktop, creare un Database e nominarlo “c19”, al suo interno definire: Utente : neo4j - Password: c19
 
   - Supponendo di aver già installato node.js, popolare il database eseguendo sul terminale il comando all’interno della cartella neo4j_js :
-    *<u>node generator.js <**N**></u>*
+    *<u>`db_generator.js <**N**>`</u>*
     dove <**N**> è uguale al numero di pazienti che si vogliono generare.
     Per ottenere dati verosimili, è consigliato un valore compreso tra 100 e 300 (per valori superiori a 300 i nomi e i cognomi fittizi potrebbero ripetersi).
 
-    Verrà prodotto un file di testo “queries_neo4j.txt” che conterrà le queries da incollare all’interno di Neo4J Browser.
+    Verrà prodotto nella stessa directory un file di testo “queries_neo4j.txt” che conterrà le queries da incollare all’interno di Neo4J Browser.
     Il grafo così generato avrà un aspetto simile a quello della figura sottostante, i cui nodi sono persone fittizie e gli archi sono le interazioni tra di esse, generate tramite un algoritmo pseudorandom: 
 
     ![img](https://lh5.googleusercontent.com/bKmIuutiC_l5zs4xwevsgFwbdSc_RAHKR9RhLOPk6IOnlkDbn0iJyGur-zmcpeLUXeu8o5NU1C4IUWy-IHMZU3HNKjloJHZ7hCiJVyFyrWnUDSbHOykFw5Na420DtCh7tvHazR1v)
     
-  - Avviare il server Go digitando sul terminale il comando: *<u>go run server.go</u>*
+  - Accedere alla cartella go/server e avviare il server Go digitando sul terminale il comando: 
+    
+    *<u>`go run .`</u>*
     Dopo aver consentito l'accesso richiesto dal firewall, sarà possibile visualizzare sul terminale il messaggio “SERVER UP" qualora la procedura sia andata a buon fine.
-    A questo punto è possibile avviare il client oppure registrarsi al database tramite bot Telegram. 
-    Vediamo nel dettaglio entrambe le opzioni:
-    - Avviare il client simulando l’azienda ospedaliera che ha accesso al database generale in modo tale da poter visualizzare la situazione dei contagi e vedere le interazioni tra gli utenti.
-    - Avviare l’app Telegram sul proprio smartphone e cercare il bot denominato “Covid-19 Tracking Bot”, per registrarsi o per ricevere notifiche push in caso di contatto con un positivo.
-  - 
+    
+  - A questo punto è possibile avviare il client, simulando l’azienda ospedaliera che ha accesso al database generale in modo tale da poter visualizzare la situazione dei contagi e vedere le interazioni tra gli utenti. Sarà inoltre possibile eseguire le classiche operazioni CRUD tramite interfaccia utente per manipolare i dati.
+  
+  - Nella sezione Visualizza/Visualizza Statistiche è possibile lanciare gli R script per la data analysis.
+    
+  
+- 
 
 
 
