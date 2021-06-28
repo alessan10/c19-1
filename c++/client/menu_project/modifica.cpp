@@ -36,9 +36,6 @@ QString old_name, old_surname;
 
 void Modifica::on_pushButton_clicked()
 {
-    //QString name = ui->nome->text();
-    //QString surname = ui->cognome->text();
-
     old_name = ui->nome->text();
     old_surname = ui->cognome->text();
 
@@ -51,7 +48,6 @@ void Modifica::on_pushButton_clicked()
     {
         //Initialize our API data
         const QUrl API_ENDPOINT("http://localhost:8081/simplesearch?name="+old_name+"&surname="+old_surname);
-        //const QUrl API_ENDPOINT("http://localhost:8081/simplesearch?name="+name+"&surname="+surname);
         QNetworkRequest request;
         request.setUrl(API_ENDPOINT);
 

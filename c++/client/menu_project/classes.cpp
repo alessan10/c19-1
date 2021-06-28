@@ -13,7 +13,6 @@ Person::~Person(){
     qDebug() << "Person destructor called";
 }
 
-//Date::~Date(){}
 
 void Date::conversion(QDate & q){
 
@@ -134,23 +133,6 @@ void Patient::toString()
     qDebug() << "Country: " << country;
 
 }
-/*funzione buona
-QString Patient::toR()
-{
-    QString str =
-            "\"" + country + "\"," +
-            "\"" + date.getDayOfWeek() + "\"," +
-            "\"" + date.getDay() + "\"," +
-            "\"" + date.getMonth() + "\"," +
-            "\"" + date.getYear() + "\"," +
-            "\"" + chatId + "\"," +
-            "\"" + covid + "\"," +
-            "\"" + age + "\"," +
-            "\"" + surname + "\","
-            "\"" + name + "\","
-            "\"" + id + "\"";
-    return str;
-}*/
 
 QString Patient::toR()
 {

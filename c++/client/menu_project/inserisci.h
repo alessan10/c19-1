@@ -22,8 +22,6 @@ public:
     void cleanUp() override;
 
 private slots:
-    //void on_buttonBox_clicked(QAbstractButton *button);
-
     void on_save_button_clicked(QAbstractButton *button);
 
 private:

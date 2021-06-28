@@ -78,8 +78,6 @@ void Worker::dataReadFinished(){
 
 }
 
-
-
 void Worker::authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator)
 {
     Q_UNUSED(reply);
