@@ -21,6 +21,7 @@ class Visualizza : public QDialog
 public:
     explicit Visualizza(QWidget *parent = nullptr);
     ~Visualizza();
+    void patientToTable(Patient *p, int row);
 
 private slots:
     void on_pushButton_clicked();

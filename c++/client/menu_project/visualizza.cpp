@@ -71,7 +71,7 @@ void Visualizza::dataReadFinished()
 
       //Turn document into json array
        QJsonArray array = mDoc.array();
-       QList<Patient *> patients_list;
+       //QList<Patient *> patients_list;
        Patient *p = new Patient();
 
        for ( int i = 0; i < array.size(); i++)
@@ -92,10 +92,10 @@ void Visualizza::dataReadFinished()
                object["country"].toString()
            );
 
-           patients_list.push_back(p);
+           //patients_list.push_back(p);
 
            //
-           QString tmpPatient =
+           /*QString tmpPatient =
                    "Id: " + p->getId() +
                    " - Nome: " + p->getName() +
                    " - Cognome: " + p->getSurname() +
@@ -103,11 +103,11 @@ void Visualizza::dataReadFinished()
                    " - ChatID: "  + p->getChatId() +
                    " - Covid: " + p->getCovid() +
                    " - Data: " + p->date.getYear() + " " + p->date.getMonth() + " " + p->date.getDay() + " " + p->date.getDayOfWeek() +
-                   " - Country: " + p->getCountry();
+                   " - Country: " + p->getCountry();*/
 
-           ui->table->insertRow(ui->table->rowCount());
-           int row = ui->table->rowCount() -1;
-
+           ui->table->insertRow(i);
+           patientToTable(p, i);
+/*
            ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
 
            ui->table->setItem(row, Nome, new QTableWidgetItem(p->getName()));
@@ -129,9 +129,23 @@ void Visualizza::dataReadFinished()
            ui->table->setItem(row, Giorno_della_settimana, new QTableWidgetItem(p->date.getDayOfWeek()));
 
            ui->table->setItem(row, Paese, new QTableWidgetItem(p->getCountry()));
-
+*/
        }
        delete p;
 
     }   
+}
+
+void Visualizza::patientToTable(Patient *p, int row){
+    ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
+    ui->table->setItem(row, Nome, new QTableWidgetItem(p->getName()));
+    ui->table->setItem(row, Cognome, new QTableWidgetItem(p->getSurname()));
+    ui->table->setItem(row, Eta, new QTableWidgetItem(p->getAge()));
+    ui->table->setItem(row, ChatID, new QTableWidgetItem(p->getChatId()));
+    ui->table->setItem(row, Covid, new QTableWidgetItem(p->getCovid()));
+    ui->table->setItem(row, Anno, new QTableWidgetItem(p->date.getYear()));
+    ui->table->setItem(row, Mese, new QTableWidgetItem(p->date.getMonth()));
+    ui->table->setItem(row, Giorno, new QTableWidgetItem(p->date.getDay()));
+    ui->table->setItem(row, Giorno_della_settimana, new QTableWidgetItem(p->date.getDayOfWeek()));
+    ui->table->setItem(row, Paese, new QTableWidgetItem(p->getCountry()));
 }
