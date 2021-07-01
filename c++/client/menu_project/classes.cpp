@@ -93,9 +93,11 @@ void Date::conversion(QDate & q){
 
 Patient::Patient(QJsonObject object)
 {
+    setId( object["id"].toString());
     setName( object["name"].toString());
     setSurname ( object["surname"].toString());
     setAge( object["age"].toString());
+    setChatId( object["chatid"].toString());
     setCovid( object["covid"].toString());
     date.setYear(object["year"].toString());
     date.setMonth( object["month"].toString());

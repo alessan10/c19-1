@@ -16,9 +16,9 @@
 
 - ##### Indice
 
-  - 1. Introduzione
-    2. Scelte Implementative
-    3. Come avviare il progetto
+  1. Introduzione
+  2. Scelte Implementative
+  3. Come avviare il progetto
 
   
 
@@ -40,7 +40,7 @@ Come evidenziato dalla precedente immagine, abbiamo deciso di utilizzare le segu
 
 Poiché i client possono utilizzare qualsiasi sistema operativo (Windows, Linux, MacOS), C++ ci garantisce una ragionevole portabilità per tutti questi sistemi.
 
-In dettaglio, abbiamo sfruttato le potenzialità dell'ambiente di sviluppo QTCreator per la realizzazione di un client dotato di interfaccia utente grafica che si adatta ai differenti sistemi operativi (Windows, Linux, MacOS) a partire da un unico codice sorgente. Mette inoltre a disposizione tutti gli elementi grafici necessari compresi metodi e funzioni per ottenere 
+In dettaglio, abbiamo sfruttato le potenzialità dell'ambiente di sviluppo QTCreator per la realizzazione di un client dotato di interfaccia utente, che si adatta ai differenti sistemi operativi (Windows, Linux, MacOS) a partire da un unico codice sorgente. Mette inoltre a disposizione tutti gli elementi grafici necessari compresi metodi e funzioni per ottenere una UI responsive.
 
 ###### Server: Golang
 
@@ -48,16 +48,18 @@ Essendo un’applicazione su larga scala, i server sono soggetti a una grande so
 
 ###### Statistiche: R
 
-Il linguaggio R ci consente di produrre statistiche in maniera efficiente e di facile lettura. Gli script, uno per ogni statistica, vengono lanciati dal client e producono un'immagine contenente la statistica richiesta. Questa immagine verrà poi invocata all'interno di una specifica area della view del client.
+Il linguaggio R ci consente di produrre statistiche in maniera efficiente e di facile lettura. Gli script, uno per ogni statistica, vengono lanciati* dal client e producono un'immagine contenente la statistica richiesta. Questa immagine verrà poi invocata all'interno di una specifica area della view del client.
 In particolare, le statistiche sono utili a visualizzare:
 
 - il numero dei positivi in base alla nazione di appartenenza;
 - l'andamento dei positivi in un dato anno;
 - l'andamento dei positivi in base all'età.
 
+*L'invocazione degli script è stata implementata in maniera statica. Per testarla su altri dispositivi, vanno modificati il path di RScript, quello dello script relativo alla statistica e il percorso di salvataggio del file .csv.
+
 ###### Database: NEO4J
 
-Database noSQL nel quale vengono memorizzati gli utenti e le loro interazioni. La scelta di un "graph database" ci permette di memorizzare efficientemente le relazioni tra i pazienti evitando replicazioni di dati. Per popolare inizialmente il database abbiamo implementato un algoritmo JavaScript che genera un numero di soggetti fittizi con i relativi campi (nome, cognome, ecc.) da inserire nel DB.
+Si tratta di un database di tipo noSQL nel quale vengono memorizzati gli utenti e le loro interazioni. La scelta di un "graph database" ci permette di memorizzare efficientemente le relazioni tra i pazienti evitando replicazioni di dati. Per popolare inizialmente il database abbiamo implementato un algoritmo JavaScript che genera un numero di soggetti fittizi con i relativi campi (nome, cognome, ecc.) da inserire nel DB.
 
 
 
@@ -87,8 +89,6 @@ Database noSQL nel quale vengono memorizzati gli utenti e le loro interazioni. L
     
     Dopo aver consentito l'accesso richiesto dal firewall, sarà possibile visualizzare sul terminale il messaggio “SERVER UP" qualora la procedura sia andata a buon fine.
     
-  - A questo punto è possibile avviare il client, simulando l’azienda ospedaliera che ha accesso al database generale in modo tale da poter visualizzare la situazione dei contagi e vedere le interazioni tra gli utenti. Sarà inoltre possibile eseguire le classiche operazioni CRUD tramite interfaccia utente per manipolare i dati.
-  
-  - Nella sezione Visualizza/Visualizza Statistiche è possibile lanciare gli R script per la data analysis.
+  - A questo punto è possibile avviare il client, simulando l’azienda ospedaliera che ha accesso al database generale in modo tale da poter visualizzare la situazione dei contagi e vedere le interazioni tra gli utenti. Sarà inoltre possibile eseguire le classiche operazioni CRUD per manipolare i dati inseriti, inserirne di nuovi o eliminarli. Infine, nella sezione Visualizza/Visualizza Statistiche è possibile lanciare gli R script per la data analysis.
   
 

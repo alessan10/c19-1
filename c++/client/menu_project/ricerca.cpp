@@ -92,7 +92,7 @@ void Ricerca::dataReadFinished()
        QJsonDocument * mDoc = new QJsonDocument() ;
        *mDoc = QJsonDocument::fromJson(*mDataBuffer);
 
-       qDebug() << mDoc->object().value("patient").toArray().size();
+       qDebug()<< mDoc->object().value("patient").toArray().size();
 
        //Turn document into json array
 
