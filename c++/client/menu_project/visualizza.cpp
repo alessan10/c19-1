@@ -76,9 +76,10 @@ void Visualizza::dataReadFinished()
 
        for ( int i = 0; i < array.size(); i++)
        {
-           QJsonObject object = array.at(i).toObject().value("patient").toObject();
+           QJsonObject jsonPatient = array.at(i).toObject().value("patient").toObject();
 
-           Patient *p = new Patient(
+           Patient p = Patient(jsonPatient);
+           /*Patient *p = new Patient(
                object["id"].toString(),
                object["name"].toString(),
                object["surname"].toString(),
@@ -90,7 +91,7 @@ void Visualizza::dataReadFinished()
                object["day"].toString(),
                object["weekday"].toString(),
                object["country"].toString()
-           );
+           );*/
 
            //patients_list.push_back(p);
 
@@ -106,7 +107,7 @@ void Visualizza::dataReadFinished()
                    " - Country: " + p->getCountry();*/
 
            ui->table->insertRow(i);
-           patientToTable(p, i);
+           patientToTable(&p, i);
 /*
            ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
 
