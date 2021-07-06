@@ -8,12 +8,12 @@ library(cartography)
 #title("Population in 2008")
 
 #my version
-data = read.csv("") #importo il dataframe
+data = read.csv("/Users/andreacalabretta/Downloads/out.csv") #importo il dataframe
 data.positive.bycountry = subset(data, Covid == "positivo", select = c(Country, Covid)) #creo un subset con solo i positivi
 country.vector = data.positive.bycountry$Country #metto le country in un vettore
 country.vector.counter = table(country.vector) #conto quante sono
 new.df = as.data.frame.table(country.vector.counter) #trasformo in un dataframe la tabella dove ho conteggiato le country
-jpeg("geo_plot.jpg", width = 1024, height = 768)
+jpeg("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/geo_plot.jpg", width = 1024, height = 768)
 choroLayer(spdf = nuts0.spdf, df = new.df, var = "Freq" , legend.pos = "right") #plotto
 title("Positive by Country")
 dev.off()
