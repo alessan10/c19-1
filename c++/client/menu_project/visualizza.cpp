@@ -79,58 +79,9 @@ void Visualizza::dataReadFinished()
            QJsonObject jsonPatient = array.at(i).toObject().value("patient").toObject();
 
            Patient p = Patient(jsonPatient);
-           /*Patient *p = new Patient(
-               object["id"].toString(),
-               object["name"].toString(),
-               object["surname"].toString(),
-               object["age"].toString(),
-               object["chatId"].toString(),
-               object["covid"].toString(),
-               object["year"].toString(),
-               object["month"].toString(),
-               object["day"].toString(),
-               object["weekday"].toString(),
-               object["country"].toString()
-           );*/
-
-           //patients_list.push_back(p);
-
-           //
-           /*QString tmpPatient =
-                   "Id: " + p->getId() +
-                   " - Nome: " + p->getName() +
-                   " - Cognome: " + p->getSurname() +
-                   " - Age: " + p->getAge() +
-                   " - ChatID: "  + p->getChatId() +
-                   " - Covid: " + p->getCovid() +
-                   " - Data: " + p->date.getYear() + " " + p->date.getMonth() + " " + p->date.getDay() + " " + p->date.getDayOfWeek() +
-                   " - Country: " + p->getCountry();*/
 
            ui->table->insertRow(i);
            patientToTable(&p, i);
-/*
-           ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
-
-           ui->table->setItem(row, Nome, new QTableWidgetItem(p->getName()));
-
-           ui->table->setItem(row, Cognome, new QTableWidgetItem(p->getSurname()));
-
-           ui->table->setItem(row, Eta, new QTableWidgetItem(p->getAge()));
-
-           ui->table->setItem(row, ChatID, new QTableWidgetItem(p->getChatId()));
-
-           ui->table->setItem(row, Covid, new QTableWidgetItem(p->getCovid()));
-
-           ui->table->setItem(row, Anno, new QTableWidgetItem(p->date.getYear()));
-
-           ui->table->setItem(row, Mese, new QTableWidgetItem(p->date.getMonth()));
-
-           ui->table->setItem(row, Giorno, new QTableWidgetItem(p->date.getDay()));
-
-           ui->table->setItem(row, Giorno_della_settimana, new QTableWidgetItem(p->date.getDayOfWeek()));
-
-           ui->table->setItem(row, Paese, new QTableWidgetItem(p->getCountry()));
-*/
        }
        delete p;
 
