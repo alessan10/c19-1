@@ -1,20 +1,18 @@
 library(cartography)
 
-# Load data
-#data(nuts2006)
-
-# Build a choropleth
-#choroLayer(spdf = nuts0.spdf, df = nuts0.df, var = "death_2008" , legend.pos = "right")
-#title("Population in 2008")
-
-#my version
-data = read.csv("C:/Users/alexm/Downloads/out.csv") #importo il dataframe
-data.positive.bycountry = subset(data, Covid == "positivo", select = c(Country, Covid)) #creo un subset con solo i positivi
-country.vector = data.positive.bycountry$Country #metto le country in un vettore
-country.vector.counter = table(country.vector) #conto quante sono
-new.df = as.data.frame.table(country.vector.counter) #trasformo in un dataframe la tabella dove ho conteggiato le country
-jpeg("geo_plot.jpg", width = 1024, height = 768)
-choroLayer(spdf = nuts0.spdf, df = new.df, var = "Freq" , legend.pos = "right") #plotto
+#importo il dataframe
+data = read.csv("C:/Users/alexm/Downloads/out.csv") 
+#creo un subset con solo i positivi
+data.positive.bycountry = subset(data, Covid == "positivo", select = c(Country, Covid)) 
+#metto le country in un vettore
+country.vector = data.positive.bycountry$Country 
+#conto quanti sono i positivi per ogni country
+country.vector.counter = table(country.vector) 
+#trasformo in un dataframe la tabella dove ho conteggiato le country
+new.df = as.data.frame.table(country.vector.counter) 
+#creo il file jpeg
+jpeg("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/geo_plot.jpg", width = 1024, height = 768)
+#plotto
+choroLayer(spdf = nuts0.spdf, df = new.df, var = "Freq" , legend.pos = "right") 
 title("Positive by Country")
 dev.off()
-

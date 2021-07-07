@@ -17,13 +17,9 @@ class Worker : public QObject
 public:
     explicit Worker(QObject *parent = nullptr);
 
-signals:
-
 public slots:
-
      void get(QString location);
      void post(QString location, QByteArray data);
-
 
 private slots:
 

@@ -39,6 +39,7 @@ private:
     QByteArray * mDataBuffer;
     Worker *worker;
     Patient *patient;
+
     enum Columns{
         ID,
         Nome,

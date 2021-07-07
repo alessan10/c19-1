@@ -25,7 +25,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionAbout_Our_Project_triggered()
 {
-    QMessageBox::about(this, "Message", "This is ...");
+    QMessageBox::about(this, "Message", "This is the first version of C19 Tracking System!");
 }
 
 void MainWindow::on_actionExit_triggered()
