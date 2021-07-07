@@ -11,7 +11,6 @@ Worker::Worker(QObject *parent) :
     mNetReply(nullptr),
     mDataBuffer(new QByteArray)
 {
-
     connect(mNetManager,&QNetworkAccessManager::authenticationRequired,this,&Worker::authenticationRequired);
     connect(mNetManager,&QNetworkAccessManager::encrypted,this,&Worker::encrypted);
     connect(mNetManager,&QNetworkAccessManager::preSharedKeyAuthenticationRequired,this,&Worker::preSharedKeyAuthenticationRequired);
@@ -19,7 +18,7 @@ Worker::Worker(QObject *parent) :
     connect(mNetManager,&QNetworkAccessManager::sslErrors,this,&Worker::sslErrors);
 }
 
-void  Worker::get(QString location)
+void Worker::get(QString location)
 {
     qInfo() << "Getting from server...";
     QNetworkReply* reply = mNetManager->get(QNetworkRequest(QUrl(location)));

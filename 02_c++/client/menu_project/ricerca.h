@@ -24,7 +24,6 @@ public:
     void cleanUp() override;
     void patientToTable(Patient *p, int row);
 
-
 private slots:
     void on_searchButton_clicked();
     void dataReadyRead();
@@ -39,6 +38,7 @@ private:
     QByteArray * mDataBuffer;
     Worker *worker;
     Patient *patient;
+
     enum Columns{
         ID,
         Nome,

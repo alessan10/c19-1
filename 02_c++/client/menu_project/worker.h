@@ -17,19 +17,14 @@ class Worker : public QObject
 public:
     explicit Worker(QObject *parent = nullptr);
 
-signals:
-
 public slots:
-
      void get(QString location);
      void post(QString location, QByteArray data);
-
 
 private slots:
 
     void readyRead();
     void dataReadFinished();
-
     void authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);
     void encrypted(QNetworkReply *reply);
     void finished(QNetworkReply *reply);

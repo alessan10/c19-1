@@ -20,17 +20,11 @@ public:
 
 private slots:
     void on_actionAbout_Our_Project_triggered();
-
     void on_actionExit_triggered();
-
     void on_actioninserisci_triggered();
-
     void on_actionRicerca_triggered();
-
     void on_actionVisualizza_Database_triggered();
-
     void on_actionVisualizza_Statistiche_triggered();
-
     void on_actionModifica_Dati_Paziente_triggered();
 
 private:
