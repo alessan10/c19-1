@@ -15,7 +15,7 @@
 #include <QDate>
 #include <QStringBuilder>
 
-Modifica::Modifica(Worker &worker, QWidget *parent) :
+Modifica::Modifica(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Modifica),
     mNetManager(new QNetworkAccessManager(this)),
@@ -23,7 +23,7 @@ Modifica::Modifica(Worker &worker, QWidget *parent) :
     mDataBuffer(new QByteArray),
     worker(nullptr)
 {
-    this->worker = &worker;
+//    this->worker = &worker;
     ui->setupUi(this);
 }
 

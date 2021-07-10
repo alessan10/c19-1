@@ -14,8 +14,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-     MainWindow(Worker &worker, QWidget *parent = nullptr);
-    //MainWindow(QWidget *parent = nullptr);
+//     MainWindow(Worker &worker, QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -29,6 +29,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Worker worker;
+//    Worker worker;
 };
 #endif // MAINWINDOW_H

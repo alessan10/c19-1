@@ -40,42 +40,42 @@ Worker::Worker(QObject *parent) :
 
 
 
-void Worker::readyRead()
-{
-    qInfo() << "Entro in readyRead";
-    qInfo() << "ReadyRead";
+//void Worker::readyRead()
+//{
+//    qInfo() << "Entro in readyRead";
+//    qInfo() << "ReadyRead";
 
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-    mDataBuffer->append(reply->readAll());
-    if(reply) qInfo() << reply->readAll();
-}
+//    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+//    mDataBuffer->append(reply->readAll());
+//    if(reply) qInfo() << reply->readAll();
+//}
 
-void Worker::dataReadFinished(){
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-    if(reply->error()){
-        qDebug() << "Error: " << reply->errorString();
-    }
-    qDebug() << "Data fetch finished : " << QString(*mDataBuffer);
-    QJsonDocument mDoc;
-    mDoc = QJsonDocument::fromJson(*mDataBuffer);
+//void Worker::dataReadFinished(){
+//    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+//    if(reply->error()){
+//        qDebug() << "Error: " << reply->errorString();
+//    }
+//    qDebug() << "Data fetch finished : " << QString(*mDataBuffer);
+//    QJsonDocument mDoc;
+//    mDoc = QJsonDocument::fromJson(*mDataBuffer);
 
-    qDebug() <<mDoc.object().value("cperson").toArray().size();
+//    qDebug() <<mDoc.object().value("cperson").toArray().size();
 
-    QJsonArray array = mDoc.array();
+//    QJsonArray array = mDoc.array();
 
-    for(int i = 0; i < array.size(); i++)
-    {
-        QJsonObject object = array.at(i).toObject().value("cperson").toObject();
-        QString name = object["name"].toString();
-        QString chatid = object["chatid"].toString();
-        QString covid = object["covid"].toString();
+//    for(int i = 0; i < array.size(); i++)
+//    {
+//        QJsonObject object = array.at(i).toObject().value("cperson").toObject();
+//        QString name = object["name"].toString();
+//        QString chatid = object["chatid"].toString();
+//        QString covid = object["covid"].toString();
 
-        QString c0 = mDoc.object().value("cperson").toArray().at(i).toObject().value("name").toString();
-        qDebug() << c0;
-    }
+//        QString c0 = mDoc.object().value("cperson").toArray().at(i).toObject().value("name").toString();
+//        qDebug() << c0;
+//    }
 
 
-}
+//}
 
 //void Worker::authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator)
 //{

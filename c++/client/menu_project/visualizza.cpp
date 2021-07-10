@@ -88,6 +88,8 @@ void Visualizza::dataReadFinished()
     }   
 }
 
+
+
 void Visualizza::patientToTable(Patient *p, int row){
     ui->table->setItem(row, ID, new QTableWidgetItem(p->getId()));
     ui->table->setItem(row, Nome, new QTableWidgetItem(p->getName()));

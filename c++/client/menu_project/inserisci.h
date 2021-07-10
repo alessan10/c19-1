@@ -17,7 +17,7 @@ class Inserisci : public QDialog, private GuiUtility
     Q_OBJECT
 
 public:
-    explicit Inserisci(Worker &worker, QWidget *parent = nullptr);
+    explicit Inserisci(QWidget *parent = nullptr);
     ~Inserisci();
     void cleanUp() override;
 
@@ -29,7 +29,7 @@ private:
     QNetworkAccessManager * mNetManager;
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
-    Worker *worker;
+//    Worker *worker;
 };
 
 #endif // INSERISCI_H

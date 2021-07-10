@@ -15,14 +15,14 @@
 #include <QDate>
 #include <QStringBuilder>
 
-Inserisci::Inserisci(Worker &worker, QWidget *parent) :
+Inserisci::Inserisci( QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Inserisci),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
     mDataBuffer(new QByteArray)
 {
-    this->worker = &worker;
+//    this->worker = &worker;
     ui->setupUi(this);
 }
 

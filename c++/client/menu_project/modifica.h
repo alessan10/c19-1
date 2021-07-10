@@ -20,7 +20,7 @@ class Modifica : public QDialog, private GuiUtility
     Q_OBJECT
 
 public:
-    explicit Modifica(Worker & worker, QWidget *parent = nullptr);
+    explicit Modifica(QWidget *parent = nullptr);
     ~Modifica();
     void cleanUp() override;
     void setUiFieldsFromPatient(Patient *patient);

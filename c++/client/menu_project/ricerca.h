@@ -19,7 +19,7 @@ class Ricerca : public QDialog, private GuiUtility
 {
     Q_OBJECT
 public:
-    explicit Ricerca(Worker & worker, QWidget *parent = nullptr);
+    explicit Ricerca(QWidget *parent = nullptr);
     ~Ricerca();
     void cleanUp() override;
     void patientToTable(Patient *p, int row);
