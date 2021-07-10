@@ -9,7 +9,7 @@
 
 namespace Ui
 {
-class Inserisci;
+    class Inserisci;
 }
 
 class Inserisci : public QDialog, private GuiUtility

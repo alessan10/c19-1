@@ -20,8 +20,7 @@ Inserisci::Inserisci(Worker &worker, QWidget *parent) :
     ui(new Ui::Inserisci),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
-    mDataBuffer(new QByteArray),
-    worker(nullptr)
+    mDataBuffer(new QByteArray)
 {
     this->worker = &worker;
     ui->setupUi(this);
@@ -29,7 +28,7 @@ Inserisci::Inserisci(Worker &worker, QWidget *parent) :
 
 Inserisci::~Inserisci()
 {
-    delete ui;
+   delete ui;
 }
 
 void Inserisci::on_save_button_clicked(QAbstractButton *button)

@@ -11,32 +11,32 @@ Worker::Worker(QObject *parent) :
     mNetReply(nullptr),
     mDataBuffer(new QByteArray)
 {
-    connect(mNetManager,&QNetworkAccessManager::authenticationRequired,this,&Worker::authenticationRequired);
-    connect(mNetManager,&QNetworkAccessManager::encrypted,this,&Worker::encrypted);
-    connect(mNetManager,&QNetworkAccessManager::preSharedKeyAuthenticationRequired,this,&Worker::preSharedKeyAuthenticationRequired);
-    connect(mNetManager,&QNetworkAccessManager::proxyAuthenticationRequired,this,&Worker::proxyAuthenticationRequired);
-    connect(mNetManager,&QNetworkAccessManager::sslErrors,this,&Worker::sslErrors);
+//    connect(mNetManager,&QNetworkAccessManager::authenticationRequired,this,&Worker::authenticationRequired);
+//    connect(mNetManager,&QNetworkAccessManager::encrypted,this,&Worker::encrypted);
+//    connect(mNetManager,&QNetworkAccessManager::preSharedKeyAuthenticationRequired,this,&Worker::preSharedKeyAuthenticationRequired);
+//    connect(mNetManager,&QNetworkAccessManager::proxyAuthenticationRequired,this,&Worker::proxyAuthenticationRequired);
+//    connect(mNetManager,&QNetworkAccessManager::sslErrors,this,&Worker::sslErrors);
 }
 
-void Worker::get(QString location)
-{
-    qInfo() << "Getting from server...";
-    QNetworkReply* reply = mNetManager->get(QNetworkRequest(QUrl(location)));
-    connect(reply,&QIODevice::readyRead,this,&Worker::readyRead);
-    connect(reply, &QNetworkReply::finished, this,&Worker::dataReadFinished );
-    qInfo()<< "Fatto";
+//void Worker::get(QString location)
+//{
+//    qInfo() << "Getting from server...";
+//    QNetworkReply* reply = mNetManager->get(QNetworkRequest(QUrl(location)));
+//    connect(reply,&QIODevice::readyRead,this,&Worker::readyRead);
+//    connect(reply, &QNetworkReply::finished, this,&Worker::dataReadFinished );
+//    qInfo()<< "Done";
 
-}
+//}
 
-void Worker::post(QString location, QByteArray data)
-{
-    qInfo() << "Posting to server...";
-    QNetworkRequest request = QNetworkRequest(QUrl(location));
-    request.setHeader(QNetworkRequest::ContentTypeHeader,"text/plain");
+//void Worker::post(QString location, QByteArray data)
+//{
+//    qInfo() << "Posting to server...";
+//    QNetworkRequest request = QNetworkRequest(QUrl(location));
+//    request.setHeader(QNetworkRequest::ContentTypeHeader,"text/plain");
 
-    QNetworkReply* reply = mNetManager->post(request,data);
-    connect(reply,&QNetworkReply::readyRead,this,&Worker::readyRead);
-}
+//    QNetworkReply* reply = mNetManager->post(request,data);
+//    connect(reply,&QNetworkReply::readyRead,this,&Worker::readyRead);
+//}
 
 
 
@@ -77,47 +77,47 @@ void Worker::dataReadFinished(){
 
 }
 
-void Worker::authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator)
-{
-    Q_UNUSED(reply);
-    Q_UNUSED(authenticator);
-    qInfo() << "authenticationRequired";
-}
+//void Worker::authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator)
+//{
+//    Q_UNUSED(reply);
+//    Q_UNUSED(authenticator);
+//    qInfo() << "authenticationRequired";
+//}
 
-void Worker::encrypted(QNetworkReply *reply)
-{
-    Q_UNUSED(reply);
-    qInfo() << "encrypted";
-}
+//void Worker::encrypted(QNetworkReply *reply)
+//{
+//    Q_UNUSED(reply);
+//    qInfo() << "encrypted";
+//}
 
-void Worker::finished(QNetworkReply *reply)
-{
-    Q_UNUSED(reply);
-    qInfo() << "finished";
-}
+//void Worker::finished(QNetworkReply *reply)
+//{
+//    Q_UNUSED(reply);
+//    qInfo() << "finished";
+//}
 
 
 
-void Worker::preSharedKeyAuthenticationRequired(QNetworkReply *reply, QSslPreSharedKeyAuthenticator *authenticator)
-{
-    Q_UNUSED(reply);
-    Q_UNUSED(authenticator);
-    qInfo() << "preSharedKeyAuthenticationRequired";
-}
+//void Worker::preSharedKeyAuthenticationRequired(QNetworkReply *reply, QSslPreSharedKeyAuthenticator *authenticator)
+//{
+//    Q_UNUSED(reply);
+//    Q_UNUSED(authenticator);
+//    qInfo() << "preSharedKeyAuthenticationRequired";
+//}
 
-void Worker::proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator)
-{
-    Q_UNUSED(proxy);
-    Q_UNUSED(authenticator);
-    qInfo() << "proxyAuthenticationRequired";
-}
+//void Worker::proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator)
+//{
+//    Q_UNUSED(proxy);
+//    Q_UNUSED(authenticator);
+//    qInfo() << "proxyAuthenticationRequired";
+//}
 
-void Worker::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
-{
-    Q_UNUSED(reply);
-    Q_UNUSED(errors);
-    qInfo() << "sslErrors";
-}
+//void Worker::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
+//{
+//    Q_UNUSED(reply);
+//    Q_UNUSED(errors);
+//    qInfo() << "sslErrors";
+//}
 
 
 
