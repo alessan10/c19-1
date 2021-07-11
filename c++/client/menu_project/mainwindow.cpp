@@ -34,12 +34,10 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actioninserisci_triggered()
 {
-//    Inserisci inseriscidialog(worker);
     Inserisci inseriscidialog;
     inseriscidialog.setWindowTitle("Inserisci");
     inseriscidialog.setModal(true);
     inseriscidialog.exec();
-
 }
 
 void MainWindow::on_actionRicerca_triggered()
