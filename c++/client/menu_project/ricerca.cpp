@@ -1,8 +1,9 @@
 #include "ricerca.h"
 #include "ui_ricerca.h"
-#include "worker.h"
 
 #include <QNetworkRequest>
+#include <QNetworkAccessManager>
+
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -19,7 +20,6 @@ Ricerca::Ricerca( QWidget *parent) :
     mNetReply(nullptr),
     mDataBuffer(new QByteArray)
 {
-//    this->worker = &worker;
     ui->setupUi(this);
 
     QStringList headers;
@@ -53,7 +53,6 @@ void Ricerca::on_searchButton_clicked()
     else
     {
         cleanUp();
-//        worker = new Worker();
         mNetReply= nullptr;
         mDataBuffer = new QByteArray();
         mNetManager = new QNetworkAccessManager();
@@ -113,8 +112,6 @@ void Ricerca::dataReadFinished()
        delete mNetReply;
        delete mNetManager;
        delete mDataBuffer;
-//       delete worker;
-
     }
 }
 
@@ -142,7 +139,6 @@ void Ricerca::deleteFinished()
        delete mNetReply;
        delete mNetManager;
        delete mDataBuffer;
-//       delete worker;
 }
 
 void Ricerca::on_deleteButton_clicked()
@@ -159,7 +155,7 @@ void Ricerca::on_deleteButton_clicked()
     }else{
 
         //Initialize our API data
-        worker = new Worker();
+
         mNetReply= nullptr;
         mDataBuffer = new QByteArray();
         mNetManager = new QNetworkAccessManager();

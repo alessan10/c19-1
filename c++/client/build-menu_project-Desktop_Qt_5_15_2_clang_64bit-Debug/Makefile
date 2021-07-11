@@ -59,15 +59,13 @@ SOURCES       = ../menu_project/classes.cpp \
 		../menu_project/modifica.cpp \
 		../menu_project/ricerca.cpp \
 		../menu_project/stats.cpp \
-		../menu_project/visualizza.cpp \
-		../menu_project/worker.cpp qrc_resource.cpp \
+		../menu_project/visualizza.cpp qrc_resource.cpp \
 		moc_inserisci.cpp \
 		moc_mainwindow.cpp \
 		moc_modifica.cpp \
 		moc_ricerca.cpp \
 		moc_stats.cpp \
-		moc_visualizza.cpp \
-		moc_worker.cpp
+		moc_visualizza.cpp
 OBJECTS       = classes.o \
 		inserisci.o \
 		main.o \
@@ -76,15 +74,13 @@ OBJECTS       = classes.o \
 		ricerca.o \
 		stats.o \
 		visualizza.o \
-		worker.o \
 		qrc_resource.o \
 		moc_inserisci.o \
 		moc_mainwindow.o \
 		moc_modifica.o \
 		moc_ricerca.o \
 		moc_stats.o \
-		moc_visualizza.o \
-		moc_worker.o
+		moc_visualizza.o
 DIST          = /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/qdevice.pri \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/device_config.prf \
@@ -233,6 +229,7 @@ DIST          = /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/sp
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/qt_config.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/spec_post.prf \
+		../menu_project/.qmake.stash \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/toolchain.prf \
@@ -267,16 +264,14 @@ DIST          = /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/sp
 		../menu_project/modifica.h \
 		../menu_project/ricerca.h \
 		../menu_project/stats.h \
-		../menu_project/visualizza.h \
-		../menu_project/worker.h ../menu_project/classes.cpp \
+		../menu_project/visualizza.h ../menu_project/classes.cpp \
 		../menu_project/inserisci.cpp \
 		../menu_project/main.cpp \
 		../menu_project/mainwindow.cpp \
 		../menu_project/modifica.cpp \
 		../menu_project/ricerca.cpp \
 		../menu_project/stats.cpp \
-		../menu_project/visualizza.cpp \
-		../menu_project/worker.cpp
+		../menu_project/visualizza.cpp
 QMAKE_TARGET  = menu_project
 DESTDIR       = 
 TARGET        = menu_project.app/Contents/MacOS/menu_project
@@ -447,6 +442,7 @@ Makefile: ../menu_project/menu_project.pro /Users/andreacalabretta/Qt-2/5.15.2/c
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/qt_config.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/toolchain.prf \
@@ -630,6 +626,7 @@ Makefile: ../menu_project/menu_project.pro /Users/andreacalabretta/Qt-2/5.15.2/c
 /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/qt_config.prf:
 /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/toolchain.prf:
@@ -695,8 +692,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../menu_project/resource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../menu_project/classes.h ../menu_project/inserisci.h ../menu_project/mainwindow.h ../menu_project/modifica.h ../menu_project/ricerca.h ../menu_project/stats.h ../menu_project/visualizza.h ../menu_project/worker.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../menu_project/classes.cpp ../menu_project/inserisci.cpp ../menu_project/main.cpp ../menu_project/mainwindow.cpp ../menu_project/modifica.cpp ../menu_project/ricerca.cpp ../menu_project/stats.cpp ../menu_project/visualizza.cpp ../menu_project/worker.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../menu_project/classes.h ../menu_project/inserisci.h ../menu_project/mainwindow.h ../menu_project/modifica.h ../menu_project/ricerca.h ../menu_project/stats.h ../menu_project/visualizza.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../menu_project/classes.cpp ../menu_project/inserisci.cpp ../menu_project/main.cpp ../menu_project/mainwindow.cpp ../menu_project/modifica.cpp ../menu_project/ricerca.cpp ../menu_project/stats.cpp ../menu_project/visualizza.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../menu_project/inserisci.ui ../menu_project/mainwindow.ui ../menu_project/modifica.ui ../menu_project/ricerca.ui ../menu_project/stats.ui ../menu_project/visualizza.ui $(DISTDIR)/
 
 
@@ -707,6 +704,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r menu_project.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -737,36 +735,25 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -mmacosx-version-min=10.13 -Wall -Wextra -dM -E -o moc_predefs.h /Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_inserisci.cpp moc_mainwindow.cpp moc_modifica.cpp moc_ricerca.cpp moc_stats.cpp moc_visualizza.cpp moc_worker.cpp
+compiler_moc_header_make_all: moc_inserisci.cpp moc_mainwindow.cpp moc_modifica.cpp moc_ricerca.cpp moc_stats.cpp moc_visualizza.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_inserisci.cpp moc_mainwindow.cpp moc_modifica.cpp moc_ricerca.cpp moc_stats.cpp moc_visualizza.cpp moc_worker.cpp
+	-$(DEL_FILE) moc_inserisci.cpp moc_mainwindow.cpp moc_modifica.cpp moc_ricerca.cpp moc_stats.cpp moc_visualizza.cpp
 moc_inserisci.cpp: ../menu_project/inserisci.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QAbstractButton \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qabstractbutton.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		moc_predefs.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc
 	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/moc_predefs.h -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang -I/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/menu_project -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.5/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib ../menu_project/inserisci.h -o moc_inserisci.cpp
@@ -774,28 +761,13 @@ moc_inserisci.cpp: ../menu_project/inserisci.h \
 moc_mainwindow.cpp: ../menu_project/mainwindow.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		moc_predefs.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc
 	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/moc_predefs.h -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang -I/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/menu_project -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.5/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib ../menu_project/mainwindow.h -o moc_mainwindow.cpp
@@ -811,22 +783,13 @@ moc_modifica.cpp: ../menu_project/modifica.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		moc_predefs.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc
 	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/moc_predefs.h -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang -I/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/menu_project -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.5/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib ../menu_project/modifica.h -o moc_modifica.cpp
@@ -842,22 +805,13 @@ moc_ricerca.cpp: ../menu_project/ricerca.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		moc_predefs.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc
 	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/moc_predefs.h -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang -I/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/menu_project -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.5/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib ../menu_project/ricerca.h -o moc_ricerca.cpp
@@ -905,27 +859,6 @@ moc_visualizza.cpp: ../menu_project/visualizza.h \
 		moc_predefs.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc
 	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/moc_predefs.h -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang -I/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/menu_project -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.5/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib ../menu_project/visualizza.h -o moc_visualizza.cpp
-
-moc_worker.cpp: ../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
-		moc_predefs.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc
-	/Users/andreacalabretta/Qt-2/5.15.2/clang_64/bin/moc $(DEFINES) --include /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/build-menu_project-Desktop_Qt_5_15_2_clang_64bit-Debug/moc_predefs.h -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/mkspecs/macx-clang -I/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/c++/client/menu_project -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtGui.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.5/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib ../menu_project/worker.h -o moc_worker.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -986,35 +919,28 @@ inserisci.o: ../menu_project/inserisci.cpp ../menu_project/inserisci.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QAbstractButton \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qabstractbutton.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		ui_inserisci.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonArray \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QVariantMap \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QUrlQuery \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
@@ -1028,28 +954,13 @@ inserisci.o: ../menu_project/inserisci.cpp ../menu_project/inserisci.h \
 main.o: ../menu_project/main.cpp ../menu_project/mainwindow.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../menu_project/main.cpp
@@ -1057,37 +968,28 @@ main.o: ../menu_project/main.cpp ../menu_project/mainwindow.h \
 mainwindow.o: ../menu_project/mainwindow.cpp ../menu_project/mainwindow.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		ui_mainwindow.h \
 		../menu_project/inserisci.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QAbstractButton \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qabstractbutton.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		../menu_project/ricerca.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
 		../menu_project/visualizza.h \
 		../menu_project/stats.h \
 		../menu_project/modifica.h \
@@ -1106,22 +1008,13 @@ modifica.o: ../menu_project/modifica.cpp ../menu_project/modifica.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		ui_modifica.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
@@ -1129,6 +1022,8 @@ modifica.o: ../menu_project/modifica.cpp ../menu_project/modifica.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QVariantMap \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QUrlQuery \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
@@ -1150,22 +1045,13 @@ ricerca.o: ../menu_project/ricerca.cpp ../menu_project/ricerca.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		../menu_project/classes.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QString \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDate \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
 		ui_ricerca.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
@@ -1173,6 +1059,8 @@ ricerca.o: ../menu_project/ricerca.cpp ../menu_project/ricerca.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QVariantMap \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QUrlQuery \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
@@ -1255,29 +1143,6 @@ visualizza.o: ../menu_project/visualizza.cpp ../menu_project/visualizza.h \
 		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtWidgets.framework/Headers/qtabwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o visualizza.o ../menu_project/visualizza.cpp
 
-worker.o: ../menu_project/worker.cpp ../menu_project/worker.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkAccessManager \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkReply \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkRequest \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QAuthenticator \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/QNetworkProxy \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/QJsonArray \
-		/Users/andreacalabretta/Qt-2/5.15.2/clang_64/lib/QtCore.framework/Headers/qjsonarray.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o worker.o ../menu_project/worker.cpp
-
 qrc_resource.o: qrc_resource.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp
 
@@ -1298,9 +1163,6 @@ moc_stats.o: moc_stats.cpp
 
 moc_visualizza.o: moc_visualizza.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_visualizza.o moc_visualizza.cpp
-
-moc_worker.o: moc_worker.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_worker.o moc_worker.cpp
 
 ####### Install
 

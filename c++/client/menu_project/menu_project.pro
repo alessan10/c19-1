@@ -16,8 +16,7 @@ SOURCES += \
     modifica.cpp \
     ricerca.cpp \
     stats.cpp \
-    visualizza.cpp \
-    worker.cpp
+    visualizza.cpp
 
 HEADERS += \
     classes.h \
@@ -26,8 +25,7 @@ HEADERS += \
     modifica.h \
     ricerca.h \
     stats.h \
-    visualizza.h \
-    worker.h
+    visualizza.h
 
 FORMS += \
     inserisci.ui \

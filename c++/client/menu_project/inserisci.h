@@ -3,8 +3,9 @@
 
 #include <QDialog>
 #include <QAbstractButton>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
-#include "worker.h"
 #include "classes.h"
 
 namespace Ui
@@ -29,7 +30,6 @@ private:
     QNetworkAccessManager * mNetManager;
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
-//    Worker *worker;
 };
 
 #endif // INSERISCI_H

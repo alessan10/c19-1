@@ -1,9 +1,10 @@
 #include "inserisci.h"
 #include "ui_inserisci.h"
-#include "worker.h"
 #include "classes.h"
 
 #include <QNetworkRequest>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -22,7 +23,6 @@ Inserisci::Inserisci( QWidget *parent) :
     mNetReply(nullptr),
     mDataBuffer(new QByteArray)
 {
-//    this->worker = &worker;
     ui->setupUi(this);
 }
 

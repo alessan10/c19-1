@@ -7,7 +7,6 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
-#include "worker.h"
 #include "classes.h"
 
 namespace Ui
@@ -36,7 +35,6 @@ private:
     QNetworkAccessManager * mNetManager;
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
-    Worker *worker;
     Patient *patient;
 
     enum Columns{

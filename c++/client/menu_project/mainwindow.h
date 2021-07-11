@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <worker.h>
 #include <classes.h>
 
 QT_BEGIN_NAMESPACE

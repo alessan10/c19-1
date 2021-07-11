@@ -113,7 +113,7 @@ void Stats::dataReadFinished()
             (*i)->toString();
        }
 
-       QFile file("C:/Users/alexm/Downloads/out.csv");
+       QFile file("/Users/andreacalabretta/Downloads/out.csv");
        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)){
            QMessageBox::warning(this, "Attenzione", "Non è stato possibile generare il file!",
                                 QMessageBox::Close);
@@ -140,9 +140,9 @@ void Stats::dataReadFinished()
 
 void Stats::on_positive_country_clicked()
 {
-    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\geo_script.r");
+    system("/Library/Frameworks/R.framework/Versions/4.1/Resources/bin/Rscript /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/geo_script.r");
 
-    QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/geo_plot.jpg");
+    QPixmap pix("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/geo_plot.jpg");
     ui->imageLabel->setPixmap(pix);
 }
 
@@ -150,15 +150,15 @@ void Stats::on_positive_year_clicked()
 {
     if (ui->year_comboBox->currentIndex() == 0){
         qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
-        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_2020_script.r");
+        system("/Library/Frameworks/R.framework/Versions/4.1/Resources/bin/Rscript /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_2020_script.r");
 
-        QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_2020_plot.jpg");
+        QPixmap pix("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_2020_plot.jpg");
         ui->imageLabel->setPixmap(pix);
     } else {
         qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
-        system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_2021_script.r");
+        system("/Library/Frameworks/R.framework/Versions/4.1/Resources/bin/Rscript /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_2021_script.r");
 
-        QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_2021_plot.jpg");
+        QPixmap pix("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_2021_plot.jpg");
             ui->imageLabel->setPixmap(pix);
     }
 
@@ -167,8 +167,8 @@ void Stats::on_positive_year_clicked()
 
 void Stats::on_positive_age_clicked()
 {
-    system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_eta.r");
+    system("/Library/Frameworks/R.framework/Versions/4.1/Resources/bin/Rscript /Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_eta.r");
 
-    QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_eta_plot.jpg");
+    QPixmap pix("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_eta_plot.jpg");
     ui->imageLabel->setPixmap(pix);
 }

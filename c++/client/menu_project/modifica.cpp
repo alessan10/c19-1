@@ -1,6 +1,5 @@
 #include "modifica.h"
 #include "ui_modifica.h"
-#include "worker.h"
 #include "classes.h"
 
 #include <QNetworkRequest>
@@ -20,10 +19,8 @@ Modifica::Modifica(QWidget *parent) :
     ui(new Ui::Modifica),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
-    mDataBuffer(new QByteArray),
-    worker(nullptr)
+    mDataBuffer(new QByteArray)
 {
-//    this->worker = &worker;
     ui->setupUi(this);
 }
 

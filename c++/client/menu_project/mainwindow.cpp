@@ -4,7 +4,6 @@
 #include "ricerca.h"
 #include "visualizza.h"
 #include "stats.h"
-#include "worker.h"
 #include "classes.h"
 #include "modifica.h"
 
