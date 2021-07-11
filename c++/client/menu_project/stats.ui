@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1042</width>
-    <height>1028</height>
+    <width>1200</width>
+    <height>887</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -270,7 +270,7 @@
      </property>
     </widget>
    </item>
-   <item>
+   <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
     <widget class="QLabel" name="imageLabel">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -280,8 +280,14 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>1024</width>
-       <height>768</height>
+       <width>1124</width>
+       <height>680</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1124</width>
+       <height>680</height>
       </size>
      </property>
      <property name="frameShape">

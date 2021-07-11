@@ -15,6 +15,6 @@ eta.vector.sorted = sort(eta.vector, decreasing = FALSE)
 #conto quante volte si ripete ciascun valore di eta'
 
 eta.vector.counter = table(eta.vector.sorted) 
-jpeg("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_eta_plot.jpg", width = 1024, height = 768)
-dotplot(eta.vector.counter~eta.vector.sorted, ylab = "positivi", xlab="et?")
+jpeg("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_eta_plot.jpg", width = 1124, height = 680)
+dotplot(eta.vector.counter~eta.vector.sorted, ylab = "positivi", xlab="eta'")
 dev.off()

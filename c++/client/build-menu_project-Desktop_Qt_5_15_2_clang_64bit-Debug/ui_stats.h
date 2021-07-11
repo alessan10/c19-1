@@ -49,7 +49,7 @@ public:
     {
         if (Stats->objectName().isEmpty())
             Stats->setObjectName(QString::fromUtf8("Stats"));
-        Stats->resize(1042, 1028);
+        Stats->resize(1200, 887);
         verticalLayout_2 = new QVBoxLayout(Stats);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_5 = new QHBoxLayout();
@@ -209,11 +209,12 @@ public:
         imageLabel->setObjectName(QString::fromUtf8("imageLabel"));
         sizePolicy1.setHeightForWidth(imageLabel->sizePolicy().hasHeightForWidth());
         imageLabel->setSizePolicy(sizePolicy1);
-        imageLabel->setMinimumSize(QSize(1024, 768));
+        imageLabel->setMinimumSize(QSize(1124, 680));
+        imageLabel->setMaximumSize(QSize(1124, 680));
         imageLabel->setFrameShape(QFrame::Box);
         imageLabel->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_2->addWidget(imageLabel);
+        verticalLayout_2->addWidget(imageLabel, 0, Qt::AlignHCenter|Qt::AlignVCenter);
 
 
         retranslateUi(Stats);
