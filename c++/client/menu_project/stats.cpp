@@ -149,19 +149,20 @@ void Stats::on_positive_country_clicked()
 void Stats::on_positive_year_clicked()
 {
     if (ui->year_comboBox->currentIndex() == 0){
-        //qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
+        qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
         system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_2020_script.r");
 
         QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_2020_plot.jpg");
         ui->imageLabel->setPixmap(pix);
-
     } else {
-        //qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
+        qDebug() << "Selected: " << ui->year_comboBox->currentIndex();
         system("C:\\\"Program Files\"\\R\\R-4.0.5\\bin\\Rscript D:\\Alessandro\\uniCT\\Magistrale\\Secondo_Anno\\1_Advanced_Programming_Languages\\Progetto_Esame\\git_c19\\c19\\r\\covid+_2021_script.r");
 
         QPixmap pix("D:/Alessandro/uniCT/Magistrale/Secondo_Anno/1_Advanced_Programming_Languages/Progetto_Esame/git_c19/c19/r/covid+_2021_plot.jpg");
             ui->imageLabel->setPixmap(pix);
     }
+
+
 }
 
 void Stats::on_positive_age_clicked()

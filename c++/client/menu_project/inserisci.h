@@ -3,13 +3,14 @@
 
 #include <QDialog>
 #include <QAbstractButton>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
-#include "worker.h"
 #include "classes.h"
 
 namespace Ui
 {
-class Inserisci;
+    class Inserisci;
 }
 
 class Inserisci : public QDialog, private GuiUtility
@@ -17,7 +18,7 @@ class Inserisci : public QDialog, private GuiUtility
     Q_OBJECT
 
 public:
-    explicit Inserisci(Worker &worker, QWidget *parent = nullptr);
+    explicit Inserisci(QWidget *parent = nullptr);
     ~Inserisci();
     void cleanUp() override;
 
@@ -29,7 +30,6 @@ private:
     QNetworkAccessManager * mNetManager;
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
-    Worker *worker;
 };
 
 #endif // INSERISCI_H

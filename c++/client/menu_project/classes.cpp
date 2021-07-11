@@ -2,20 +2,15 @@
 #include <QDebug>
 
 
-
 void Date::toString(){
     qDebug() <<  dayOfWeek << " " << day << " "<< month << " "<< year;
 }
-
-
 
 Person::~Person(){
     qDebug() << "Person destructor called";
 }
 
-
 void Date::conversion(QDate & q){
-
 
     switch (q.dayOfWeek()) {
     case 1:

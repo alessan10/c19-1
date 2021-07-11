@@ -7,7 +7,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
-#include "worker.h"
+
 #include "classes.h"
 
 namespace Ui
@@ -20,7 +20,7 @@ class Modifica : public QDialog, private GuiUtility
     Q_OBJECT
 
 public:
-    explicit Modifica(Worker & worker, QWidget *parent = nullptr);
+    explicit Modifica(QWidget *parent = nullptr);
     ~Modifica();
     void cleanUp() override;
     void setUiFieldsFromPatient(Patient *patient);
@@ -38,7 +38,6 @@ private:
     QNetworkAccessManager * mNetManager;
     QNetworkReply * mNetReply;
     QByteArray * mDataBuffer;
-    Worker *worker;
     Patient *patient;
 };
 

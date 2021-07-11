@@ -1,6 +1,5 @@
 #include "modifica.h"
 #include "ui_modifica.h"
-#include "worker.h"
 #include "classes.h"
 
 #include <QNetworkRequest>
@@ -15,15 +14,13 @@
 #include <QDate>
 #include <QStringBuilder>
 
-Modifica::Modifica(Worker &worker, QWidget *parent) :
+Modifica::Modifica(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Modifica),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
-    mDataBuffer(new QByteArray),
-    worker(nullptr)
+    mDataBuffer(new QByteArray)
 {
-    this->worker = &worker;
     ui->setupUi(this);
 }
 

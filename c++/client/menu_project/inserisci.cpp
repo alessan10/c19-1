@@ -1,9 +1,10 @@
 #include "inserisci.h"
 #include "ui_inserisci.h"
-#include "worker.h"
 #include "classes.h"
 
 #include <QNetworkRequest>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -15,21 +16,19 @@
 #include <QDate>
 #include <QStringBuilder>
 
-Inserisci::Inserisci(Worker &worker, QWidget *parent) :
+Inserisci::Inserisci( QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Inserisci),
     mNetManager(new QNetworkAccessManager(this)),
     mNetReply(nullptr),
-    mDataBuffer(new QByteArray),
-    worker(nullptr)
+    mDataBuffer(new QByteArray)
 {
-    this->worker = &worker;
     ui->setupUi(this);
 }
 
 Inserisci::~Inserisci()
 {
-    delete ui;
+   delete ui;
 }
 
 void Inserisci::on_save_button_clicked(QAbstractButton *button)

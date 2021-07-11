@@ -4,13 +4,12 @@
 #include "ricerca.h"
 #include "visualizza.h"
 #include "stats.h"
-#include "worker.h"
 #include "classes.h"
 #include "modifica.h"
 
 #include <QMessageBox>
 
-MainWindow::MainWindow(Worker &worker, QWidget *parent)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -25,7 +24,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionAbout_Our_Project_triggered()
 {
-    QMessageBox::about(this, "Message", "This is the first version of C19 Tracking System!");
+    QMessageBox::about(this, "Message", "This is the first version of C19tracking System");
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -35,7 +34,8 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actioninserisci_triggered()
 {
-    Inserisci inseriscidialog(worker);
+//    Inserisci inseriscidialog(worker);
+    Inserisci inseriscidialog;
     inseriscidialog.setWindowTitle("Inserisci");
     inseriscidialog.setModal(true);
     inseriscidialog.exec();
@@ -44,7 +44,7 @@ void MainWindow::on_actioninserisci_triggered()
 
 void MainWindow::on_actionRicerca_triggered()
 {
-    Ricerca ricercadialog(worker);
+    Ricerca ricercadialog;
     ricercadialog.setWindowTitle("Ricerca");
     ricercadialog.setModal(true);
     ricercadialog.exec();
@@ -69,7 +69,7 @@ void MainWindow::on_actionVisualizza_Statistiche_triggered()
 
 void MainWindow::on_actionModifica_Dati_Paziente_triggered()
 {
-    Modifica modificadialog(worker);
+    Modifica modificadialog;
     modificadialog.setWindowTitle("Modifica");
     modificadialog.setModal(true);
     modificadialog.exec();
