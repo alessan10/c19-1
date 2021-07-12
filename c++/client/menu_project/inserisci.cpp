@@ -31,7 +31,7 @@ Inserisci::~Inserisci()
    delete ui;
 }
 
-void Inserisci::on_save_button_clicked(QAbstractButton *button)
+void Inserisci::on_save_button_clicked()
 {
     if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty() ||
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
