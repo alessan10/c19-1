@@ -55,27 +55,24 @@ void Inserisci::on_save_button_clicked()
         QString surname = ui->cognome->text();
         surname.replace(" ",""); //rimuoviamo eventuali spazi
 
-        Patient &p = *(new Patient());
+        Patient *pat = new Patient();
+        Patient &p = *(pat);
         p.setName(name);
         p.setSurname(surname);
-
         p.setChatId("-");
 
         ui->radio_positivo->isChecked()? p.setCovid("positivo") : p.setCovid("negativo");
 
         QDate calend = ui->calendar->selectedDate() ;
         QDate &cld = calend;
+
         p.date.conversion(cld);
-
         p.setCountry(ui->paese->text());
-
         p.setAge(ui->eta->text());
-
-        cleanUp();
 
         QJsonObject jsonToPost = p.toJson();
 
-        delete &p;
+        delete pat;
 
         qDebug() << jsonToPost;
         QJsonDocument doc(jsonToPost);
@@ -96,6 +93,7 @@ void Inserisci::on_save_button_clicked()
                 qDebug() << contents;
                 //se non ci sono errori mostra un dialog
                 QMessageBox::information(this,"Info","Utente inserito con successo.", QMessageBox::Ok);
+                cleanUp();
             }
             else
             {

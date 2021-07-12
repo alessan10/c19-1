@@ -30,7 +30,6 @@ private slots:
     void on_pushButton_clicked();
     void dataReadyRead();
     void dataReadFinished();
-
     void on_button_modifica_clicked();
 
 private:

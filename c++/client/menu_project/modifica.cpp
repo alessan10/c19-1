@@ -89,7 +89,8 @@ void Modifica::dataReadFinished()
 
 void Modifica::on_button_modifica_clicked()
 {
-    Patient &p = *(new Patient());
+    Patient *pat = new Patient();
+    Patient &p = *(pat);
     setPatientFromUiFields(p);
     QJsonObject json = p.toJson();
 
@@ -123,6 +124,7 @@ void Modifica::on_button_modifica_clicked()
         reply->deleteLater();
     });
     cleanUp();
+    delete pat;
 
 }
 
