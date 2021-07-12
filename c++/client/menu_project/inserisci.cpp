@@ -31,7 +31,7 @@ Inserisci::~Inserisci()
    delete ui;
 }
 
-void Inserisci::on_save_button_clicked(QAbstractButton *button)
+void Inserisci::on_save_button_clicked()
 {
     if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty() ||
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
@@ -55,7 +55,8 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
         QString surname = ui->cognome->text();
         surname.replace(" ",""); //rimuoviamo eventuali spazi
 
-        Patient &p = *(new Patient());
+        Patient *pat = new Patient();
+        Patient &p = *(pat);
         p.setName(name);
         p.setSurname(surname);
 
@@ -71,11 +72,9 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
 
         p.setAge(ui->eta->text());
 
-        cleanUp();
-
         QJsonObject jsonToPost = p.toJson();
 
-        delete &p;
+        delete pat;
 
         qDebug() << jsonToPost;
         QJsonDocument doc(jsonToPost);
@@ -96,6 +95,7 @@ void Inserisci::on_save_button_clicked(QAbstractButton *button)
                 qDebug() << contents;
                 //se non ci sono errori mostra un dialog
                 QMessageBox::information(this,"Info","Utente inserito con successo.", QMessageBox::Ok);
+                        cleanUp();
             }
             else
             {

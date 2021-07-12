@@ -24,7 +24,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionAbout_Our_Project_triggered()
 {
-    QMessageBox::about(this, "Message", "This is the first version of C19tracking System");
+    QMessageBox::about(this, "Message", "This is the first version of C19Tracking System,\n made by Andrea Calabretta & Alessandro Mauro");
 }
 
 void MainWindow::on_actionExit_triggered()
