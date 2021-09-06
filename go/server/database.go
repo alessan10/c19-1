@@ -1,8 +1,9 @@
 package main
 
-import(
-	"github.com/neo4j/neo4j-go-driver/neo4j"
+import (
 	"os"
+
+	"github.com/neo4j/neo4j-go-driver/neo4j"
 )
 
 type Neo4jConfiguration struct {
@@ -34,7 +35,7 @@ func lookupEnvOrGetDefault(key string, defaultValue string) string {
 	}
 }
 
-func resultToPatientsArray(result* neo4j.Result)  (patientResult* []PatientResult){
+func resultToPatientsArray(result *neo4j.Result) (patientResult *[]PatientResult) {
 
 	var patientResults []PatientResult
 
@@ -52,12 +53,11 @@ func resultToPatientsArray(result* neo4j.Result)  (patientResult* []PatientResul
 		weekday, _ := record.Get("weekday")
 		country, _ := record.Get("country")
 
-
 		patientResults = append(patientResults, PatientResult{Patient{
-			Id: 	 id.(string),
+			Id:      id.(string),
 			Name:    name.(string),
 			Surname: surname.(string),
-			Age:     age.(string),
+			Age:     age.(int64),
 			Chatid:  chatid.(string),
 			Covid:   covid.(string),
 			Year:    year.(string),
