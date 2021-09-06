@@ -8,7 +8,7 @@ type Patient struct {
 	Id      string `json:"id"`
 	Name    string `json:"name,omitempty"`
 	Surname string `json:"surname,omitempty"`
-	Age     int64  `json:"age"`
+	Age     string `json:"age"`
 	Chatid  string `json:"chatid"`
 	Covid   string `json:"covid"`
 	Year    string `json:"year"`

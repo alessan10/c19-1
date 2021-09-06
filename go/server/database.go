@@ -57,7 +57,7 @@ func resultToPatientsArray(result *neo4j.Result) (patientResult *[]PatientResult
 			Id:      id.(string),
 			Name:    name.(string),
 			Surname: surname.(string),
-			Age:     age.(int64),
+			Age:     age.(string),
 			Chatid:  chatid.(string),
 			Covid:   covid.(string),
 			Year:    year.(string),
