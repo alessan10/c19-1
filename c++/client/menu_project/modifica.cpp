@@ -134,7 +134,7 @@ void Modifica::cleanUp(){
 
     this->ui->new_nome->setText("");
     this->ui->new_cognome->setText("");
-    this->ui->new_eta->setText("");
+    this->ui->new_eta->setValue(0);
     this->ui->new_paese->setText("");
 
     this->ui->new_day->clear();
@@ -148,7 +148,10 @@ void Modifica::setUiFieldsFromPatient(Patient *p)
 {
     ui->new_nome->setText(p->getName());
     ui->new_cognome->setText(p->getSurname());
-    ui->new_eta->setText(p->getAge());
+
+    int myeta = p->getAge().toInt();
+    ui->new_eta->setValue(myeta);
+
     ui->new_paese->setText(p->getCountry());
 
     int iday = p->date.getDay().toInt() -1;

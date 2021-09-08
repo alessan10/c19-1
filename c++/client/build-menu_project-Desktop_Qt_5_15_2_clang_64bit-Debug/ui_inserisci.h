@@ -23,6 +23,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -37,7 +38,7 @@ public:
     QLineEdit *nome;
     QLineEdit *cognome;
     QHBoxLayout *horizontalLayout_2;
-    QLineEdit *eta;
+    QSpinBox *eta;
     QLineEdit *paese;
     QFrame *line;
     QSpacerItem *verticalSpacer_2;
@@ -108,10 +109,11 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        eta = new QLineEdit(Inserisci);
+        eta = new QSpinBox(Inserisci);
         eta->setObjectName(QString::fromUtf8("eta"));
+        sizePolicy2.setHeightForWidth(eta->sizePolicy().hasHeightForWidth());
+        eta->setSizePolicy(sizePolicy2);
         eta->setFont(font1);
-        eta->setInputMethodHints(Qt::ImhDigitsOnly);
         eta->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_2->addWidget(eta);
@@ -216,7 +218,6 @@ public:
         label->setText(QCoreApplication::translate("Inserisci", "Inserisci i dati del paziente:", nullptr));
         nome->setPlaceholderText(QCoreApplication::translate("Inserisci", "Nome", nullptr));
         cognome->setPlaceholderText(QCoreApplication::translate("Inserisci", "Cognome", nullptr));
-        eta->setPlaceholderText(QCoreApplication::translate("Inserisci", "Et\303\240", nullptr));
         paese->setPlaceholderText(QCoreApplication::translate("Inserisci", "Paese", nullptr));
         label_2->setText(QCoreApplication::translate("Inserisci", "Seleziona l'esito del tampone al COVID-19 e la data in cui \303\250 stato effettuato:", nullptr));
         radio_negativo->setText(QCoreApplication::translate("Inserisci", "Negativo", nullptr));

@@ -208,10 +208,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="new_eta">
+      <widget class="QSpinBox" name="new_eta">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="alignment">

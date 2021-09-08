@@ -19,6 +19,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -42,7 +43,7 @@ public:
     QFrame *line_2;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
-    QLineEdit *new_eta;
+    QSpinBox *new_eta;
     QSpacerItem *horizontalSpacer_2;
     QLabel *label_5;
     QLineEdit *new_paese;
@@ -185,9 +186,14 @@ public:
 
         horizontalLayout_4->addWidget(label_4);
 
-        new_eta = new QLineEdit(Modifica);
+        new_eta = new QSpinBox(Modifica);
         new_eta->setObjectName(QString::fromUtf8("new_eta"));
-        new_eta->setFont(font1);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(new_eta->sizePolicy().hasHeightForWidth());
+        new_eta->setSizePolicy(sizePolicy2);
+        new_eta->setFont(font);
         new_eta->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_4->addWidget(new_eta);
@@ -380,11 +386,11 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         label_10 = new QLabel(Modifica);
         label_10->setObjectName(QString::fromUtf8("label_10"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label_10->sizePolicy().hasHeightForWidth());
-        label_10->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_10->sizePolicy().hasHeightForWidth());
+        label_10->setSizePolicy(sizePolicy3);
         label_10->setFont(font1);
 
         horizontalLayout_6->addWidget(label_10);
@@ -393,8 +399,8 @@ public:
         new_covid->addItem(QString());
         new_covid->addItem(QString());
         new_covid->setObjectName(QString::fromUtf8("new_covid"));
-        sizePolicy2.setHeightForWidth(new_covid->sizePolicy().hasHeightForWidth());
-        new_covid->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(new_covid->sizePolicy().hasHeightForWidth());
+        new_covid->setSizePolicy(sizePolicy3);
         new_covid->setFont(font1);
 
         horizontalLayout_6->addWidget(new_covid);

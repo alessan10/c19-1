@@ -24,6 +24,9 @@ Inserisci::Inserisci( QWidget *parent) :
     mDataBuffer(new QByteArray)
 {
     ui->setupUi(this);
+    ui->eta->setMaximum(100);
+    ui->eta->setMinimum(0);
+    ui->eta->setSingleStep(1);
 }
 
 Inserisci::~Inserisci()
@@ -36,10 +39,10 @@ void Inserisci::on_save_button_clicked()
     if (ui->nome->text().isEmpty() || ui->cognome->text().isEmpty() ||
             (!ui->radio_positivo->isChecked()) && (!ui->radio_negativo->isChecked()) ||
             ui->calendar->selectedDate().isNull() ||
-            ui->eta->text().isEmpty() ||
+            (ui->eta->value()== 0) ||
             ui->paese->text().isEmpty())
     {
-        int ret = QMessageBox::warning(this,"Attenzione","Inserisci tutti i campi.",
+        int ret = QMessageBox::warning(this,"Attenzione","Campi vuoti o non corretti.",
                                         QMessageBox::Ok);
 
         if ( ret == QMessageBox::Ok)
@@ -59,16 +62,19 @@ void Inserisci::on_save_button_clicked()
         Patient &p = *(pat);
         p.setName(name);
         p.setSurname(surname);
+
         p.setChatId("-");
 
         ui->radio_positivo->isChecked()? p.setCovid("positivo") : p.setCovid("negativo");
 
         QDate calend = ui->calendar->selectedDate() ;
         QDate &cld = calend;
-
         p.date.conversion(cld);
+
         p.setCountry(ui->paese->text());
-        p.setAge(ui->eta->text());
+
+        QString age = ui->eta->text();
+        p.setAge(age);
 
         QJsonObject jsonToPost = p.toJson();
 
@@ -93,7 +99,7 @@ void Inserisci::on_save_button_clicked()
                 qDebug() << contents;
                 //se non ci sono errori mostra un dialog
                 QMessageBox::information(this,"Info","Utente inserito con successo.", QMessageBox::Ok);
-                cleanUp();
+                        cleanUp();
             }
             else
             {
@@ -110,6 +116,6 @@ void Inserisci::cleanUp(){
     this->ui->nome->setText("");
     this->ui->cognome->setText("");
     this->ui->paese->setText("");
-    this->ui->eta->setText("");
+    this->ui->eta->setValue(0);
 }
 
