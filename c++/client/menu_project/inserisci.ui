@@ -106,20 +106,20 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLineEdit" name="eta">
+      <widget class="QSpinBox" name="eta">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <pointsize>14</pointsize>
         </font>
        </property>
-       <property name="inputMethodHints">
-        <set>Qt::ImhDigitsOnly</set>
-       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
-       </property>
-       <property name="placeholderText">
-        <string>Età</string>
        </property>
       </widget>
      </item>

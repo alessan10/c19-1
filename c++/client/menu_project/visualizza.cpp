@@ -71,8 +71,6 @@ void Visualizza::dataReadFinished()
 
       //Turn document into json array
        QJsonArray array = mDoc.array();
-       //QList<Patient *> patients_list;
-       Patient *p = new Patient();
 
        for ( int i = 0; i < array.size(); i++)
        {
@@ -83,8 +81,6 @@ void Visualizza::dataReadFinished()
            ui->table->insertRow(i);
            patientToTable(&p, i);
        }
-       delete p;
-
     }   
 }
 
