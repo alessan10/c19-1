@@ -29,7 +29,7 @@ class Date{
 class Person{
     protected:
         QString id, name, surname, age, country ;
-        qint64 aage;
+
     public:
         Person(){};
         Person(QString i, QString n, QString s, QString a, QString c): id(i), name(n), surname(s), age(a), country(c){};
