@@ -1,5 +1,4 @@
 //Importiamo le librerie necessarie alla generazione i dati delle persone fittizie
-const { fake } = require('faker');
 const faker = require('faker');
 const fs = require('fs');
 const { exit } = require('process');
