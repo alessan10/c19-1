@@ -394,7 +394,7 @@ func main() {
 	serveMux.HandleFunc("/update", updateHandlerFunc(driver))             // UPDATE patient's fields
 	serveMux.HandleFunc("/add", addHandlerFunc(driver))                   // ADD a patient and connect him/her to other 5 random patients
 	serveMux.HandleFunc("/graph", graphHandlerFunc(driver))               // RETURN ALL GRAPH
-	serveMux.HandleFunc("/search", searchHandlerFunc(driver))             // SEARCH A Patient and all its DATA
+	serveMux.HandleFunc("/search", searchHandlerFunc(driver))             // SEARCH A Patient and all its CONNECTIONS with other patients
 	serveMux.HandleFunc("/delete", deleteHandlerFunc(driver) )            // DELETE patient
 	serveMux.HandleFunc("/simplesearch", simpleSearchHandlerFunc(driver)) // SEARCH a patient without relations (for update purpose)
 
