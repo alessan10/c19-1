@@ -73,7 +73,7 @@ class Patient: public Person {
 };
 
 class GuiUtility{
-    private:
+    public:
         virtual void cleanUp() = 0;
 
 };

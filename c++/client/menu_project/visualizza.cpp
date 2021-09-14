@@ -71,12 +71,13 @@ void Visualizza::dataReadFinished()
 
       //Turn document into json array
        QJsonArray array = mDoc.array();
+       Patient p;
 
        for ( int i = 0; i < array.size(); i++)
        {
            QJsonObject jsonPatient = array.at(i).toObject().value("patient").toObject();
 
-           Patient p = Patient(jsonPatient);
+           p = Patient(jsonPatient);
 
            ui->table->insertRow(i);
            patientToTable(&p, i);
