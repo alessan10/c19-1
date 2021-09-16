@@ -105,6 +105,7 @@ void Stats::dataReadFinished()
            QString c0 = mDoc.object().value("patient").toArray().at(i).toObject().value("name").toString();
            qDebug() << c0;
 
+
        }
        delete p;
 

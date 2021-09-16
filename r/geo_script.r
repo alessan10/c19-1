@@ -15,5 +15,6 @@ jpeg("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r
 #plotto il grafico dei dati che mando in ingresso
 choroLayer(spdf = nuts0.spdf, df = new.df, var = "Freq" , legend.pos = "right")
 title("Positive by Country")
+#dopo il comando per plottare ci vuole dev.off; senza di esso potremmo ottenere un plot parziale o addirittura nulla
 dev.off()
 

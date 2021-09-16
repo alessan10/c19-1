@@ -13,6 +13,7 @@ month.vector.20 = data.positive.year20$Mese
 month.vector.20.counter = table(month.vector.20)
 jpeg("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_2020_plot.jpg", width = 1124, height = 680)
 barplot(month.vector.20.counter, ylab = "positivi", xlab="mesi 2020")
+#dopo il comando per plottare ci vuole dev.off; senza di esso potremmo ottenere un plot parziale o addirittura nulla
 dev.off()
 
 

@@ -17,4 +17,5 @@ eta.vector.sorted = sort(eta.vector, decreasing = FALSE)
 eta.vector.counter = table(eta.vector.sorted) 
 jpeg("/Users/andreacalabretta/Documents/0.MAGISTRALE_INFO/8.APL/consegna/c19-1/r/covid+_eta_plot.jpg", width = 1124, height = 680)
 dotplot(eta.vector.counter~eta.vector.sorted, ylab = "positivi", xlab="eta'")
+#dopo il comando per plottare ci vuole dev.off; senza di esso potremmo ottenere un plot parziale o addirittura nulla
 dev.off()
