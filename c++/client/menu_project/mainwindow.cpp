@@ -34,7 +34,6 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actioninserisci_triggered()
 {
-//    Inserisci inseriscidialog(worker);
     Inserisci inseriscidialog;
     inseriscidialog.setWindowTitle("Inserisci");
     inseriscidialog.setModal(true);

@@ -98,11 +98,13 @@ void Ricerca::dataReadFinished()
        QJsonArray * array = new QJsonArray();
        * array = mDoc->array();
 
+       Patient p;
        //for each patient print a row in the table with patient's data
        for ( int i = 0; i < array->size(); i++)
        {
            QJsonObject jsonPatient = array->at(i).toObject().value("patient").toObject();
-           Patient p  =  Patient(jsonPatient);
+           //Patient p  =  Patient(jsonPatient);
+           p = Patient(jsonPatient);
            ui->table->insertRow(i);
            patientToTable(&p, i);
        }

@@ -106,7 +106,7 @@ void Modifica::on_button_modifica_clicked()
 
     QNetworkReply *reply = mgr->post(request, data);
 
-    QObject::connect(reply, &QNetworkReply::finished, [=]()
+    connect(reply, &QNetworkReply::finished, [=]()
     {
         if(reply->error() == QNetworkReply::NoError)
         {

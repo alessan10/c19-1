@@ -14,7 +14,7 @@ import (
 	"github.com/neo4j/neo4j-go-driver/neo4j"
 )
 
-func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+func simpleSearchHandlerFunc(driver neo4j.Driver) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -50,7 +50,7 @@ func simpleSearchHandlerFunc(driver neo4j.Driver, database string) func(http.Res
 	}
 }
 
-func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+func searchHandlerFunc(driver neo4j.Driver) func(http.ResponseWriter, *http.Request) {
 
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -86,7 +86,7 @@ func searchHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 	}
 }
 
-func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+func updateHandlerFunc(driver neo4j.Driver) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -142,7 +142,7 @@ func updateHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseW
 	}
 }
 
-func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+func addHandlerFunc(driver neo4j.Driver) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -288,7 +288,7 @@ func addHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWrit
 	}
 }
 
-func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+func graphHandlerFunc(driver neo4j.Driver) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -323,7 +323,7 @@ func graphHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWr
 
 }
 
-func deleteHandlerFunc(driver neo4j.Driver, database string) func(http.ResponseWriter, *http.Request) {
+func deleteHandlerFunc(driver neo4j.Driver) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -391,12 +391,12 @@ func main() {
 	serveMux := http.NewServeMux() //NewServeMux allocates and returns a new ServeMux.
 
 	// HandleFunc registers the handler function for the given pattern.
-	serveMux.HandleFunc("/update", updateHandlerFunc(driver, configuration.Database))             // UPDATE --c19positive
-	serveMux.HandleFunc("/add", addHandlerFunc(driver, configuration.Database))                   // ADD
-	serveMux.HandleFunc("/graph", graphHandlerFunc(driver, configuration.Database))               // RETURN ALL GRAPH
-	serveMux.HandleFunc("/search", searchHandlerFunc(driver, configuration.Database))             // SEARCH A Patient and all of its DATA
-	serveMux.HandleFunc("/delete", deleteHandlerFunc(driver, configuration.Database))             // DELETE PERSON
-	serveMux.HandleFunc("/simplesearch", simpleSearchHandlerFunc(driver, configuration.Database)) // search a person without relations (for update purpose)
+	serveMux.HandleFunc("/update", updateHandlerFunc(driver))             // UPDATE patient fields
+	serveMux.HandleFunc("/add", addHandlerFunc(driver))                   // ADD a patient & connect to 5 other random ones
+	serveMux.HandleFunc("/graph", graphHandlerFunc(driver))               // RETURN ALL GRAPH
+	serveMux.HandleFunc("/search", searchHandlerFunc(driver))             // SEARCH A Patient and all of its DATA
+	serveMux.HandleFunc("/delete", deleteHandlerFunc(driver))             // DELETE patient
+	serveMux.HandleFunc("/simplesearch", simpleSearchHandlerFunc(driver)) // search a patient without relations (for update purpose)
 
 	var port string
 	var found bool
